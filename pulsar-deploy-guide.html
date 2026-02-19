@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Deploy — Pulsar SDR Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04040c;--s1:#08080f;--s2:#0e0e1a;--card:#111120;
+  --border:#1a1a30;--border2:#252540;
+  --orange:#ff5c1a;--pink:#e8249a;--blue:#38b6ff;--green:#10b981;--yellow:#f59e0b;
+  --white:#eeeefa;--muted:#5a5a7a;--muted2:#8888a8;--code:#1a1a2e;
+  --grad:linear-gradient(135deg,var(--orange),var(--pink));
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;line-height:1.7;}
+a{color:var(--blue);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOP */
+.header{
+  background:var(--s1);border-bottom:1px solid var(--border);
+  padding:20px 40px;display:flex;align-items:center;gap:16px;
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);
+}
+.header-logo{font-family:'Bebas Neue';font-size:22px;letter-spacing:3px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.header-title{font-size:14px;color:var(--muted2);padding-left:16px;border-left:1px solid var(--border2);}
+.header-badge{margin-left:auto;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.2);}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:260px 1fr;max-width:1300px;margin:0 auto;min-height:100vh;}
+.sidebar{
+  border-right:1px solid var(--border);padding:28px 20px;
+  position:sticky;top:61px;height:calc(100vh - 61px);overflow-y:auto;
+}
+.sb-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;padding:12px 8px 6px;}
+.sb-link{
+  display:block;padding:8px 12px;border-radius:8px;font-size:13px;color:var(--muted2);
+  text-decoration:none;transition:all .2s;border-left:2px solid transparent;margin-bottom:1px;
+}
+.sb-link:hover{color:var(--white);background:rgba(255,255,255,.03);text-decoration:none;}
+.sb-link.active{color:var(--white);background:rgba(255,92,26,.08);border-color:var(--orange);}
+.sb-cost{font-size:11px;font-weight:700;margin-left:auto;float:right;padding:1px 6px;border-radius:4px;}
+.cost-free{background:rgba(16,185,129,.15);color:var(--green);}
+.cost-paid{background:rgba(255,92,26,.15);color:var(--orange);}
+
+.main{padding:40px 48px 80px;}
+
+/* OVERVIEW CARDS */
+.overview{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px;}
+.ov-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.ov-val{font-family:'Bebas Neue';font-size:28px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ov-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+
+/* SECTION */
+.section{margin-bottom:60px;scroll-margin-top:80px;}
+.sec-num{font-family:'Bebas Neue';font-size:48px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
+.sec-title{font-size:26px;font-weight:700;margin-bottom:8px;}
+.sec-desc{font-size:14px;color:var(--muted2);line-height:1.7;margin-bottom:24px;max-width:680px;}
+
+/* STEP CARD */
+.step-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:24px;margin-bottom:14px;position:relative;overflow:hidden;
+  transition:border-color .3s;
+}
+.step-card:hover{border-color:var(--border2);}
+.step-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .3s;}
+.step-card:hover::before{opacity:1;}
+.step-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
+.step-ico{width:40px;height:40px;border-radius:10px;background:rgba(255,92,26,.1);border:1px solid rgba(255,92,26,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.step-info{flex:1;}
+.step-name{font-size:16px;font-weight:700;margin-bottom:2px;}
+.step-sub{font-size:12px;color:var(--muted2);}
+.step-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;}
+.b-free{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.2);}
+.b-paid{background:rgba(255,92,26,.12);color:var(--orange);border:1px solid rgba(255,92,26,.2);}
+.b-easy{background:rgba(56,182,255,.12);color:var(--blue);border:1px solid rgba(56,182,255,.2);}
+.b-5min{background:rgba(124,58,237,.12);color:#a78bfa;border:1px solid rgba(124,58,237,.2);}
+
+.step-body{font-size:13px;color:var(--muted2);line-height:1.75;}
+.step-body p{margin-bottom:10px;}
+.step-body strong{color:var(--white);}
+.step-body ul{padding-left:18px;margin:8px 0;}
+.step-body li{margin-bottom:4px;}
+
+/* CODE */
+.code-block{
+  background:var(--code);border:1px solid var(--border2);border-radius:10px;
+  padding:16px 20px;margin:12px 0;position:relative;overflow-x:auto;
+}
+.code-block code{font-family:'JetBrains Mono',monospace;font-size:12px;color:#c8d3ff;white-space:pre;}
+.code-block .kw{color:#ff79c6;}
+.code-block .str{color:#f1fa8c;}
+.code-block .cm{color:#6272a4;}
+.copy-btn{
+  position:absolute;top:10px;right:10px;
+  background:rgba(255,255,255,.06);border:1px solid var(--border2);
+  border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;
+  color:var(--muted2);cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;
+}
+.copy-btn:hover{color:var(--white);background:rgba(255,255,255,.1);}
+
+/* COST TABLE */
+.cost-table{width:100%;border-collapse:collapse;margin:16px 0;}
+.cost-table th{background:var(--s2);padding:10px 14px;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border2);}
+.cost-table td{padding:12px 14px;border-bottom:1px solid rgba(26,26,48,.8);font-size:13px;vertical-align:middle;}
+.cost-table tr:last-child td{border-bottom:none;font-weight:700;}
+.cost-table .total td{background:rgba(255,92,26,.05);border-top:1px solid rgba(255,92,26,.2);}
+.c-green{color:var(--green);font-weight:700;}
+.c-orange{color:var(--orange);font-weight:700;}
+
+/* ALERT */
+.alert{border-radius:10px;padding:14px 18px;margin:14px 0;font-size:13px;line-height:1.65;display:flex;gap:10px;}
+.alert-tip{background:rgba(56,182,255,.06);border:1px solid rgba(56,182,255,.15);color:var(--blue);}
+.alert-warn{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);color:var(--yellow);}
+.alert-ok{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);color:var(--green);}
+.alert-icon{font-size:18px;flex-shrink:0;}
+
+/* CHECKLIST */
+.checklist{list-style:none;margin:12px 0;}
+.checklist li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;display:flex;align-items:flex-start;gap:10px;color:var(--muted2);}
+.checklist li::before{content:'□';color:var(--muted);flex-shrink:0;font-size:16px;margin-top:-2px;}
+.checklist li strong{color:var(--white);}
+
+/* ARCH DIAGRAM */
+.arch{display:flex;align-items:center;gap:0;margin:20px 0;flex-wrap:wrap;justify-content:center;}
+.arch-node{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px;}
+.arch-node .an-icon{font-size:24px;margin-bottom:4px;}
+.arch-node .an-label{font-size:11px;color:var(--muted2);}
+.arch-arrow{font-size:20px;color:var(--muted);padding:0 8px;}
+
+/* ROADMAP */
+.roadmap{display:flex;flex-direction:column;gap:0;}
+.rm-item{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);}
+.rm-time{width:100px;flex-shrink:0;font-size:12px;font-weight:700;color:var(--orange);padding-top:3px;}
+.rm-content{flex:1;}
+.rm-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.rm-desc{font-size:12px;color:var(--muted2);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .main{padding:24px 20px 60px;}
+  .overview{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">PULSAR SDR</div>
+  <div class="header-title">Guia Completo de Deploy & Publicação</div>
+  <div class="header-badge">✅ Guia Atualizado 2025</div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR NAV -->
+  <aside class="sidebar">
+    <div class="sb-label">Visão Geral</div>
+    <a href="#overview" class="sb-link active">📋 Resumo & Custos</a>
+    <a href="#arquitetura" class="sb-link">🏗️ Arquitetura</a>
+
+    <div class="sb-label">Deploy do App</div>
+    <a href="#step1" class="sb-link">1. GitHub <span class="sb-cost cost-free">Grátis</span></a>
+    <a href="#step2" class="sb-link">2. Railway.app <span class="sb-cost cost-free">Grátis</span></a>
+    <a href="#step3" class="sb-link">3. Domínio próprio <span class="sb-cost cost-paid">R$40/ano</span></a>
+
+    <div class="sb-label">WhatsApp</div>
+    <a href="#step4" class="sb-link">4. Evolution API <span class="sb-cost cost-free">Grátis</span></a>
+    <a href="#step5" class="sb-link">5. n8n Automação <span class="sb-cost cost-free">Grátis</span></a>
+    <a href="#step6" class="sb-link">6. Testar tudo</a>
+
+    <div class="sb-label">Vender</div>
+    <a href="#step7" class="sb-link">7. Landing page online</a>
+    <a href="#step8" class="sb-link">8. Instagram & vendas</a>
+    <a href="#roadmap" class="sb-link">🗓️ Cronograma</a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="sec-num">00</div>
+      <div class="sec-title">Resumo Executivo & Custos</div>
+      <div class="sec-desc">Tudo que você precisa para publicar o Pulsar SDR online e começar a vender. Foco no caminho mais simples possível — sem programação.</div>
+
+      <div class="overview">
+        <div class="ov-card"><div class="ov-val">R$0</div><div class="ov-lbl">Custo inicial de deploy</div></div>
+        <div class="ov-card"><div class="ov-val">48h</div><div class="ov-lbl">Para estar no ar</div></div>
+        <div class="ov-card"><div class="ov-val">~R$200</div><div class="ov-lbl">Custo operacional/mês (5 clientes)</div></div>
+        <div class="ov-card"><div class="ov-val">85%+</div><div class="ov-lbl">Margem por cliente</div></div>
+      </div>
+
+      <div class="step-card">
+        <div style="font-size:14px;font-weight:700;margin-bottom:16px;">💰 Tabela Completa de Custos</div>
+        <table class="cost-table">
+          <thead><tr><th>Serviço</th><th>O que faz</th><th>Plano Grátis</th><th>Pago (quando crescer)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>GitHub</strong></td><td>Guarda o código do app</td><td class="c-green">Grátis para sempre</td><td>—</td></tr>
+            <tr><td><strong>Railway.app</strong></td><td>Publica o app online</td><td class="c-green">Grátis (trial $5)</td><td>$5–20/mês (~R$30–120)</td></tr>
+            <tr><td><strong>Registro.br</strong></td><td>Domínio .com.br</td><td>—</td><td class="c-orange">R$40/ano</td></tr>
+            <tr><td><strong>Evolution API</strong></td><td>Conecta WhatsApp</td><td class="c-green">Open source grátis</td><td>—</td></tr>
+            <tr><td><strong>n8n.cloud</strong></td><td>Automação de mensagens</td><td class="c-green">Grátis até 5 fluxos</td><td>$20/mês (~R$120)</td></tr>
+            <tr><td><strong>Anthropic API</strong></td><td>IA que responde os leads</td><td>—</td><td class="c-orange">~R$50–150/mês por cliente</td></tr>
+            <tr class="total"><td colspan="2"><strong>TOTAL estimado (5 clientes)</strong></td><td class="c-green">R$0 para começar</td><td class="c-orange">~R$200–350/mês</td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert-ok"><div class="alert-icon">💡</div><div>Com 5 clientes pagando R$1.299/mês = <strong>R$6.495 de receita</strong>. Após custos de ~R$350, sua margem é de aproximadamente <strong>R$6.145/mês (94%)</strong>.</div></div>
+      </div>
+    </section>
+
+    <!-- ARQUITETURA -->
+    <section class="section" id="arquitetura">
+      <div class="sec-num">01</div>
+      <div class="sec-title">Arquitetura do Sistema</div>
+      <div class="sec-desc">Como as peças se conectam. Não precisa entender tudo — só saber que funciona.</div>
+      <div class="step-card">
+        <div class="arch">
+          <div class="arch-node"><div class="an-icon">👤</div><div class="an-label">Lead</div></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><div class="an-icon">📱</div><div class="an-label">WhatsApp</div></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node" style="border-color:rgba(255,92,26,.3);"><div class="an-icon">⚡</div><div class="an-label">Evolution API</div></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><div class="an-icon">🔄</div><div class="an-label">n8n</div></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node" style="border-color:rgba(255,92,26,.3);"><div class="an-icon">🤖</div><div class="an-label">Claude AI</div></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><div class="an-icon">📊</div><div class="an-label">Pulsar SDR App</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px;">Lead envia mensagem → WhatsApp captura → n8n processa → IA responde → tudo registrado no painel</div>
+      </div>
+    </section>
+
+    <!-- STEP 1 — GITHUB -->
+    <section class="section" id="step1">
+      <div class="sec-num">02</div>
+      <div class="sec-title">Publicar o App no GitHub</div>
+      <div class="sec-desc">O GitHub vai guardar o código do app. É o primeiro passo e é completamente gratuito. Leva menos de 5 minutos.</div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">🐙</div>
+          <div class="step-info">
+            <div class="step-name">Criar conta e repositório no GitHub</div>
+            <div class="step-sub">github.com — completamente gratuito</div>
+          </div>
+          <div class="step-badges"><span class="badge b-free">Grátis</span><span class="badge b-5min">~5 min</span></div>
+        </div>
+        <div class="step-body">
+          <p><strong>Passo 1:</strong> Acesse <a href="https://github.com" target="_blank">github.com</a> e crie sua conta (grátis).</p>
+          <p><strong>Passo 2:</strong> Clique em <strong>"New repository"</strong> → nome: <code>pulsar-sdr</code> → <strong>Public</strong> → Create.</p>
+          <p><strong>Passo 3:</strong> Clique em <strong>"uploading an existing file"</strong> e faça upload dos 3 arquivos HTML que você baixou:</p>
+          <ul>
+            <li><code>pulsar-sdr-platform.html</code> — renomeie para <code>index.html</code></li>
+            <li><code>landing.html</code></li>
+            <li><code>deploy-guide.html</code></li>
+          </ul>
+          <p><strong>Passo 4:</strong> Clique em <strong>"Commit changes"</strong>. Pronto — seu código está salvo na nuvem.</p>
+        </div>
+        <div class="alert alert-tip"><div class="alert-icon">💡</div><div>Renomeie o arquivo <code>pulsar-sdr-platform.html</code> para <code>index.html</code> antes de fazer o upload. O Railway vai reconhecer automaticamente como a página principal.</div></div>
+      </div>
+    </section>
+
+    <!-- STEP 2 — RAILWAY -->
+    <section class="section" id="step2">
+      <div class="sec-num">03</div>
+      <div class="sec-title">Deploy no Railway.app</div>
+      <div class="sec-desc">O Railway publica seu app online em minutos, conectado ao GitHub. A conta gratuita inclui $5 de crédito que dura meses para apps leves.</div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">🚂</div>
+          <div class="step-info">
+            <div class="step-name">Publicar no Railway (grátis para começar)</div>
+            <div class="step-sub">railway.app — $5 gratuito, depois ~$5/mês</div>
+          </div>
+          <div class="step-badges"><span class="badge b-free">Grátis início</span><span class="badge b-easy">Fácil</span></div>
+        </div>
+        <div class="step-body">
+          <p><strong>Passo 1:</strong> Acesse <a href="https://railway.app" target="_blank">railway.app</a> → <strong>"Login with GitHub"</strong>.</p>
+          <p><strong>Passo 2:</strong> Clique em <strong>"New Project"</strong> → <strong>"Deploy from GitHub repo"</strong> → selecione <strong>pulsar-sdr</strong>.</p>
+          <p><strong>Passo 3:</strong> O Railway vai detectar automaticamente que é um site estático e fazer o deploy. Aguarde ~2 minutos.</p>
+          <p><strong>Passo 4:</strong> Vá em <strong>Settings → Networking → Generate Domain</strong>. Você receberá uma URL como:</p>
+          <div class="code-block"><code>https://pulsar-sdr-production.up.railway.app</code></div>
+          <p><strong>Passo 5:</strong> Acesse essa URL e confirme que o app está funcionando. 🎉</p>
+        </div>
+        <div class="alert alert-ok"><div class="alert-icon">✅</div><div>Seu app já está online! Você pode compartilhar este link com qualquer pessoa. Toda vez que você atualizar o código no GitHub, o Railway atualiza automaticamente.</div></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">🌐</div>
+          <div class="step-info">
+            <div class="step-name">Alternativa: Netlify (também grátis)</div>
+            <div class="step-sub">netlify.com — mais simples ainda, só arrasta os arquivos</div>
+          </div>
+          <div class="step-badges"><span class="badge b-free">Grátis</span><span class="badge b-5min">2 min</span></div>
+        </div>
+        <div class="step-body">
+          <p>Se preferir algo ainda mais simples: acesse <a href="https://netlify.com" target="_blank">netlify.com</a>, arraste sua pasta com os arquivos HTML para a área de deploy. O site fica online imediatamente, sem precisar do GitHub.</p>
+          <p>URL gerada automaticamente: <code>https://amazing-name-123.netlify.app</code></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 — DOMÍNIO -->
+    <section class="section" id="step3">
+      <div class="sec-num">04</div>
+      <div class="sec-title">Domínio Próprio (Opcional, mas Recomendado)</div>
+      <div class="sec-desc">Um domínio próprio passa muito mais profissionalismo. Custa R$40/ano — vale cada centavo.</div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">🌍</div>
+          <div class="step-info">
+            <div class="step-name">Registrar domínio no Registro.br</div>
+            <div class="step-sub">registro.br — domínios .com.br</div>
+          </div>
+          <div class="step-badges"><span class="badge b-paid">R$40/ano</span><span class="badge b-5min">10 min</span></div>
+        </div>
+        <div class="step-body">
+          <p><strong>Sugestões de domínio para sua agência:</strong></p>
+          <ul>
+            <li><code>pulsarsdr.com.br</code></li>
+            <li><code>agentesdr.com.br</code></li>
+            <li><code>pulsarmarketing.com.br</code></li>
+          </ul>
+          <p><strong>Passo 1:</strong> Acesse <a href="https://registro.br" target="_blank">registro.br</a> → pesquise o domínio desejado → compre.</p>
+          <p><strong>Passo 2:</strong> No Railway (ou Netlify), vá em <strong>Settings → Custom Domain</strong> → adicione seu domínio.</p>
+          <p><strong>Passo 3:</strong> Copie os registros DNS fornecidos e adicione no painel do Registro.br.</p>
+          <p><strong>Passo 4:</strong> Aguarde até 24h para propagar. Geralmente funciona em menos de 1 hora.</p>
+        </div>
+        <div class="alert alert-tip"><div class="alert-icon">💡</div><div>HTTPS (cadeado de segurança) é configurado automaticamente pelo Railway e Netlify. Você não precisa fazer nada extra.</div></div>
+      </div>
+    </section>
+
+    <!-- STEP 4 — EVOLUTION API -->
+    <section class="section" id="step4">
+      <div class="sec-num">05</div>
+      <div class="sec-title">Conectar WhatsApp (Evolution API)</div>
+      <div class="sec-desc">A Evolution API é um software gratuito e open source que conecta seu WhatsApp ao agente IA. É a solução mais usada no Brasil para isso.</div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">📱</div>
+          <div class="step-info">
+            <div class="step-name">Deploy da Evolution API no Railway</div>
+            <div class="step-sub">Open source · Gratuito · 1 clique no Railway</div>
+          </div>
+          <div class="step-badges"><span class="badge b-free">Grátis</span><span class="badge b-easy">No-code</span></div>
+        </div>
+        <div class="step-body">
+          <p><strong>Passo 1:</strong> Acesse o template oficial:</p>
+          <div class="code-block"><code>https://railway.app/template/EvolutionAPI</code><button class="copy-btn" onclick="copy(this,'https://railway.app/template/EvolutionAPI')">Copiar</button></div>
+          <p><strong>Passo 2:</strong> Clique em <strong>"Deploy Now"</strong> → entre com sua conta GitHub → Deploy.</p>
+          <p><strong>Passo 3:</strong> Aguarde 3–5 minutos. O Railway vai criar automaticamente um banco de dados e o servidor.</p>
+          <p><strong>Passo 4:</strong> Acesse o painel da Evolution API pela URL gerada e conecte seu WhatsApp escaneando o QR Code.</p>
+          <p><strong>Passo 5:</strong> Anote sua URL da API e o API Key gerado — você vai precisar no próximo passo.</p>
+        </div>
+        <div class="alert alert-warn"><div class="alert-icon">⚠️</div><div>Use um <strong>número de WhatsApp dedicado</strong> para o agente (não o seu pessoal). Você pode usar um chip novo de operadora de R$10 ou um chip virtual. O número fica "ocupado" pelo agente enquanto estiver ativo.</div></div>
+      </div>
+    </section>
+
+    <!-- STEP 5 — N8N -->
+    <section class="section" id="step5">
+      <div class="sec-num">06</div>
+      <div class="sec-title">Configurar Automação com n8n</div>
+      <div class="sec-desc">O n8n é o "cérebro" que conecta o WhatsApp ao agente IA. É no-code — você configura arrastando blocos, sem escrever código.</div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">🔄</div>
+          <div class="step-info">
+            <div class="step-name">Criar fluxo no n8n Cloud</div>
+            <div class="step-sub">n8n.cloud — grátis até 5 fluxos ativos</div>
+          </div>
+          <div class="step-badges"><span class="badge b-free">Grátis</span><span class="badge b-easy">No-code</span></div>
+        </div>
+        <div class="step-body">
+          <p><strong>Passo 1:</strong> Acesse <a href="https://n8n.cloud" target="_blank">n8n.cloud</a> e crie conta grátis.</p>
+          <p><strong>Passo 2:</strong> Clique em <strong>"New Workflow"</strong>. O fluxo que você vai criar tem 4 nós:</p>
+          <ul>
+            <li>🟡 <strong>Webhook</strong> — recebe a mensagem do WhatsApp</li>
+            <li>🔵 <strong>HTTP Request</strong> — chama a API do Claude (IA)</li>
+            <li>🟠 <strong>Function</strong> — monta a resposta</li>
+            <li>🟢 <strong>HTTP Request</strong> — envia resposta de volta pelo WhatsApp</li>
+          </ul>
+          <p><strong>Passo 3:</strong> No nó Webhook, copie a URL gerada. Essa URL vai no painel da Evolution API em <strong>Webhooks → URL</strong>.</p>
+          <p><strong>Passo 4:</strong> No nó de chamada ao Claude, configure:</p>
+          <div class="code-block"><code><span class="cm">// URL da API Anthropic</span>
+URL: https://api.anthropic.com/v1/messages
+
+<span class="cm">// Headers</span>
+x-api-key: sua_chave_aqui
+anthropic-version: 2023-06-01
+Content-Type: application/json
+
+<span class="cm">// Body (JSON)</span>
+{
+  <span class="str">"model"</span>: <span class="str">"claude-sonnet-4-20250514"</span>,
+  <span class="str">"max_tokens"</span>: 800,
+  <span class="str">"system"</span>: <span class="str">"Seu prompt do agente aqui..."</span>,
+  <span class="str">"messages"</span>: [{ <span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">"{{mensagem_do_lead}}"</span> }]
+}</code><button class="copy-btn" onclick="copy(this,'colado')">Copiar</button></div>
+          <p><strong>Passo 5:</strong> Ative o fluxo e teste enviando uma mensagem para o número conectado.</p>
+        </div>
+        <div class="alert alert-ok"><div class="alert-icon">🎉</div><div>Com isso configurado, seu agente já está respondendo leads no WhatsApp com IA real! O fluxo completo funciona em menos de 3 segundos por mensagem.</div></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">💾</div>
+          <div class="step-info">
+            <div class="step-name">Salvar histórico de conversa (memória do agente)</div>
+            <div class="step-sub">Para o agente lembrar o contexto da conversa</div>
+          </div>
+        </div>
+        <div class="step-body">
+          <p>Para o agente ter memória da conversa (saber o que foi dito antes), adicione um passo extra no fluxo n8n usando <strong>Google Sheets</strong> (grátis) ou <strong>Airtable</strong> (grátis) para guardar o histórico por número de WhatsApp.</p>
+          <p>O fluxo fica: receber mensagem → buscar histórico → chamar IA com contexto → salvar nova mensagem → responder.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6 — TESTAR -->
+    <section class="section" id="step6">
+      <div class="sec-num">07</div>
+      <div class="sec-title">Testar Tudo Antes de Vender</div>
+      <div class="sec-desc">Checklist completo para garantir que tudo funciona antes de apresentar ao primeiro cliente.</div>
+
+      <div class="step-card">
+        <ul class="checklist">
+          <li><strong>App online:</strong> a URL do Railway abre o painel do Pulsar SDR corretamente</li>
+          <li><strong>Login funciona:</strong> entrar como agência e como cliente</li>
+          <li><strong>API Key configurada:</strong> o chat no painel responde com IA real</li>
+          <li><strong>WhatsApp conectado:</strong> Evolution API mostra QR Code lido e conectado</li>
+          <li><strong>n8n ativo:</strong> fluxo está ligado e o webhook está funcionando</li>
+          <li><strong>Teste de mensagem:</strong> envie "Olá" para o número do agente e ele responde em segundos</li>
+          <li><strong>Domínio (se tiver):</strong> o site abre no domínio personalizado com HTTPS</li>
+          <li><strong>Landing page:</strong> a página de vendas está acessível pelo link</li>
+          <li><strong>Link do WhatsApp:</strong> o botão da landing page abre a conversa correta com você</li>
+          <li><strong>Mobile:</strong> o app e a landing page funcionam bem no celular</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STEP 7 — LANDING -->
+    <section class="section" id="step7">
+      <div class="sec-num">08</div>
+      <div class="sec-title">Publicar a Landing Page de Vendas</div>
+      <div class="sec-desc">A landing page que criamos vai ser sua vitrine. Dois passos para deixá-la no ar.</div>
+
+      <div class="step-card">
+        <div class="step-body">
+          <p><strong>Passo 1:</strong> Antes de publicar, personalize o arquivo <code>landing.html</code>:</p>
+          <ul>
+            <li>Substitua o número <code>5511999999999</code> pelo seu WhatsApp real</li>
+            <li>Atualize o e-mail e redes sociais no footer se quiser</li>
+            <li>Ajuste os depoimentos com nomes reais quando tiver clientes</li>
+          </ul>
+          <p><strong>Passo 2:</strong> Publique a landing page no <strong>Netlify</strong> (mais fácil):</p>
+          <ul>
+            <li>Acesse <a href="https://netlify.com" target="_blank">netlify.com</a> → crie conta grátis</li>
+            <li>Arraste o arquivo <code>landing.html</code> renomeado para <code>index.html</code> na área de deploy</li>
+            <li>Em 30 segundos seu site está no ar</li>
+          </ul>
+          <div class="code-block"><code><span class="cm"># Exemplo de URLs finais:</span>
+Landing page:  https://pulsarsdr.com.br
+Painel app:    https://app.pulsarsdr.com.br
+              (ou subpasta /app no mesmo domínio)</code></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 8 — INSTAGRAM -->
+    <section class="section" id="step8">
+      <div class="sec-num">09</div>
+      <div class="sec-title">Estratégia de Vendas pelo Instagram</div>
+      <div class="sec-desc">Como apresentar o produto nos Stories e no feed para gerar leads qualificados para sua agência — sem gastar com anúncios no início.</div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">📸</div>
+          <div class="step-info"><div class="step-name">Conteúdo que converte no Instagram</div></div>
+        </div>
+        <div class="step-body">
+          <p><strong>📌 Bio do Instagram:</strong></p>
+          <div class="code-block"><code>🤖 Agente SDR com IA para negócios locais
+📱 Responde leads no WhatsApp 24/7
+🔥 Só entregamos leads prontos para fechar
+👇 Link para ver como funciona</code><button class="copy-btn" onclick="copy(this,`🤖 Agente SDR com IA para negócios locais\n📱 Responde leads no WhatsApp 24/7\n🔥 Só entregamos leads prontos para fechar\n👇 Link para ver como funciona`)">Copiar</button></div>
+
+          <p><strong>🎬 Roteiro de Reels (30 segundos) que funciona:</strong></p>
+          <div class="code-block"><code>Cena 1 (0–5s): "Você perde leads toda noite porque não consegue responder rápido?"
+Cena 2 (5–15s): [Mostra tela do agente respondendo automaticamente no WhatsApp]
+Cena 3 (15–22s): "A IA responde em 3 segundos, qualifica e te entrega só os clientes prontos."
+Cena 4 (22–30s): "Link na bio para ver como funciona. 🔥"</code><button class="copy-btn" onclick="copy(this,'roteiro')">Copiar</button></div>
+
+          <p><strong>💬 Story de venda direta:</strong></p>
+          <div class="code-block"><code>[Imagem do dashboard com métricas reais]
+"Esse agente gerou 47 leads quentes para uma clínica em 30 dias.
+Funciona para qualquer negócio local.
+Arrasta pra cima e veja como funciona 👆"</code><button class="copy-btn" onclick="copy(this,'story')">Copiar</button></div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">💬</div>
+          <div class="step-info"><div class="step-name">Script de DM para prospecção ativa</div></div>
+        </div>
+        <div class="step-body">
+          <p>Envie essa mensagem para donos de negócios locais no Direct:</p>
+          <div class="code-block"><code>Oi [Nome]! Vi o perfil do [nome do negócio] aqui no Instagram.
+Trabalho com uma ferramenta de IA que responde seus leads
+no WhatsApp automaticamente — até quando você está dormindo.
+
+A maioria dos negócios perde 40% dos leads por demora no atendimento.
+Você tem esse problema?
+
+Se quiser, posso te mostrar como funciona em 10 minutos.
+Sem compromisso. 🤝</code><button class="copy-btn" onclick="copy(this,'dm')">Copiar</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section" id="roadmap">
+      <div class="sec-num">10</div>
+      <div class="sec-title">Cronograma Realista</div>
+      <div class="sec-desc">O que fazer e quando, da configuração até os primeiros clientes pagando.</div>
+      <div class="step-card">
+        <div class="roadmap">
+          <div class="rm-item">
+            <div class="rm-time">DIA 1</div>
+            <div class="rm-content">
+              <div class="rm-title">🛠️ Setup técnico</div>
+              <div class="rm-desc">GitHub + Railway + domínio. App online. Menos de 2 horas de trabalho.</div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-time">DIA 2</div>
+            <div class="rm-content">
+              <div class="rm-title">📱 WhatsApp conectado</div>
+              <div class="rm-desc">Evolution API + n8n configurados. Agente respondendo mensagens reais.</div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-time">DIA 3–5</div>
+            <div class="rm-content">
+              <div class="rm-title">🧪 Testes com nicho piloto</div>
+              <div class="rm-desc">Escolha 1 nicho (ex: clínica). Configure o agente. Simule 20 conversas. Refine as respostas.</div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-time">SEMANA 2</div>
+            <div class="rm-content">
+              <div class="rm-title">🎁 Primeiro cliente beta (gratuito)</div>
+              <div class="rm-desc">Ofereça 30 dias grátis para um conhecido. Mostre os resultados. Peça depoimento.</div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-time">SEMANA 3</div>
+            <div class="rm-content">
+              <div class="rm-title">📸 Conteúdo no Instagram</div>
+              <div class="rm-desc">Poste print do dashboard com os leads. Reels mostrando o agente em ação. Stories com depoimento do beta.</div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-time">SEMANA 4</div>
+            <div class="rm-content">
+              <div class="rm-title">💰 Primeiros clientes pagando</div>
+              <div class="rm-desc">Meta: 3 clientes a R$999. = R$2.997/mês. Reinvista em tráfego pago para acelerar.</div>
+            </div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-time">MÊS 2</div>
+            <div class="rm-content">
+              <div class="rm-title">🚀 Escala para 5 clientes</div>
+              <div class="rm-desc">R$4.995–R$6.495/mês. Margem de 85%+. Contrate alguém para fazer o onboarding de novos clientes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-ok" style="margin-top:20px;"><div class="alert-icon">🔥</div><div><strong>Dica de ouro:</strong> Não espere tudo estar perfeito para vender. O primeiro cliente com R$999/mês cobre todos os seus custos operacionais com sobra. Comece vendendo antes de terminar de configurar tudo.</div></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// Sidebar active tracking
+const sections=document.querySelectorAll('.section');
+const links=document.querySelectorAll('.sb-link');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('active'));
+      const id=e.target.id;
+      const link=document.querySelector('.sb-link[href="#'+id+'"]');
+      if(link)link.classList.add('active');
+    }
+  });
+},{threshold:.3});
+sections.forEach(s=>observer.observe(s));
+
+// Copy to clipboard
+function copy(btn,text){
+  const content=btn.parentElement.querySelector('code')?.innerText||text;
+  navigator.clipboard.writeText(content).then(()=>{
+    btn.textContent='✓ Copiado!';btn.style.color='var(--green)';
+    setTimeout(()=>{btn.textContent='Copiar';btn.style.color='';},2000);
+  });
+}
+</script>
+</body>
+</html>
