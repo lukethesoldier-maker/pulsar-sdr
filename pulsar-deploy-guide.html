@@ -170,7 +170,7 @@ a:hover{text-decoration:underline;}
     <a href="#step3" class="sb-link">3. Domínio próprio <span class="sb-cost cost-paid">R$40/ano</span></a>
 
     <div class="sb-label">WhatsApp</div>
-    <a href="#step4" class="sb-link">4. Evolution API <span class="sb-cost cost-free">Grátis</span></a>
+    <a href="#step4" class="sb-link">4. WAHA WhatsApp <span class="sb-cost cost-free">Grátis</span></a>
     <a href="#step5" class="sb-link">5. n8n Automação <span class="sb-cost cost-free">Grátis</span></a>
     <a href="#step6" class="sb-link">6. Testar tudo</a>
 
@@ -204,7 +204,7 @@ a:hover{text-decoration:underline;}
             <tr><td><strong>GitHub</strong></td><td>Guarda o código do app</td><td class="c-green">Grátis para sempre</td><td>—</td></tr>
             <tr><td><strong>Railway.app</strong></td><td>Publica o app online</td><td class="c-green">Grátis (trial $5)</td><td>$5–20/mês (~R$30–120)</td></tr>
             <tr><td><strong>Registro.br</strong></td><td>Domínio .com.br</td><td>—</td><td class="c-orange">R$40/ano</td></tr>
-            <tr><td><strong>Evolution API</strong></td><td>Conecta WhatsApp</td><td class="c-green">Open source grátis</td><td>—</td></tr>
+            <tr><td><strong>WAHA</strong></td><td>Conecta WhatsApp</td><td class="c-green">Core grátis (1 sessão/instância)</td><td class="c-orange">Plus ~R$115/mês (multi-sessão)</td></tr>
             <tr><td><strong>n8n.cloud</strong></td><td>Automação de mensagens</td><td class="c-green">Grátis até 5 fluxos</td><td>$20/mês (~R$120)</td></tr>
             <tr><td><strong>Anthropic API</strong></td><td>IA que responde os leads</td><td>—</td><td class="c-orange">~R$50–150/mês por cliente</td></tr>
             <tr class="total"><td colspan="2"><strong>TOTAL estimado (5 clientes)</strong></td><td class="c-green">R$0 para começar</td><td class="c-orange">~R$200–350/mês</td></tr>
@@ -225,7 +225,7 @@ a:hover{text-decoration:underline;}
           <div class="arch-arrow">→</div>
           <div class="arch-node"><div class="an-icon">📱</div><div class="an-label">WhatsApp</div></div>
           <div class="arch-arrow">→</div>
-          <div class="arch-node" style="border-color:rgba(255,92,26,.3);"><div class="an-icon">⚡</div><div class="an-label">Evolution API</div></div>
+          <div class="arch-node" style="border-color:rgba(255,92,26,.3);"><div class="an-icon">⚡</div><div class="an-label">WAHA</div></div>
           <div class="arch-arrow">→</div>
           <div class="arch-node"><div class="an-icon">🔄</div><div class="an-label">n8n</div></div>
           <div class="arch-arrow">→</div>
@@ -340,30 +340,62 @@ a:hover{text-decoration:underline;}
       </div>
     </section>
 
-    <!-- STEP 4 — EVOLUTION API -->
+    <!-- STEP 4 — WAHA -->
     <section class="section" id="step4">
       <div class="sec-num">05</div>
-      <div class="sec-title">Conectar WhatsApp (Evolution API)</div>
-      <div class="sec-desc">A Evolution API é um software gratuito e open source que conecta seu WhatsApp ao agente IA. É a solução mais usada no Brasil para isso.</div>
+      <div class="sec-title">Conectar WhatsApp (WAHA)</div>
+      <div class="sec-desc">O WAHA (WhatsApp HTTP API) é a solução mais simples para conectar WhatsApp direto no Railway. Tem template oficial, painel visual e versão gratuita ilimitada.</div>
 
       <div class="step-card">
         <div class="step-header">
           <div class="step-ico">📱</div>
           <div class="step-info">
-            <div class="step-name">Deploy da Evolution API no Railway</div>
-            <div class="step-sub">Open source · Gratuito · 1 clique no Railway</div>
+            <div class="step-name">Deploy do WAHA no Railway — 1 clique</div>
+            <div class="step-sub">Template oficial · Gratuito · Roda 100% no Railway</div>
           </div>
-          <div class="step-badges"><span class="badge b-free">Grátis</span><span class="badge b-easy">No-code</span></div>
+          <div class="step-badges"><span class="badge b-free">Grátis</span><span class="badge b-easy">No-code</span><span class="badge b-5min">~5 min</span></div>
         </div>
         <div class="step-body">
-          <p><strong>Passo 1:</strong> Acesse o template oficial:</p>
-          <div class="code-block"><code>https://railway.app/template/EvolutionAPI</code><button class="copy-btn" onclick="copy(this,'https://railway.app/template/EvolutionAPI')">Copiar</button></div>
-          <p><strong>Passo 2:</strong> Clique em <strong>"Deploy Now"</strong> → entre com sua conta GitHub → Deploy.</p>
-          <p><strong>Passo 3:</strong> Aguarde 3–5 minutos. O Railway vai criar automaticamente um banco de dados e o servidor.</p>
-          <p><strong>Passo 4:</strong> Acesse o painel da Evolution API pela URL gerada e conecte seu WhatsApp escaneando o QR Code.</p>
-          <p><strong>Passo 5:</strong> Anote sua URL da API e o API Key gerado — você vai precisar no próximo passo.</p>
+          <p><strong>Passo 1:</strong> Acesse o template oficial do WAHA no Railway:</p>
+          <div class="code-block"><code>https://railway.com/deploy/waha</code><button class="copy-btn" onclick="copy(this,'https://railway.com/deploy/waha')">Copiar</button></div>
+          <p><strong>Passo 2:</strong> Clique em <strong>"Deploy Now"</strong> → entre com sua conta do Railway → clique em <strong>Deploy</strong>. Aguarde ~3 minutos.</p>
+          <p><strong>Passo 3:</strong> Quando o deploy terminar, clique no serviço → <strong>Settings → Networking → Generate Domain</strong>. Você receberá uma URL como:</p>
+          <div class="code-block"><code>https://waha-production.up.railway.app</code></div>
+          <p><strong>Passo 4:</strong> Acesse essa URL no navegador — o painel do WAHA vai abrir. Clique em <strong>"Start Session"</strong> → aparece o QR Code.</p>
+          <p><strong>Passo 5:</strong> Abra o WhatsApp no celular → <strong>Dispositivos conectados → Conectar dispositivo</strong> → escaneie o QR Code.</p>
+          <p><strong>Passo 6:</strong> Após conectar, anote a URL da sua instância — você vai usá-la no n8n no próximo passo.</p>
         </div>
-        <div class="alert alert-warn"><div class="alert-icon">⚠️</div><div>Use um <strong>número de WhatsApp dedicado</strong> para o agente (não o seu pessoal). Você pode usar um chip novo de operadora de R$10 ou um chip virtual. O número fica "ocupado" pelo agente enquanto estiver ativo.</div></div>
+        <div class="alert alert-ok"><div class="alert-icon">✅</div><div>O WAHA funciona 100% no Railway, sem restrições. A versão gratuita (Core) suporta <strong>mensagens ilimitadas</strong> — mais que suficiente para começar e validar com os primeiros clientes.</div></div>
+        <div class="alert alert-warn"><div class="alert-icon">⚠️</div><div>Use um <strong>número de WhatsApp dedicado</strong> para o agente — não o seu pessoal. Você pode comprar um chip novo por ~R$10 ou usar um chip virtual (DDD de qualquer operadora). O número fica exclusivo do agente enquanto estiver conectado.</div></div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-ico">📊</div>
+          <div class="step-info">
+            <div class="step-name">WAHA Core (grátis) vs WAHA Plus (~$19/mês)</div>
+            <div class="step-sub">Comparativo para você decidir quando escalar</div>
+          </div>
+        </div>
+        <div class="step-body">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border2);">
+                <th style="padding:8px;text-align:left;color:var(--muted);">Recurso</th>
+                <th style="padding:8px;text-align:center;color:var(--green);">Core — Grátis</th>
+                <th style="padding:8px;text-align:center;color:var(--orange);">Plus — ~R$115/mês</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:8px;">Mensagens</td><td style="padding:8px;text-align:center;">✅ Ilimitadas</td><td style="padding:8px;text-align:center;">✅ Ilimitadas</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:8px;">Sessões WhatsApp</td><td style="padding:8px;text-align:center;">1 por instância</td><td style="padding:8px;text-align:center;">Múltiplas</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:8px;">Dashboard visual</td><td style="padding:8px;text-align:center;">✅</td><td style="padding:8px;text-align:center;">✅</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:8px;">Integração n8n</td><td style="padding:8px;text-align:center;">✅</td><td style="padding:8px;text-align:center;">✅</td></tr>
+              <tr><td style="padding:8px;">Para 5 clientes</td><td style="padding:8px;text-align:center;color:var(--green);">1 instância por cliente</td><td style="padding:8px;text-align:center;color:var(--orange);">1 instância total</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:12px;color:var(--muted2);">💡 <strong style="color:var(--white);">Recomendação:</strong> comece com a versão Core gratuita. Para cada cliente, crie uma instância WAHA separada no Railway — continua gratuito e cada agente tem seu próprio número isolado.</p>
+        </div>
       </div>
     </section>
 
@@ -391,7 +423,7 @@ a:hover{text-decoration:underline;}
             <li>🟠 <strong>Function</strong> — monta a resposta</li>
             <li>🟢 <strong>HTTP Request</strong> — envia resposta de volta pelo WhatsApp</li>
           </ul>
-          <p><strong>Passo 3:</strong> No nó Webhook, copie a URL gerada. Essa URL vai no painel da Evolution API em <strong>Webhooks → URL</strong>.</p>
+          <p><strong>Passo 3:</strong> No nó Webhook, copie a URL gerada. Essa URL vai no painel do WAHA em <strong>Settings → Webhooks → URL</strong>.</p>
           <p><strong>Passo 4:</strong> No nó de chamada ao Claude, configure:</p>
           <div class="code-block"><code><span class="cm">// URL da API Anthropic</span>
 URL: https://api.anthropic.com/v1/messages
