@@ -17,23 +17,19 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-height:100vh;overflow-x:hidden;}
-
-/* AURORA */
 .aurora{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .ab{position:absolute;border-radius:50%;filter:blur(100px);animation:af 18s ease-in-out infinite alternate;}
 .ab1{width:500px;height:500px;background:radial-gradient(circle,rgba(255,101,53,.09),transparent 70%);top:-150px;left:-100px;}
 .ab2{width:400px;height:400px;background:radial-gradient(circle,rgba(232,54,155,.07),transparent 70%);top:30%;right:-100px;animation-delay:-6s;}
 .ab3{width:600px;height:600px;background:radial-gradient(circle,rgba(56,182,255,.06),transparent 70%);bottom:-200px;left:30%;animation-delay:-12s;}
-@keyframes af{0%{transform:translate(0,0) scale(1);}50%{transform:translate(25px,-20px) scale(1.07);}100%{transform:translate(-15px,25px) scale(.95);}}
-
-/* SCREEN SYSTEM */
+@keyframes af{0%{transform:translate(0,0)scale(1);}50%{transform:translate(25px,-20px)scale(1.07);}100%{transform:translate(-15px,25px)scale(.95);}}
 .screen{display:none;position:relative;z-index:1;min-height:100vh;}
 .screen.active{display:flex;}
 
 /* ══ LOGIN ══ */
 #screen-login{align-items:center;justify-content:center;padding:20px;}
 .login-box{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:36px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1);}
-@keyframes popIn{from{opacity:0;transform:translateY(30px) scale(.96);}to{opacity:1;transform:none;}}
+@keyframes popIn{from{opacity:0;transform:translateY(30px)scale(.96);}to{opacity:1;transform:none;}}
 .login-logo{text-align:center;margin-bottom:28px;}
 .ll-mark{font-family:'Bebas Neue';font-size:40px;letter-spacing:4px;background:linear-gradient(120deg,var(--orange),var(--pink) 45%,var(--purple) 75%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .ll-sub{font-size:11px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase;margin-top:2px;}
@@ -56,18 +52,18 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .btn-green:hover{background:rgba(0,230,118,.2);}
 .btn-red{background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.2);}
 .btn-red:hover{background:rgba(255,71,87,.25);}
+.btn-yellow{background:rgba(255,211,42,.12);color:var(--yellow);border:1px solid rgba(255,211,42,.2);}
+.btn-yellow:hover{background:rgba(255,211,42,.22);}
 .login-err{font-size:12px;color:var(--red);text-align:center;margin-top:10px;display:none;}
 .pw-wrap{position:relative;}
-.pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:2px 4px;}
+.pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;}
 
-/* ══ AGENCY PANEL ══ */
+/* ══ AGENCY ══ */
 #screen-agency{flex-direction:column;}
 .agency-topbar{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,10,.95);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;}
 .agency-logo{font-family:'Bebas Neue';font-size:22px;letter-spacing:3px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .agency-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(255,101,53,.15);color:var(--orange);border:1px solid rgba(255,101,53,.25);letter-spacing:1px;margin-left:10px;}
 .agency-content{padding:28px;flex:1;}
-
-/* MASTER STATS */
 .master-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
 .ms{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden;transition:border-color .3s,transform .2s;}
 .ms:hover{border-color:var(--border2);transform:translateY(-2px);}
@@ -76,8 +72,6 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .ms-val{font-family:'Bebas Neue';font-size:34px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
 .ms-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
 .ms-sub{font-size:11px;color:var(--green);margin-top:3px;}
-
-/* CLIENTS GRID */
 .clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px;}
 .client-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:all .25s;}
 .client-card:hover{border-color:rgba(255,101,53,.3);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3);}
@@ -94,11 +88,8 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .cc-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:12px;}
 .cc-bar-fill{height:100%;border-radius:2px;background:var(--grad);}
 .cc-actions{display:flex;gap:6px;flex-wrap:wrap;}
-.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;}
-.dot-active{background:var(--green);box-shadow:0 0 8px rgba(0,230,118,.5);animation:dp 2s infinite;}
-.dot-trial{background:var(--yellow);}
-.dot-paused{background:var(--muted);}
-@keyframes dp{0%,100%{opacity:1;}50%{opacity:.4;}}
+.add-client-card{background:transparent;border:2px dashed var(--border2);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;min-height:200px;transition:all .2s;color:var(--muted);}
+.add-client-card:hover{border-color:var(--orange);color:var(--orange);}
 .plan-badge{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;}
 .plan-basico{background:rgba(56,182,255,.15);color:var(--blue);border:1px solid rgba(56,182,255,.25);}
 .plan-pro{background:rgba(139,92,246,.2);color:#b09af8;border:1px solid rgba(139,92,246,.3);}
@@ -107,8 +98,6 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .pill-active{background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.2);}
 .pill-trial{background:rgba(255,211,42,.12);color:var(--yellow);border:1px solid rgba(255,211,42,.2);}
 .pill-paused{background:rgba(85,85,106,.15);color:var(--muted2);border:1px solid var(--border2);}
-.add-client-card{background:transparent;border:2px dashed var(--border2);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;min-height:200px;transition:all .2s;color:var(--muted);}
-.add-client-card:hover{border-color:var(--orange);color:var(--orange);}
 
 /* ══ CLIENT PANEL ══ */
 #screen-client{flex-direction:column;}
@@ -117,12 +106,16 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .sb-brand{font-family:'Bebas Neue';font-size:22px;letter-spacing:3px;background:linear-gradient(120deg,var(--orange),var(--pink) 45%,var(--purple) 75%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
 .sb-client{font-size:11px;color:var(--muted2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .ai-live{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;background:rgba(0,230,118,.1);color:var(--green);border:1px solid rgba(0,230,118,.2);margin-top:6px;letter-spacing:1px;}
+.ai-paused{background:rgba(255,211,42,.1);color:var(--yellow);border:1px solid rgba(255,211,42,.2);}
 .pring{width:6px;height:6px;border-radius:50%;background:var(--green);animation:dp 1.5s infinite;}
+.pring-y{background:var(--yellow);}
+@keyframes dp{0%,100%{opacity:1;}50%{opacity:.4;}}
 .sb-nav{padding:10px 8px;flex:1;overflow-y:auto;}
 .nb{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border-radius:var(--rs);background:none;border:none;color:var(--muted2);font-family:'Sora',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-align:left;margin-bottom:1px;}
 .nb:hover{color:var(--white);background:rgba(255,255,255,.04);}
 .nb.active{color:var(--white);background:linear-gradient(90deg,rgba(255,101,53,.15),rgba(232,54,155,.08));border-left:2px solid var(--orange);}
 .nb .ni{width:18px;font-size:14px;text-align:center;}
+.npill{margin-left:auto;font-size:9px;font-weight:700;padding:2px 6px;border-radius:20px;background:var(--orange);color:#000;}
 .sb-foot{padding:14px 18px;border-top:1px solid var(--border);}
 .main-panel{margin-left:230px;display:flex;flex-direction:column;min-height:100vh;}
 .topbar{padding:13px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,10,.95);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;}
@@ -145,43 +138,74 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .ph{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .ph-t{font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;}
 
-/* CHAT */
-.chat-wrap{display:grid;grid-template-columns:1fr 320px;gap:16px;}
-.chat-panel{display:flex;flex-direction:column;height:520px;}
-.chat-win{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* ══ INBOX / CONVERSAS ══ */
+.inbox-wrap{display:grid;grid-template-columns:300px 1fr;gap:0;height:600px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.contact-list{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--surface);}
+.contact-search{padding:12px;border-bottom:1px solid var(--border);}
+.contact-search input{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:var(--rs);padding:8px 12px;color:var(--white);font-family:'Sora',sans-serif;font-size:12px;outline:none;}
+.contact-search input:focus{border-color:rgba(255,101,53,.4);}
+.contact-items{flex:1;overflow-y:auto;}
+.contact-item{padding:12px 14px;border-bottom:1px solid rgba(26,26,42,.6);cursor:pointer;transition:background .15s;display:flex;align-items:flex-start;gap:10px;}
+.contact-item:hover{background:rgba(255,255,255,.025);}
+.contact-item.active{background:rgba(255,101,53,.08);border-left:2px solid var(--orange);}
+.contact-item.unread .ci-name{color:var(--white);font-weight:700;}
+.ci-ava{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--card2);border:1px solid var(--border2);}
+.ci-body{flex:1;min-width:0;}
+.ci-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;}
+.ci-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ci-time{font-size:10px;color:var(--muted);flex-shrink:0;}
+.ci-preview{font-size:11px;color:var(--muted2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ci-badge{display:inline-block;background:var(--orange);color:#000;font-size:9px;font-weight:800;min-width:16px;height:16px;border-radius:8px;text-align:center;line-height:16px;padding:0 4px;flex-shrink:0;}
+.ci-score{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;padding:1px 5px;border-radius:8px;margin-top:3px;}
+.cs-hot{background:rgba(255,71,87,.12);color:#f87171;}
+.cs-warm{background:rgba(255,101,53,.12);color:var(--orange);}
+.cs-cold{background:rgba(56,182,255,.12);color:var(--blue);}
+
+/* CHAT PANEL */
+.chat-main{display:flex;flex-direction:column;background:var(--bg);}
+.chat-header{padding:12px 18px;border-bottom:1px solid var(--border);background:var(--card);display:flex;align-items:center;gap:12px;}
+.chat-header-ava{width:34px;height:34px;border-radius:50%;background:var(--card2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.chat-header-info{flex:1;}
+.chat-header-name{font-size:14px;font-weight:700;}
+.chat-header-sub{font-size:11px;color:var(--muted2);}
+.chat-header-actions{display:flex;gap:6px;}
+.chat-win{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
 .bubble-row{display:flex;gap:9px;animation:su .3s ease;}
-@keyframes su{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@keyframes su{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 .bubble-row.lr{flex-direction:row-reverse;}
-.av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;}
-.av.ai{background:var(--grad);font-family:'Bebas Neue';font-size:10px;color:white;box-shadow:0 0 14px rgba(255,101,53,.3);}
-.av.lead{background:var(--card2);border:1px solid var(--border2);}
-.bdy{max-width:86%;}
-.bsender{font-size:10px;color:var(--muted);margin-bottom:3px;}
+.av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.av.ai{background:var(--grad);font-family:'Bebas Neue';font-size:9px;color:white;}
+.av.lead{background:var(--card2);border:1px solid var(--border2);font-size:13px;}
+.bdy{max-width:78%;}
+.bsender{font-size:9px;color:var(--muted);margin-bottom:2px;}
 .lr .bsender{text-align:right;}
-.bubble{padding:9px 13px;border-radius:13px;font-size:13px;line-height:1.65;}
-.ai-bub{background:linear-gradient(135deg,rgba(255,101,53,.1),rgba(232,54,155,.07));border:1px solid rgba(255,101,53,.18);border-radius:3px 13px 13px 13px;}
-.lead-bub{background:var(--card2);border:1px solid var(--border2);border-radius:13px 3px 13px 13px;color:#c0c0d8;}
-.sbadge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:5px;text-transform:uppercase;letter-spacing:.5px;}
+.bubble{padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.6;}
+.ai-bub{background:linear-gradient(135deg,rgba(255,101,53,.1),rgba(232,54,155,.07));border:1px solid rgba(255,101,53,.18);border-radius:3px 12px 12px 12px;}
+.lead-bub{background:var(--card2);border:1px solid var(--border2);border-radius:12px 3px 12px 12px;color:#c0c0d8;}
+.sys-bub{background:rgba(56,182,255,.06);border:1px solid rgba(56,182,255,.12);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--blue);text-align:center;align-self:center;margin:4px 0;}
+.btime{font-size:9px;color:var(--muted);margin-top:2px;}
+.lr .btime{text-align:right;}
+.sbadge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:4px;text-transform:uppercase;}
 .s0{background:rgba(139,92,246,.15);color:#b09af8;border:1px solid rgba(139,92,246,.25);}
 .s1{background:rgba(56,182,255,.15);color:var(--blue);border:1px solid rgba(56,182,255,.25);}
 .s2{background:rgba(255,101,53,.15);color:var(--orange);border:1px solid rgba(255,101,53,.25);}
 .s3{background:rgba(0,212,255,.15);color:#00d4ff;border:1px solid rgba(0,212,255,.25);}
 .s4{background:rgba(232,54,155,.2);color:var(--pink);border:1px solid rgba(232,54,155,.3);}
 .typing-row{display:flex;gap:9px;}
-.tbub{padding:11px 14px;background:rgba(255,101,53,.07);border:1px solid rgba(255,101,53,.15);border-radius:3px 13px 13px 13px;display:flex;gap:4px;align-items:center;}
-.td{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:td 1.3s ease-in-out infinite;}
+.tbub{padding:10px 13px;background:rgba(255,101,53,.07);border:1px solid rgba(255,101,53,.15);border-radius:3px 12px 12px 12px;display:flex;gap:4px;align-items:center;}
+.td{width:5px;height:5px;border-radius:50%;background:var(--orange);animation:td 1.3s ease-in-out infinite;}
 .td:nth-child(2){animation-delay:.2s;}.td:nth-child(3){animation-delay:.4s;}
-@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-5px);opacity:1;}}
-.chat-bar{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:flex-end;}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+.chat-bar{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:9px;align-items:flex-end;background:var(--card);}
 .chat-in{flex:1;background:var(--surface);border:1px solid var(--border2);border-radius:var(--rs);padding:9px 13px;color:var(--white);font-family:'Sora',sans-serif;font-size:13px;resize:none;outline:none;max-height:100px;transition:border-color .2s;}
 .chat-in:focus{border-color:rgba(255,101,53,.4);}
 .chat-in::placeholder{color:var(--muted);}
-.send-b{width:40px;height:40px;border-radius:var(--rs);border:none;background:var(--grad);color:white;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-.send-b:hover:not(:disabled){transform:scale(1.06);box-shadow:0 0 18px rgba(255,101,53,.4);}
+.send-b{width:38px;height:38px;border-radius:var(--rs);border:none;background:var(--grad);color:white;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.send-b:hover:not(:disabled){transform:scale(1.06);}
 .send-b:disabled{opacity:.4;cursor:not-allowed;}
 
-/* LEAD CARD */
-.lead-panel{display:flex;flex-direction:column;gap:14px;}
+/* LEAD INFO SIDE */
+.lead-side{width:260px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow-y:auto;}
 .lead-info{padding:16px;}
 .lead-ava{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 16px rgba(139,92,246,.3);margin-bottom:11px;}
 .lead-name{font-size:16px;font-weight:700;}
@@ -191,22 +215,20 @@ body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;min-h
 .score-fill{height:100%;border-radius:3px;background:var(--grad);box-shadow:0 0 8px rgba(255,101,53,.3);transition:width 1s cubic-bezier(.34,1.56,.64,1);}
 .tags{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 12px;}
 .tag{font-size:10px;padding:3px 8px;border-radius:20px;border:1px solid var(--border2);color:var(--muted2);}
-.ac-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-
-/* JORNADA */
-.jtrack{padding:14px 16px;display:flex;flex-direction:column;gap:4px;}
-.jstep{display:flex;align-items:center;gap:10px;padding:7px 0;}
-.jdot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .3s;}
+.ac-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px;}
+.jtrack{padding:10px 14px;display:flex;flex-direction:column;gap:4px;}
+.jstep{display:flex;align-items:center;gap:9px;padding:5px 0;}
+.jdot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .3s;}
 .jdot.done{background:rgba(0,230,118,.15);border:1px solid rgba(0,230,118,.3);color:var(--green);}
-.jdot.now{background:var(--grad);box-shadow:0 0 12px rgba(255,101,53,.4);}
+.jdot.now{background:var(--grad);}
 .jdot.todo{background:var(--surface);border:1px solid var(--border2);color:var(--muted);}
-.ji-l{font-size:12px;font-weight:600;}
+.ji-l{font-size:11px;font-weight:600;}
 
 /* TABLE */
 table{width:100%;border-collapse:collapse;}
 th{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);}
 td{padding:10px 12px;border-bottom:1px solid rgba(26,26,42,.6);font-size:13px;vertical-align:middle;}
-tr:hover td{background:rgba(255,101,53,.025);}
+tr:hover td{background:rgba(255,101,53,.02);}
 .tname{font-weight:600;}.tsub{font-size:10px;color:var(--muted);margin-top:1px;}
 .temp{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;}
 .t-hot{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25);}
@@ -214,44 +236,48 @@ tr:hover td{background:rgba(255,101,53,.025);}
 .t-cold{background:rgba(56,182,255,.12);color:var(--blue);border:1px solid rgba(56,182,255,.25);}
 .pmini{display:inline-block;width:48px;height:4px;background:var(--border);border-radius:2px;vertical-align:middle;}
 .pfill{height:100%;border-radius:2px;background:var(--grad);}
-
-/* FUNIL */
 .funnel-bar{display:flex;align-items:center;gap:12px;padding:9px 12px;background:var(--surface);border-radius:var(--rs);margin-bottom:6px;}
-.fb-label{font-size:12px;font-weight:600;width:110px;flex-shrink:0;}
+.fb-label{font-size:12px;font-weight:600;width:120px;flex-shrink:0;}
 .fb-track{flex:1;height:6px;background:var(--border);border-radius:3px;}
 .fb-fill{height:100%;border-radius:3px;background:var(--grad);}
 .fb-count{font-family:'Bebas Neue';font-size:20px;color:var(--orange);width:40px;text-align:right;}
-
-/* TRAINING */
 .train-form{padding:20px;display:flex;flex-direction:column;gap:16px;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 select.fi option{background:var(--card);}
 textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
-/* ZAPI SETUP */
-.zapi-hero{background:linear-gradient(135deg,rgba(0,230,118,.08),rgba(0,230,118,.03));border:1px solid rgba(0,230,118,.15);border-radius:var(--r);padding:20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;}
-.setup-steps{display:flex;flex-direction:column;gap:10px;}
-.setup-step{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:15px 18px;display:flex;align-items:center;gap:14px;}
-.snum{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+/* ZAPI CONFIG */
+.zapi-status-bar{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:var(--r);margin-bottom:20px;}
+.zapi-on{background:linear-gradient(135deg,rgba(0,230,118,.08),rgba(0,230,118,.03));border:1px solid rgba(0,230,118,.2);}
+.zapi-off{background:rgba(255,211,42,.05);border:1px solid rgba(255,211,42,.2);}
+.zapi-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.zapi-dot-on{background:var(--green);box-shadow:0 0 8px rgba(0,230,118,.5);animation:dp 2s infinite;}
+.zapi-dot-off{background:var(--yellow);}
+.setup-step{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:15px 18px;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.snum{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:white;}
 .si{flex:1;}.si-t{font-size:13px;font-weight:600;}.si-d{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* TOGGLE SWITCH */
+.toggle-wrap{display:flex;align-items:center;gap:10px;}
+.toggle{width:44px;height:24px;border-radius:12px;background:var(--border2);border:none;cursor:pointer;position:relative;transition:background .3s;flex-shrink:0;}
+.toggle.on{background:var(--green);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.3);}
+.toggle.on::after{transform:translateX(20px);}
+.toggle-label{font-size:13px;font-weight:600;}
 
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
 .modal-bg.open{display:flex;}
 .modal{background:var(--card);border:1px solid var(--border2);border-radius:18px;width:100%;max-width:480px;padding:28px;animation:mIn .3s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;}
-@keyframes mIn{from{opacity:0;transform:scale(.92) translateY(20px);}to{opacity:1;transform:none;}}
+@keyframes mIn{from{opacity:0;transform:scale(.92)translateY(20px);}to{opacity:1;transform:none;}}
 .m-title{font-size:18px;font-weight:700;margin-bottom:5px;}
 .m-desc{color:var(--muted);font-size:12px;margin-bottom:20px;line-height:1.6;}
 .m-btns{display:flex;gap:9px;justify-content:flex-end;margin-top:20px;}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;z-index:400;background:var(--card2);border:1px solid var(--border2);border-radius:var(--r);padding:12px 18px;display:flex;align-items:center;gap:9px;font-size:13px;box-shadow:0 8px 40px rgba(0,0,0,.5);transform:translateY(70px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;}
-.toast.show{transform:translateY(0);opacity:1;}
-
-/* CONFIRM MODAL */
 .confirm-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:350;display:none;align-items:center;justify-content:center;padding:20px;}
 .confirm-bg.open{display:flex;}
 .confirm-box{background:var(--card);border:1px solid rgba(255,71,87,.3);border-radius:16px;width:100%;max-width:360px;padding:24px;animation:mIn .3s ease;}
+.toast{position:fixed;bottom:24px;right:24px;z-index:400;background:var(--card2);border:1px solid var(--border2);border-radius:var(--r);padding:12px 18px;display:flex;align-items:center;gap:9px;font-size:13px;box-shadow:0 8px 40px rgba(0,0,0,.5);transform:translateY(70px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
 
 /* MISC */
 .gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -264,7 +290,8 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 @media(max-width:768px){
   .master-stats{grid-template-columns:repeat(2,1fr);}
   .stats-row{grid-template-columns:repeat(2,1fr);}
-  .chat-wrap{grid-template-columns:1fr;}
+  .inbox-wrap{grid-template-columns:1fr;}
+  .lead-side{display:none;}
   .sidebar{transform:translateX(-100%);transition:transform .3s;}
   .sidebar.mob-open{transform:translateX(0);}
   .main-panel{margin-left:0;}
@@ -275,9 +302,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 <body>
 <div class="aurora"><div class="ab ab1"></div><div class="ab ab2"></div><div class="ab ab3"></div></div>
 
-<!-- ══════════════════════════════════════════════════
-     SCREEN 1 — LOGIN
-══════════════════════════════════════════════════ -->
+<!-- ══ LOGIN ══ -->
 <div class="screen active" id="screen-login">
   <div class="login-box">
     <div class="login-logo">
@@ -288,46 +313,22 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <div class="ltab active" onclick="setLoginTab('agency',this)">🏢 Agência</div>
       <div class="ltab" onclick="setLoginTab('client',this)">🏪 Cliente</div>
     </div>
-
-    <!-- AGENCY FORM -->
     <div id="login-agency-form">
-      <div class="ff">
-        <label class="fl">E-mail da Agência</label>
-        <input class="fi" type="email" id="ag-email" placeholder="agencia@pulsar.com" autocomplete="email"/>
-      </div>
-      <div class="ff">
-        <label class="fl">Senha</label>
-        <div class="pw-wrap">
-          <input class="fi" type="password" id="ag-pass" placeholder="••••••••" autocomplete="current-password"/>
-          <button class="pw-toggle" type="button" onclick="togglePw('ag-pass',this)">👁</button>
-        </div>
-      </div>
+      <div class="ff"><label class="fl">E-mail da Agência</label><input class="fi" type="email" id="ag-email" placeholder="agencia@pulsar.com" autocomplete="email"/></div>
+      <div class="ff"><label class="fl">Senha</label><div class="pw-wrap"><input class="fi" type="password" id="ag-pass" placeholder="••••••••" autocomplete="current-password"/><button class="pw-toggle" type="button" onclick="togglePw('ag-pass',this)">👁</button></div></div>
       <button class="btn btn-fire" style="width:100%;margin-top:4px;" onclick="loginAgency()">Entrar como Agência →</button>
       <div class="login-err" id="ag-err">E-mail ou senha incorretos.</div>
     </div>
-
-    <!-- CLIENT FORM -->
     <div id="login-client-form" style="display:none;">
-      <div class="ff">
-        <label class="fl">E-mail</label>
-        <input class="fi" type="email" id="cl-email" placeholder="cliente@empresa.com" autocomplete="email"/>
-      </div>
-      <div class="ff">
-        <label class="fl">Senha</label>
-        <div class="pw-wrap">
-          <input class="fi" type="password" id="cl-pass" placeholder="••••••••" autocomplete="current-password"/>
-          <button class="pw-toggle" type="button" onclick="togglePw('cl-pass',this)">👁</button>
-        </div>
-      </div>
+      <div class="ff"><label class="fl">E-mail</label><input class="fi" type="email" id="cl-email" placeholder="cliente@empresa.com" autocomplete="email"/></div>
+      <div class="ff"><label class="fl">Senha</label><div class="pw-wrap"><input class="fi" type="password" id="cl-pass" placeholder="••••••••" autocomplete="current-password"/><button class="pw-toggle" type="button" onclick="togglePw('cl-pass',this)">👁</button></div></div>
       <button class="btn btn-fire" style="width:100%;margin-top:4px;" onclick="loginClient()">Entrar →</button>
       <div class="login-err" id="cl-err">E-mail ou senha incorretos.</div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     SCREEN 2 — AGENCY MASTER PANEL
-══════════════════════════════════════════════════ -->
+<!-- ══ AGENCY ══ -->
 <div class="screen" id="screen-agency" style="flex-direction:column;">
   <div class="agency-topbar">
     <div style="display:flex;align-items:center;">
@@ -335,63 +336,33 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <span class="agency-badge">AGÊNCIA MASTER</span>
     </div>
     <div style="display:flex;gap:9px;align-items:center;">
-      <span style="font-size:12px;color:var(--muted2);" id="agency-name-display">Pulsar Marketing 360</span>
       <button class="btn btn-fire btn-sm" onclick="addClientModal()">+ Novo Cliente</button>
       <button class="btn btn-ghost btn-sm" onclick="logout()">Sair</button>
     </div>
   </div>
-
   <div class="agency-content">
-    <!-- STATS -->
     <div class="master-stats">
-      <div class="ms"><div class="ms-val" id="stat-clientes">0</div><div class="ms-lbl">Clientes Ativos</div><div class="ms-sub" id="stat-clientes-sub">Nenhum ainda</div></div>
+      <div class="ms"><div class="ms-val" id="stat-clientes">0</div><div class="ms-lbl">Clientes Ativos</div><div class="ms-sub" id="stat-clientes-sub">—</div></div>
       <div class="ms"><div class="ms-val" id="stat-leads">0</div><div class="ms-lbl">Leads Totais</div><div class="ms-sub">Gerados pelo agente</div></div>
       <div class="ms"><div class="ms-val" id="stat-hot">0</div><div class="ms-lbl">Leads Quentes</div><div class="ms-sub">Prontos p/ fechar</div></div>
-      <div class="ms"><div class="ms-val" id="stat-mrr">R$0</div><div class="ms-lbl">MRR Mensalidades</div><div class="ms-sub" id="stat-mrr-sub">↑ Crescendo</div></div>
+      <div class="ms"><div class="ms-val" id="stat-mrr">R$0</div><div class="ms-lbl">MRR Mensalidades</div><div class="ms-sub">↑ Crescendo</div></div>
       <div class="ms"><div class="ms-val">94%</div><div class="ms-lbl">Engajamento IA</div><div class="ms-sub">24/7 disponível</div></div>
     </div>
-
-    <!-- CLIENTS -->
     <div class="sec-hdr">
       <div class="sec-title">🏪 Clientes</div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-fire btn-sm" onclick="addClientModal()">+ Adicionar Cliente</button>
-      </div>
+      <button class="btn btn-fire btn-sm" onclick="addClientModal()">+ Adicionar Cliente</button>
     </div>
     <div class="clients-grid" id="clientsGrid"></div>
-
-    <!-- API + COST -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;">
-      <!-- API KEY -->
       <div class="panel">
-        <div class="ph">
-          <div class="ph-t">🔑 API Key Anthropic — Centralizada</div>
-          <span id="apiStatusBadge" style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.2);">Não configurada</span>
-        </div>
+        <div class="ph"><div class="ph-t">🔑 API Key Anthropic</div><span id="apiStatusBadge" style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.2);">Não configurada</span></div>
         <div style="padding:18px;">
-          <div style="font-size:12px;color:var(--muted2);line-height:1.65;margin-bottom:14px;background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--rs);padding:11px 14px;">
-            💡 <strong style="color:var(--white);">Esta chave é usada por todos os seus clientes.</strong> Os clientes nunca têm acesso a ela.
-          </div>
-          <div class="ff">
-            <label class="fl">Chave da API</label>
-            <div style="display:flex;gap:8px;">
-              <input class="fi" type="password" id="agencyApiKey" placeholder="sk-ant-api03-..." style="flex:1;" oninput="checkApiKey(this.value)"/>
-              <button class="btn btn-ghost btn-sm" onclick="toggleApiKeyVisibility()">👁</button>
-            </div>
-          </div>
-          <div class="ff">
-            <label class="fl">Modelo IA</label>
-            <select class="fi" id="agencyModel">
-              <option value="claude-sonnet-4-20250514">claude-sonnet-4 — Melhor qualidade ✅</option>
-              <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 — Mais econômico</option>
-            </select>
-          </div>
+          <div style="font-size:12px;color:var(--muted2);line-height:1.6;margin-bottom:14px;background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--rs);padding:11px;">💡 <strong style="color:var(--white);">Chave centralizada</strong> — usada por todos os clientes. Eles nunca têm acesso.</div>
+          <div class="ff"><label class="fl">Chave da API</label><div style="display:flex;gap:8px;"><input class="fi" type="password" id="agencyApiKey" placeholder="sk-ant-api03-..." style="flex:1;" oninput="checkApiKey(this.value)"/><button class="btn btn-ghost btn-sm" onclick="toggleApiKeyVisibility()">👁</button></div></div>
+          <div class="ff"><label class="fl">Modelo IA</label><select class="fi" id="agencyModel"><option value="claude-sonnet-4-20250514">claude-sonnet-4 — Melhor qualidade ✅</option><option value="claude-haiku-4-5-20251001">claude-haiku-4-5 — Mais econômico</option></select></div>
           <button class="btn btn-fire" style="width:100%;justify-content:center;" onclick="saveAgencyApiKey()">🔑 Salvar e Ativar</button>
-          <div style="font-size:11px;color:var(--muted);margin-top:10px;text-align:center;">Obtenha sua chave em <a href="https://console.anthropic.com" target="_blank" style="color:var(--blue);">console.anthropic.com</a></div>
         </div>
       </div>
-
-      <!-- CUSTO -->
       <div class="panel">
         <div class="ph"><div class="ph-t">📊 Estimativa de Receita</div></div>
         <div style="padding:18px;display:flex;flex-direction:column;gap:8px;">
@@ -403,31 +374,27 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
             <span style="font-size:12px;color:var(--green);">Margem líquida estimada</span>
             <span style="font-weight:700;font-size:15px;color:var(--green);" id="margem-display">R$0</span>
           </div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:4px;">~R$0,003–0,01 por mensagem com claude-sonnet-4. 500 conversas/cliente ≈ R$20–30/mês.</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     SCREEN 3 — CLIENT PANEL
-══════════════════════════════════════════════════ -->
+<!-- ══ CLIENT PANEL ══ -->
 <div class="screen" id="screen-client">
-  <!-- SIDEBAR -->
   <div class="sidebar" id="sidebar">
     <div class="sb-logo">
       <div class="sb-brand">PULSAR SDR</div>
       <div class="sb-client" id="sb-client-name">—</div>
-      <div class="ai-live"><div class="pring"></div>IA ATIVA 24/7</div>
+      <div class="ai-live" id="ai-status-badge"><div class="pring" id="pring-dot"></div><span id="ai-status-text">IA ATIVA 24/7</span></div>
     </div>
     <div class="sb-nav">
       <button class="nb active" onclick="showView('dash',this)"><span class="ni">📊</span>Dashboard</button>
-      <button class="nb" onclick="showView('agente',this)"><span class="ni">🤖</span>Agente SDR<span class="npill" id="leads-count">0</span></button>
-      <button class="nb" onclick="showView('leads',this)"><span class="ni">👥</span>Todos os Leads</button>
-      <button class="nb" onclick="showView('funil',this)"><span class="ni">🔻</span>Funil de Vendas</button>
+      <button class="nb" onclick="showView('inbox',this)"><span class="ni">💬</span>Conversas<span class="npill" id="inbox-count">0</span></button>
+      <button class="nb" onclick="showView('leads',this)"><span class="ni">👥</span>Leads<span class="npill" id="leads-count">0</span></button>
+      <button class="nb" onclick="showView('funil',this)"><span class="ni">🔻</span>Funil</button>
       <button class="nb" onclick="showView('treinamento',this)"><span class="ni">🧠</span>Treinamento</button>
-      <button class="nb" onclick="showView('whatsapp',this)"><span class="ni">📱</span>WhatsApp (Zapi)</button>
+      <button class="nb" onclick="showView('zapi',this)"><span class="ni">📱</span>Zapi & Workflow</button>
       <button class="nb" onclick="showView('config',this)"><span class="ni">⚙️</span>Configurações</button>
     </div>
     <div class="sb-foot">
@@ -436,82 +403,114 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     </div>
   </div>
 
-  <!-- MAIN PANEL -->
   <div class="main-panel">
     <div class="topbar">
       <div class="topbar-title" id="pageTitle">Dashboard</div>
       <div class="topbar-right">
-        <span id="score-display" style="font-size:12px;color:var(--muted2);">Score: —</span>
-        <button class="btn btn-ghost btn-sm" onclick="resetChat()">🔄 Novo Lead</button>
+        <div class="toggle-wrap">
+          <button class="toggle" id="agente-toggle" onclick="toggleAgente(this)"></button>
+          <span class="toggle-label" id="agente-toggle-label" style="font-size:12px;color:var(--muted2);">Agente ativo</span>
+        </div>
         <button class="btn btn-ghost btn-sm" onclick="logout()">Sair</button>
       </div>
     </div>
 
     <div class="content">
 
-      <!-- DASHBOARD VIEW -->
+      <!-- DASHBOARD -->
       <div class="view active" id="view-dash">
         <div class="stats-row">
-          <div class="stat"><div class="stat-lbl">Leads Totais</div><div class="stat-num" id="d-leads">0</div><div class="stat-sub">Gerados pelo agente</div></div>
+          <div class="stat"><div class="stat-lbl">Conversas Hoje</div><div class="stat-num" id="d-conversas">0</div><div class="stat-sub">Via WhatsApp</div></div>
           <div class="stat"><div class="stat-lbl">Leads Quentes</div><div class="stat-num" id="d-hot">0</div><div class="stat-sub">Prontos p/ fechar</div></div>
           <div class="stat"><div class="stat-lbl">Fechamentos</div><div class="stat-num" id="d-conv">0</div><div class="stat-sub">Este mês</div></div>
-          <div class="stat"><div class="stat-lbl">Score Médio</div><div class="stat-num" id="d-score">—</div><div class="stat-sub">Da carteira atual</div></div>
+          <div class="stat"><div class="stat-lbl">Taxa Engajamento</div><div class="stat-num" id="d-score">94%</div><div class="stat-sub">Respostas do agente</div></div>
         </div>
-        <div class="panel">
-          <div class="ph"><div class="ph-t">🔥 Leads Quentes Recentes</div><button class="btn btn-green btn-xs" onclick="exportHot()">📱 Enviar ao Vendedor</button></div>
-          <div style="overflow-x:auto;"><table><thead><tr><th>Lead</th><th>Temperatura</th><th>Score</th><th>Etapa</th><th>Ação</th></tr></thead><tbody id="hotTbl"></tbody></table></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="panel">
+            <div class="ph"><div class="ph-t">🔥 Leads Quentes</div><button class="btn btn-green btn-xs" onclick="exportHot()">📱 Enviar WA</button></div>
+            <div style="overflow-x:auto;"><table><thead><tr><th>Lead</th><th>Temp</th><th>Score</th><th>Ação</th></tr></thead><tbody id="hotTbl"></tbody></table></div>
+          </div>
+          <div class="panel">
+            <div class="ph"><div class="ph-t">📱 Status do Agente</div></div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+              <div id="dash-agent-status" style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.15);border-radius:var(--rs);">
+                <div style="width:9px;height:9px;border-radius:50%;background:var(--green);animation:dp 2s infinite;"></div>
+                <div><div style="font-size:13px;font-weight:700;color:var(--green);" id="dash-status-text">Agente Ativo — Respondendo leads</div><div style="font-size:11px;color:var(--muted);margin-top:1px;">Zapi + n8n + Claude AI · 24/7</div></div>
+              </div>
+              <div class="info-row"><span>Última resposta enviada</span><span style="color:var(--blue);" id="dash-last-resp">—</span></div>
+              <div class="info-row"><span>Conversas ativas agora</span><span style="color:var(--orange);" id="dash-active-conv">0</span></div>
+              <div class="info-row"><span>Tempo médio de resposta</span><span style="color:var(--green);">~3s</span></div>
+              <div class="info-row"><span>Workflow n8n</span><span id="dash-n8n-status" style="color:var(--green);">● Ativo</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- AGENTE VIEW -->
-      <div class="view" id="view-agente">
+      <!-- INBOX / CONVERSAS -->
+      <div class="view" id="view-inbox">
         <div class="sec-hdr">
-          <div><div class="sec-title">🤖 Agente SDR — Demo ao Vivo</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Simule uma conversa como se fosse um lead do WhatsApp</div></div>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <select class="fi" id="nichoSel2" onchange="resetChat()" style="width:160px;font-size:12px;">
-              <option value="clinica">🏥 Clínica</option>
-              <option value="restaurante">🍕 Restaurante</option>
-              <option value="academia">💪 Academia</option>
-              <option value="advocacia">⚖️ Advocacia</option>
-              <option value="imoveis">🏠 Imóveis</option>
-              <option value="salao">💇 Salão</option>
-            </select>
+          <div><div class="sec-title">💬 Conversas — Inbox WhatsApp</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Todas as conversas do seu agente SDR em tempo real</div></div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost btn-sm" onclick="loadConversations()">🔄 Atualizar</button>
+            <button class="btn btn-fire btn-sm" onclick="newConvoModal()">+ Simular Lead</button>
           </div>
         </div>
-        <div class="chat-wrap">
-          <div class="panel chat-panel">
-            <div class="ph"><div class="ph-t">💬 Conversa — WhatsApp Simulado</div></div>
-            <div class="chat-win" id="chatWin2"></div>
-            <div class="chat-bar">
-              <textarea class="chat-in" id="chatIn2" placeholder="Simule uma mensagem de lead..." rows="1" onkeydown="hk(event,'chatIn2','send2')"></textarea>
-              <button class="send-b" id="send2" onclick="sendMsg('chatIn2','chatWin2','send2')">➤</button>
-            </div>
+        <div class="inbox-wrap">
+          <!-- LISTA DE CONTATOS -->
+          <div class="contact-list">
+            <div class="contact-search"><input type="text" id="search-contacts" placeholder="🔍 Buscar contato..." oninput="filterContacts(this.value)"/></div>
+            <div class="contact-items" id="contactList"></div>
           </div>
-          <div class="lead-panel">
-            <div class="panel"><div class="ph"><div class="ph-t">🎯 Lead Scoring</div></div>
-              <div class="lead-info">
-                <div class="lead-ava" id="leadAva">👤</div>
-                <div class="lead-name" id="leadName">Aguardando...</div>
-                <div class="lead-sub" id="leadSub">Inicie uma conversa</div>
-                <div class="score-row"><span style="font-size:11px;color:var(--muted);">Score de qualificação</span><span style="font-weight:700;color:var(--orange);" id="sc2">0%</span></div>
-                <div class="score-track"><div class="score-fill" id="scoreFill" style="width:0%"></div></div>
-                <div class="tags" id="leadTags"><span class="tag">💬 Aguardando</span></div>
-                <div class="ac-row">
-                  <div style="background:var(--surface);border-radius:var(--rs);padding:8px;"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">TEMPERATURA</div><div id="tp2" style="font-size:12px;font-weight:700;">—</div></div>
-                  <div style="background:var(--surface);border-radius:var(--rs);padding:8px;"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">INTENÇÃO</div><div id="in2" style="font-size:12px;font-weight:700;">—</div></div>
+          <!-- CHAT PRINCIPAL -->
+          <div class="chat-main" id="chatMain">
+            <div id="chat-placeholder" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--muted);">
+              <div style="font-size:48px;">💬</div>
+              <div style="font-size:14px;font-weight:600;">Selecione uma conversa</div>
+              <div style="font-size:12px;text-align:center;max-width:200px;line-height:1.6;">ou clique em "Simular Lead" para testar o agente</div>
+            </div>
+            <div id="active-chat" style="display:none;flex-direction:column;height:100%;">
+              <div class="chat-header">
+                <div class="chat-header-ava" id="ch-ava">👤</div>
+                <div class="chat-header-info">
+                  <div class="chat-header-name" id="ch-name">—</div>
+                  <div class="chat-header-sub" id="ch-sub">—</div>
+                </div>
+                <div class="chat-header-actions">
+                  <button class="btn btn-green btn-xs" onclick="sendToWA(currentContact?.name||'Lead')">📱 Encaminhar</button>
+                  <button class="btn btn-ghost btn-xs" onclick="closeChat()">✕</button>
                 </div>
               </div>
-            </div>
-            <div class="panel"><div class="ph"><div class="ph-t">🗺️ Jornada</div></div>
-              <div class="jtrack" id="jtrack2">
-                <div class="jstep"><div class="jdot todo">🔍</div><div class="ji"><div class="ji-l">Consciência</div></div></div>
-                <div class="jstep"><div class="jdot todo">💡</div><div class="ji"><div class="ji-l">Interesse</div></div></div>
-                <div class="jstep"><div class="jdot todo">⚖️</div><div class="ji"><div class="ji-l">Consideração</div></div></div>
-                <div class="jstep"><div class="jdot todo">🎯</div><div class="ji"><div class="ji-l">Decisão</div></div></div>
-                <div class="jstep"><div class="jdot todo">🤝</div><div class="ji"><div class="ji-l">Lead Quente</div></div></div>
+              <div class="chat-win" id="chatWin"></div>
+              <div class="chat-bar">
+                <textarea class="chat-in" id="chatIn" placeholder="Digite como lead para simular..." rows="1" onkeydown="hkInbox(event)"></textarea>
+                <button class="send-b" id="sendBtn" onclick="sendInboxMsg()">➤</button>
               </div>
             </div>
-            <button class="btn btn-green" id="waBtn2" onclick="openWA()" disabled style="width:100%;justify-content:center;">📱 Enviar ao Vendedor</button>
+          </div>
+          <!-- LEAD INFO SIDE -->
+          <div class="lead-side" id="leadSide" style="display:none;">
+            <div style="padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;">🎯 Perfil do Lead</div>
+            <div class="lead-info">
+              <div class="lead-ava" id="ls-ava">👤</div>
+              <div class="lead-name" id="ls-name">—</div>
+              <div class="lead-sub" id="ls-sub">Aguardando qualificação</div>
+              <div class="score-row"><span style="font-size:11px;color:var(--muted);">Score</span><span style="font-weight:700;color:var(--orange);" id="ls-score">0%</span></div>
+              <div class="score-track"><div class="score-fill" id="ls-score-fill" style="width:0%"></div></div>
+              <div class="tags" id="ls-tags"><span class="tag">💬 Aguardando</span></div>
+              <div class="ac-row">
+                <div style="background:var(--card);border-radius:var(--rs);padding:8px;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">TEMPERATURA</div><div id="ls-temp" style="font-size:12px;font-weight:700;">—</div></div>
+                <div style="background:var(--card);border-radius:var(--rs);padding:8px;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">INTENÇÃO</div><div id="ls-intent" style="font-size:12px;font-weight:700;">—</div></div>
+              </div>
+              <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:12px;" id="ls-wa-btn" onclick="sendToWA(currentContact?.name||'Lead')" disabled>📱 Encaminhar Vendedor</button>
+            </div>
+            <div style="padding:10px 14px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted2);">JORNADA DE COMPRA</div>
+            <div class="jtrack" id="ls-jtrack">
+              <div class="jstep"><div class="jdot todo">🔍</div><div class="ji"><div class="ji-l">Consciência</div></div></div>
+              <div class="jstep"><div class="jdot todo">💡</div><div class="ji"><div class="ji-l">Interesse</div></div></div>
+              <div class="jstep"><div class="jdot todo">⚖️</div><div class="ji"><div class="ji-l">Consideração</div></div></div>
+              <div class="jstep"><div class="jdot todo">🎯</div><div class="ji"><div class="ji-l">Decisão</div></div></div>
+              <div class="jstep"><div class="jdot todo">🤝</div><div class="ji"><div class="ji-l">Lead Quente</div></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -519,7 +518,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <!-- LEADS VIEW -->
       <div class="view" id="view-leads">
         <div class="sec-hdr">
-          <div><div class="sec-title">👥 Todos os Leads</div></div>
+          <div class="sec-title">👥 Todos os Leads</div>
           <button class="btn btn-fire btn-sm" onclick="exportHot()">🔥 Exportar Quentes</button>
         </div>
         <div class="panel"><div style="overflow-x:auto;"><table><thead><tr><th>Lead</th><th>Temp</th><th>Score</th><th>Etapa</th><th>Data</th><th>Ação</th></tr></thead><tbody id="allTbl"></tbody></table></div></div>
@@ -540,8 +539,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:14px;">
-            <div class="panel">
-              <div class="ph"><div class="ph-t">⚡ Performance</div></div>
+            <div class="panel"><div class="ph"><div class="ph-t">⚡ Performance</div></div>
               <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
                 <div class="info-row"><span>Resposta média</span><span style="color:var(--blue);">3.2s</span></div>
                 <div class="info-row"><span>Taxa engajamento</span><span style="color:var(--green);">94%</span></div>
@@ -549,12 +547,10 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
                 <div class="info-row"><span>Uptime IA</span><span style="color:var(--green);">100%</span></div>
               </div>
             </div>
-            <div class="panel">
-              <div class="ph"><div class="ph-t">💰 ROI do Cliente</div></div>
+            <div class="panel"><div class="ph"><div class="ph-t">💰 ROI Estimado</div></div>
               <div style="padding:16px;text-align:center;">
-                <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Receita gerada via SDR</div>
                 <div style="font-family:'Bebas Neue';font-size:44px;" class="gt">R$22.400</div>
-                <div style="font-size:12px;color:var(--muted);margin-top:4px;">vs R$1.299/mês investido</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:4px;">Receita gerada via SDR</div>
                 <div style="font-size:14px;color:var(--green);font-weight:700;margin-top:8px;">ROI: 1.623% 🚀</div>
               </div>
             </div>
@@ -564,74 +560,92 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
 
       <!-- TREINAMENTO VIEW -->
       <div class="view" id="view-treinamento">
-        <div class="sec-hdr"><div class="sec-title">🧠 Treinamento do Agente IA</div><button class="btn btn-fire btn-sm" onclick="showToast('💾 Agente atualizado!')">💾 Salvar</button></div>
+        <div class="sec-hdr"><div class="sec-title">🧠 Treinamento do Agente IA</div><button class="btn btn-fire btn-sm" onclick="saveTraining()">💾 Salvar</button></div>
         <div class="panel">
-          <div class="ph"><div class="ph-t">⚙️ Configuração do Agente</div></div>
+          <div class="ph"><div class="ph-t">⚙️ Configuração do Agente</div><span style="font-size:11px;color:var(--muted2);">Alterações aplicadas em tempo real no n8n</span></div>
           <div class="train-form">
-            <div class="ff"><label class="fl">Nome do Negócio</label><input class="fi" id="t-negocio" value="Clínica Bella Estética"/></div>
-            <div class="ff"><label class="fl">Persona do Agente</label><input class="fi" id="t-persona" value="Sofia — Consultora especialista em estética"/></div>
-            <div class="ff"><label class="fl">Serviços / Produtos</label><textarea class="fi" id="t-servicos">Botox, Preenchimento labial, Limpeza de pele, Tratamento para manchas</textarea></div>
-            <div class="ff"><label class="fl">Principais Objeções e Como Contornar</label><textarea class="fi" id="t-objecoes">Preço alto → Parcelamento e ROI emocional (autoestima, confiança)
-"Vou pensar" → Vagas limitadas, promoção por tempo limitado
-Medo → Protocolos de conforto, depoimentos reais</textarea></div>
-            <div class="ff"><label class="fl">Perguntas de Qualificação</label><textarea class="fi" id="t-perguntas">Qual é seu principal objetivo com o tratamento?
-Você já fez algum procedimento estético antes?
-Tem alguma data especial se aproximando?</textarea></div>
+            <div class="ff"><label class="fl">Nome do Negócio</label><input class="fi" id="t-negocio"/></div>
+            <div class="ff"><label class="fl">Persona / Nome do Agente</label><input class="fi" id="t-persona"/></div>
+            <div class="ff"><label class="fl">Serviços / Produtos</label><textarea class="fi" id="t-servicos"></textarea></div>
+            <div class="ff"><label class="fl">Objeções Comuns e Como Contornar</label><textarea class="fi" id="t-objecoes"></textarea></div>
+            <div class="ff"><label class="fl">Perguntas de Qualificação</label><textarea class="fi" id="t-perguntas"></textarea></div>
             <div class="row2">
-              <div class="ff"><label class="fl">CTA Principal</label><input class="fi" id="t-cta" value="Agendar avaliação gratuita"/></div>
+              <div class="ff"><label class="fl">CTA Principal</label><input class="fi" id="t-cta"/></div>
               <div class="ff"><label class="fl">Tom de Comunicação</label><select class="fi" id="t-tom"><option>Amigável e Empático</option><option>Profissional e Formal</option><option>Descontraído e Jovial</option></select></div>
             </div>
-            <button class="btn btn-fire" style="width:100%;justify-content:center;" onclick="showToast('🤖 Agente atualizado com sucesso!')">🚀 Salvar e Aplicar Mudanças</button>
+            <div class="ff"><label class="fl">Promoção / Urgência atual (opcional)</label><input class="fi" id="t-promo" placeholder="Ex: 20% OFF este mês — vagas limitadas!"/></div>
+            <div style="background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--muted2);line-height:1.6;">
+              💡 <strong style="color:var(--white);">Como usar:</strong> Copie o prompt gerado abaixo e cole no campo <code style="color:var(--orange);">System Prompt</code> do nó Code no seu workflow n8n. O agente aplicará todas as configurações acima.
+            </div>
+            <button class="btn btn-fire" style="width:100%;justify-content:center;" onclick="saveTraining()">🚀 Salvar e Gerar Prompt para n8n</button>
+            <div id="prompt-output" style="display:none;">
+              <div style="font-size:12px;font-weight:700;margin-bottom:8px;color:var(--orange);">📋 Prompt gerado — copie para o n8n:</div>
+              <textarea class="fi" id="prompt-text" style="min-height:160px;font-size:11px;font-family:monospace;" readonly></textarea>
+              <button class="btn btn-ghost btn-sm" style="margin-top:8px;" onclick="copyPrompt()">📋 Copiar Prompt</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- WHATSAPP VIEW — ZAPI -->
-      <div class="view" id="view-whatsapp">
-        <div class="sec-title" style="margin-bottom:20px;">📱 Integração WhatsApp via Zapi</div>
+      <!-- ZAPI & WORKFLOW VIEW -->
+      <div class="view" id="view-zapi">
+        <div class="sec-title" style="margin-bottom:20px;">📱 Zapi & Workflow — Controle do Agente</div>
 
-        <div class="zapi-hero">
-          <span style="font-size:36px;">⚡</span>
+        <!-- STATUS PRINCIPAL -->
+        <div class="zapi-status-bar" id="zapi-main-status" style="margin-bottom:20px;">
+          <div class="zapi-dot" id="zapi-dot"></div>
           <div style="flex:1;">
-            <div style="font-size:15px;font-weight:700;color:var(--green);">Zapi — WhatsApp API Conectado</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Agente recebendo e respondendo mensagens automaticamente via Zapi + n8n Cloud.</div>
+            <div style="font-size:15px;font-weight:700;" id="zapi-status-label">—</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:3px;" id="zapi-status-sub">Configure as credenciais abaixo para ativar</div>
           </div>
-          <span style="font-size:11px;color:var(--green);font-weight:700;">● Ativo</span>
-        </div>
-
-        <div style="font-size:14px;font-weight:700;margin-bottom:14px;">📋 Credenciais Zapi desta instância</div>
-        <div class="setup-steps" style="margin-bottom:24px;">
-          <div class="setup-step">
-            <div class="snum">1</div>
-            <div class="si"><div class="si-t">Instance ID</div><div class="si-d">Encontrado na página da instância em app.z-api.io</div></div>
-            <input class="fi" id="zapi-instance" placeholder="3EF369ABFE5C321E9910DE26C08F8D63" style="width:260px;font-size:11px;font-family:monospace;"/>
-          </div>
-          <div class="setup-step">
-            <div class="snum">2</div>
-            <div class="si"><div class="si-t">Token</div><div class="si-d">Token principal da instância</div></div>
-            <input class="fi" id="zapi-token" placeholder="D8FD069AD1E30FDE0B7624DB" style="width:260px;font-size:11px;font-family:monospace;"/>
-          </div>
-          <div class="setup-step" style="border-color:rgba(255,101,53,.2);">
-            <div class="snum">3</div>
-            <div class="si"><div class="si-t">Client-Token <span style="color:var(--orange);font-size:10px;">(obrigatório)</span></div><div class="si-d">Aba Security dentro da instância no Zapi</div></div>
-            <input class="fi" id="zapi-client-token" placeholder="Fxxxxxxxxxxxxxxxxx" style="width:260px;font-size:11px;font-family:monospace;"/>
-          </div>
-          <div class="setup-step">
-            <div class="snum">4</div>
-            <div class="si"><div class="si-t">URL do Webhook n8n</div><div class="si-d">Cole esta URL no campo "On Message Received" no painel Zapi</div></div>
-            <div style="display:flex;gap:8px;align-items:center;">
-              <input class="fi" id="n8n-webhook-url" placeholder="https://usuario.app.n8n.cloud/webhook/zapi" style="width:280px;font-size:11px;"/>
-              <button class="btn btn-ghost btn-xs" onclick="copyField('n8n-webhook-url')">Copiar</button>
-            </div>
+          <div class="toggle-wrap">
+            <button class="toggle" id="main-toggle" onclick="toggleMainAgente(this)"></button>
+            <span style="font-size:13px;font-weight:700;" id="main-toggle-lbl">Ativar</span>
           </div>
         </div>
-        <button class="btn btn-fire" onclick="showToast('✅ Configurações Zapi salvas!')">💾 Salvar Configurações Zapi</button>
 
-        <div style="margin-top:24px;background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--r);padding:16px;">
+        <!-- CONTROLES RÁPIDOS -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
+          <div class="panel" style="padding:16px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:8px;">⚡</div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Workflow n8n</div>
+            <div style="font-size:11px;color:var(--muted2);margin-bottom:12px;" id="n8n-workflow-status">Verificar status</div>
+            <button class="btn btn-ghost btn-sm" style="width:100%" onclick="openN8nWorkflow()">Abrir n8n →</button>
+          </div>
+          <div class="panel" style="padding:16px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:8px;">📱</div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Instância Zapi</div>
+            <div style="font-size:11px;color:var(--muted2);margin-bottom:12px;" id="zapi-instance-status">Verificar conexão</div>
+            <button class="btn btn-ghost btn-sm" style="width:100%" onclick="openZapi()">Abrir Zapi →</button>
+          </div>
+          <div class="panel" style="padding:16px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:8px;">🤖</div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Claude AI</div>
+            <div style="font-size:11px;color:var(--green);margin-bottom:12px;" id="claude-status">● Conectado</div>
+            <button class="btn btn-ghost btn-sm" style="width:100%" onclick="openClaude()">Console →</button>
+          </div>
+        </div>
+
+        <!-- CREDENCIAIS ZAPI -->
+        <div class="panel" style="margin-bottom:16px;">
+          <div class="ph"><div class="ph-t">🔐 Credenciais Zapi desta Instância</div><button class="btn btn-ghost btn-sm" onclick="saveZapiConfig()">💾 Salvar</button></div>
+          <div style="padding:18px;display:flex;flex-direction:column;gap:0;">
+            <div class="setup-step"><div class="snum">1</div><div class="si"><div class="si-t">Instance ID</div><div class="si-d">Encontrado na página da instância em app.z-api.io</div></div><input class="fi" id="zapi-instance" style="width:260px;font-size:11px;font-family:monospace;" placeholder="3EF369ABFE5C321E9910DE26C08F8D63"/></div>
+            <div class="setup-step"><div class="snum">2</div><div class="si"><div class="si-t">Token</div><div class="si-d">Token principal da instância</div></div><input class="fi" id="zapi-token" style="width:260px;font-size:11px;font-family:monospace;" placeholder="D8FD069AD1E30FDE0B7624DB"/></div>
+            <div class="setup-step" style="border-color:rgba(255,101,53,.2);"><div class="snum">3</div><div class="si"><div class="si-t">Client-Token <span style="color:var(--orange);font-size:10px;">(obrigatório)</span></div><div class="si-d">Aba Security dentro da instância no Zapi</div></div><input class="fi" id="zapi-client-token" style="width:260px;font-size:11px;font-family:monospace;" placeholder="Fxxxxxxxxxxxxxxxxx"/></div>
+            <div class="setup-step"><div class="snum">4</div><div class="si"><div class="si-t">URL do Webhook n8n</div><div class="si-d">Cole no campo "On Message Received" no painel Zapi</div></div><div style="display:flex;gap:8px;align-items:center;"><input class="fi" id="n8n-webhook-url" style="width:280px;font-size:11px;" placeholder="https://usuario.app.n8n.cloud/webhook/zapi"/><button class="btn btn-ghost btn-xs" onclick="copyField('n8n-webhook-url')">Copiar</button></div></div>
+            <div class="setup-step"><div class="snum">5</div><div class="si"><div class="si-t">URL do workflow n8n</div><div class="si-d">URL da sua instância n8n para abrir o workflow direto</div></div><input class="fi" id="n8n-base-url" style="width:280px;font-size:11px;" placeholder="https://usuario.app.n8n.cloud"/></div>
+          </div>
+        </div>
+
+        <!-- FLUXO VISUAL -->
+        <div style="background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--r);padding:16px;">
           <div style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--blue);">💡 Fluxo de funcionamento</div>
-          <div style="font-size:12px;color:var(--muted2);line-height:1.9;">
-            Lead envia mensagem → <strong style="color:var(--white);">Zapi captura</strong> → envia para n8n via webhook → <strong style="color:var(--white);">n8n monta o contexto</strong> → chama <strong style="color:var(--white);">Claude AI</strong> → resposta volta para o Zapi → <strong style="color:var(--white);">mensagem enviada ao lead</strong> em segundos.<br><br>
-            ⚠️ <strong style="color:var(--yellow);">O workflow do n8n deve estar ativo (toggle verde)</strong> para o agente responder. Verifique sempre que fizer alterações nos nós.
+          <div style="font-size:12px;color:var(--muted2);line-height:2.0;">
+            Lead envia mensagem → <strong style="color:var(--white);">Zapi captura</strong> → webhook para n8n →
+            <strong style="color:var(--white);">n8n monta contexto com histórico</strong> → chama <strong style="color:var(--white);">Claude AI</strong> →
+            resposta volta ao Zapi → <strong style="color:var(--white);">entregue ao lead em ~3 segundos</strong><br><br>
+            ⚠️ <strong style="color:var(--yellow);">Para pausar o agente:</strong> use o toggle acima ou desative o workflow no n8n. Os dois métodos funcionam.
           </div>
         </div>
       </div>
@@ -640,265 +654,283 @@ Tem alguma data especial se aproximando?</textarea></div>
       <div class="view" id="view-config">
         <div class="sec-title" style="margin-bottom:6px;">⚙️ Configurações da Conta</div>
         <div style="max-width:520px;display:flex;flex-direction:column;gap:14px;">
-
-          <div class="panel">
-            <div class="ph"><div class="ph-t">🤖 Status da IA</div></div>
+          <div class="panel"><div class="ph"><div class="ph-t">👤 Dados da Conta</div></div>
             <div style="padding:16px;">
-              <div style="display:flex;align-items:center;gap:12px;background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.15);border-radius:var(--rs);padding:12px 14px;margin-bottom:12px;">
-                <div style="width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(0,230,118,.5);animation:dp 2s infinite;"></div>
-                <div><div style="font-size:13px;font-weight:700;color:var(--green);">IA Ativa e Funcionando</div><div style="font-size:11px;color:var(--muted);margin-top:1px;">Gerenciada pela Pulsar Marketing 360 · 24/7</div></div>
-              </div>
-              <div style="font-size:12px;color:var(--muted);line-height:1.7;">A inteligência artificial é configurada e mantida pela sua agência. Você não precisa fazer nada.</div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="ph"><div class="ph-t">📱 WhatsApp para Leads Quentes</div></div>
-            <div style="padding:16px;">
-              <div style="font-size:12px;color:var(--muted2);margin-bottom:12px;line-height:1.6;">Quando um lead estiver qualificado com score alto, ele será enviado para este número.</div>
-              <div class="ff"><label class="fl">Número do vendedor (com DDI)</label><input class="fi" id="waInp" placeholder="5511999999999"/></div>
-              <button class="btn btn-fire btn-sm" onclick="saveClientWA()">💾 Salvar número</button>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="ph"><div class="ph-t">👤 Dados da Conta</div></div>
-            <div style="padding:16px;">
-              <div class="ff"><label class="fl">Nome do responsável</label><input class="fi" id="cfg-nome" value=""/></div>
-              <div class="ff"><label class="fl">E-mail</label><input class="fi" type="email" id="cfg-email" value=""/></div>
-              <div class="ff"><label class="fl">Empresa</label><input class="fi" id="cfg-empresa" value=""/></div>
-              <div class="ff">
-                <label class="fl">Alterar senha</label>
-                <div class="pw-wrap">
-                  <input class="fi" type="password" id="cfg-nova-senha" placeholder="Nova senha (deixe em branco para não alterar)" autocomplete="new-password"/>
-                  <button class="pw-toggle" type="button" onclick="togglePw('cfg-nova-senha',this)">👁</button>
-                </div>
-              </div>
+              <div class="ff"><label class="fl">Nome do responsável</label><input class="fi" id="cfg-nome"/></div>
+              <div class="ff"><label class="fl">E-mail</label><input class="fi" type="email" id="cfg-email"/></div>
+              <div class="ff"><label class="fl">Empresa</label><input class="fi" id="cfg-empresa"/></div>
+              <div class="ff"><label class="fl">Nova senha (deixe em branco para manter)</label><div class="pw-wrap"><input class="fi" type="password" id="cfg-nova-senha" placeholder="••••••••" autocomplete="new-password"/><button class="pw-toggle" type="button" onclick="togglePw('cfg-nova-senha',this)">👁</button></div></div>
               <button class="btn btn-ghost btn-sm" onclick="showToast('✅ Dados atualizados!')">Salvar alterações</button>
             </div>
           </div>
-
-          <div class="panel">
-            <div class="ph"><div class="ph-t">🆘 Suporte</div></div>
+          <div class="panel"><div class="ph"><div class="ph-t">📱 WhatsApp do Vendedor</div></div>
             <div style="padding:16px;">
-              <div style="font-size:13px;color:var(--muted2);margin-bottom:12px;">Fale direto com a Pulsar Marketing 360.</div>
-              <div style="display:flex;gap:9px;">
-                <button class="btn btn-green btn-sm" onclick="openSupportWA()">📱 WhatsApp da Agência</button>
-              </div>
+              <div style="font-size:12px;color:var(--muted2);margin-bottom:12px;line-height:1.6;">Número que recebe notificação quando um lead quente é detectado.</div>
+              <div class="ff"><label class="fl">Número (com DDI)</label><input class="fi" id="waInp" placeholder="5511999999999"/></div>
+              <button class="btn btn-fire btn-sm" onclick="saveClientWA()">💾 Salvar</button>
+            </div>
+          </div>
+          <div class="panel"><div class="ph"><div class="ph-t">🆘 Suporte</div></div>
+            <div style="padding:16px;">
+              <div style="font-size:13px;color:var(--muted2);margin-bottom:12px;">Fale com a Pulsar Marketing 360.</div>
+              <button class="btn btn-green btn-sm" onclick="openSupportWA()">📱 WhatsApp da Agência</button>
             </div>
           </div>
         </div>
       </div>
 
-    </div><!-- content -->
-  </div><!-- main-panel -->
-</div><!-- screen-client -->
-
-<!-- ADD CLIENT MODAL -->
-<div class="modal-bg" id="mainModal">
-  <div class="modal">
-    <div class="m-title" id="mTitle">Novo Cliente</div>
-    <div class="m-desc" id="mDesc">Configure um novo agente SDR para um cliente da agência.</div>
-    <div id="mBody"></div>
-    <div class="m-btns">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-fire" id="mOk">Confirmar</button>
     </div>
   </div>
 </div>
 
-<!-- CONFIRM DELETE MODAL -->
+<!-- MODALS -->
+<div class="modal-bg" id="mainModal">
+  <div class="modal">
+    <div class="m-title" id="mTitle">Novo Cliente</div>
+    <div class="m-desc" id="mDesc"></div>
+    <div id="mBody"></div>
+    <div class="m-btns"><button class="btn btn-ghost" onclick="closeModal()">Cancelar</button><button class="btn btn-fire" id="mOk">Confirmar</button></div>
+  </div>
+</div>
 <div class="confirm-bg" id="confirmModal">
   <div class="confirm-box">
     <div style="font-size:18px;font-weight:700;margin-bottom:8px;color:var(--red);">⚠️ Remover Cliente</div>
-    <div style="font-size:13px;color:var(--muted2);margin-bottom:20px;" id="confirm-msg">Tem certeza?</div>
+    <div style="font-size:13px;color:var(--muted2);margin-bottom:20px;" id="confirm-msg"></div>
     <div style="display:flex;gap:9px;justify-content:flex-end;">
       <button class="btn btn-ghost btn-sm" onclick="closeConfirm()">Cancelar</button>
       <button class="btn btn-red btn-sm" id="confirm-ok">Remover</button>
     </div>
   </div>
 </div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"><span id="tMsg"></span></div>
 
 <script>
 // ═══════════════════════════════════════════
-// ESTADO GLOBAL
+// CREDENCIAIS
 // ═══════════════════════════════════════════
 const AGENCY_EMAIL = 'admin@pulsarmarketing.com';
-const AGENCY_PASS  = 'Pulsar@2025';
+const AGENCY_PASS  = 'admin123';
 
 const app = {
-  apiKey: '',
-  model: 'claude-sonnet-4-20250514',
-  history: [],
-  score: 0,
-  stage: -1,
-  msgCount: 0,
-  waNumber: '',
-  currentClient: null,
-  isAgency: false,
+  apiKey:'', model:'claude-sonnet-4-20250514',
+  history:[], score:0, stage:-1, msgCount:0,
+  waNumber:'', currentClient:null, isAgency:false,
+  agentActive:true,
 };
 
-// Clientes em localStorage para persistência entre sessões
-function loadClients() {
-  try {
-    const saved = localStorage.getItem('pulsar_clients');
-    if (saved) return JSON.parse(saved);
-  } catch(e) {}
+// ═══════════════════════════════════════════
+// CLIENTES (localStorage)
+// ═══════════════════════════════════════════
+function loadClients(){
+  try{ const s=localStorage.getItem('pulsar_clients'); if(s) return JSON.parse(s); }catch(e){}
   return [
     {id:1,name:'Clínica Bella',nicho:'clinica',avatar:'🏥',nichoLabel:'🏥 Clínica Médica',plan:'pro',planLabel:'PRO',planPrice:1299,status:'active',leads:312,hot:47,conv:24,score:78,email:'joao@clinicabella.com',pass:'cliente123'},
     {id:2,name:'Restaurante Sabor',nicho:'restaurante',avatar:'🍕',nichoLabel:'🍕 Restaurante',plan:'basico',planLabel:'BÁSICO',planPrice:999,status:'active',leads:198,hot:29,conv:15,score:65,email:'pedro@sabor.com',pass:'cliente123'},
-    {id:3,name:'Academia FitLife',nicho:'academia',avatar:'💪',nichoLabel:'💪 Academia',plan:'pro',planLabel:'PRO',planPrice:1299,status:'active',leads:255,hot:38,conv:19,score:71,email:'ana@fitlife.com',pass:'cliente123'},
   ];
 }
-
-function saveClients(list) {
-  localStorage.setItem('pulsar_clients', JSON.stringify(list));
-}
-
+function saveClients(list){ localStorage.setItem('pulsar_clients',JSON.stringify(list)); }
 let clients = loadClients();
 
-const leadsData = [
-  {name:'Roberto Alves',biz:'Dono de negócio',temp:'hot',score:91,stage:'Pronto',date:'Hoje 14:23'},
-  {name:'Mariana Costa',biz:'Prospect',temp:'hot',score:78,stage:'Decisão',date:'Hoje 13:10'},
-  {name:'Claudia Mendes',biz:'Empresária',temp:'warm',score:55,stage:'Consideração',date:'Hoje 11:45'},
-  {name:'Paulo Ferreira',biz:'Professor',temp:'warm',score:61,stage:'Interesse',date:'Ontem 09:00'},
-  {name:'Felipe Santos',biz:'Autônomo',temp:'cold',score:28,stage:'Consciência',date:'Hoje 09:30'},
-  {name:'Juliana Ramos',biz:'Designer',temp:'hot',score:88,stage:'Pronto',date:'Ontem 14:00'},
-];
-
+// ═══════════════════════════════════════════
+// NICHO DATA
+// ═══════════════════════════════════════════
 const nichoData = {
   clinica:{name:'Clínica Médica/Estética',negocio:'Clínica Bella Estética',persona:'Sofia, consultora de estética',servicos:'Botox, Preenchimento labial, Limpeza de pele, Tratamento para manchas',cta:'Agendar avaliação gratuita',tom:'empático e acolhedor',objecoes:'Preço→parcelamento+autoestima | Medo→segurança e depoimentos'},
   restaurante:{name:'Restaurante',negocio:'Restaurante do Chef',persona:'Lucas, consultor gastronômico',servicos:'Almoço executivo, Jantar à la carte, Eventos corporativos',cta:'Confirmar uma reserva',tom:'caloroso e sofisticado',objecoes:'Preço→experiência única | Distância→vale a pena'},
-  academia:{name:'Academia/Fitness',negocio:'Academia FitLife',persona:'Rafael, personal trainer',servicos:'Musculação, Personal training, Aulas coletivas, Nutrição esportiva',cta:'Agendar aula experimental gratuita',tom:'motivador e energético',objecoes:'Tempo→30min por dia | Preço→investimento na saúde | Vergonha→ambiente acolhedor'},
-  advocacia:{name:'Advocacia',negocio:'Escritório Jurídico',persona:'Dr. André, consultor jurídico',servicos:'Direito trabalhista, Direito civil, Contratos, Direito do consumidor',cta:'Agendar consulta inicial gratuita',tom:'profissional e confiante',objecoes:'Custo→honorários só no ganho | Demora→prazos claros'},
-  imoveis:{name:'Imobiliária',negocio:'Prime Imóveis',persona:'Ana, consultora imobiliária',servicos:'Compra, venda, aluguel residencial e comercial, financiamento',cta:'Agendar visita ao imóvel',tom:'consultivo e seguro',objecoes:'Indecisão→momento do mercado | Financiamento→parceiros com taxas especiais'},
-  salao:{name:'Salão de Beleza',negocio:'Studio Hair',persona:'Camila, consultora de beleza',servicos:'Corte, coloração, escova, manicure, maquiagem, penteados',cta:'Agendar horário',tom:'descontraído e criativo',objecoes:'Preço→qualidade e durabilidade | Horário→agenda flexível incluindo sábados'},
+  academia:{name:'Academia/Fitness',negocio:'Academia FitLife',persona:'Rafael, personal trainer',servicos:'Musculação, Personal training, Aulas coletivas, Nutrição',cta:'Agendar aula experimental gratuita',tom:'motivador e energético',objecoes:'Tempo→30min/dia | Preço→investimento na saúde'},
+  advocacia:{name:'Advocacia',negocio:'Escritório Jurídico',persona:'Dr. André, consultor jurídico',servicos:'Direito trabalhista, Direito civil, Contratos',cta:'Agendar consulta inicial gratuita',tom:'profissional e confiante',objecoes:'Custo→honorários só no ganho | Demora→prazos claros'},
+  imoveis:{name:'Imobiliária',negocio:'Prime Imóveis',persona:'Ana, consultora imobiliária',servicos:'Compra, venda, aluguel residencial e comercial',cta:'Agendar visita ao imóvel',tom:'consultivo e seguro',objecoes:'Indecisão→momento do mercado | Financiamento→parceiros especiais'},
+  salao:{name:'Salão de Beleza',negocio:'Studio Hair',persona:'Camila, consultora de beleza',servicos:'Corte, coloração, escova, manicure, maquiagem',cta:'Agendar horário',tom:'descontraído e criativo',objecoes:'Preço→qualidade e durabilidade | Horário→agenda flexível'},
 };
 
-const fallbackMsgs = {
-  clinica:['Olá! 😊 Sou a Sofia, consultora da Clínica Bella. O que te trouxe até aqui hoje?','Entendo! Que tipo de tratamento você estava pensando?','Ótimo! Temos ótimas opções para isso. Já fez algum procedimento estético antes?','Para te ajudar melhor — você tem disponibilidade esta semana para uma avaliação gratuita?','Perfeito! Vou verificar a agenda. Prefere manhã ou tarde?'],
-  restaurante:['Olá! 😊 Sou o Lucas do restaurante. Posso ajudar?','Que ótimo! Qual seria a ocasião — almoço de negócios, jantar especial?','Temos opções incríveis para isso! Quantas pessoas seriam?','Que data você tem em mente?','Maravilha! Vou verificar a disponibilidade para vocês.'],
-  academia:['E aí! 💪 Sou o Rafael da FitLife. Qual é seu objetivo?','Show! Você já treina atualmente ou está começando do zero?','Sem problema! Temos turmas para todos os níveis. Quer conhecer com uma aula gratuita?','Ótimo! Qual período você prefere — manhã, tarde ou noite?','Confirmado! Vou separar sua vaga para a aula experimental.'],
-  advocacia:['Olá! Sou o Dr. André. Como posso te orientar?','Entendo. Pode me dar mais detalhes sobre a situação?','Vejo que pode ser um caso onde podemos ajudar muito. Temos experiência similar.','Que tal uma consulta inicial gratuita para analisarmos melhor?','Perfeito! Quando você tem disponibilidade?'],
-  imoveis:['Olá! 😊 Sou a Ana da Prime Imóveis. Você está buscando comprar, vender ou alugar?','Ótimo! Qual região e faixa de valor você tem em mente?','Temos ótimas opções nesse perfil! Você já tem carta de crédito ou vai financiar?','Quando podemos marcar uma visita? Posso verificar os imóveis disponíveis.','Combinado! Qual é o melhor horário para você?'],
-  salao:['Oi! ✨ Sou a Camila do Studio Hair. O que você quer arrasar hoje?','Amei a ideia! Tem alguma referência de foto?','Perfeito! Nosso time é especialista nisso. Quando quer vir?','Qual período você prefere — manhã, tarde ou sábado?','Marcado! Vai ficar incrível 😍'],
-};
+// CONTATOS SIMULADOS (inbox)
+let contactsData = [
+  {id:1,name:'Maria Fernanda',phone:'5511991234567',avatar:'👩',lastMsg:'Gostaria de saber mais sobre o botox',time:'14:32',unread:2,score:72,stage:2,temp:'warm',nicho:'clinica',history:[
+    {role:'user',content:'Oi! Vi no Instagram sobre vocês'},
+    {role:'assistant',content:'Olá Maria! 😊 Seja bem-vinda à Clínica Bella! Sou Sofia. Fico feliz que tenha nos encontrado! O que te trouxe até nós hoje?'},
+    {role:'user',content:'Quero saber sobre botox'},
+    {role:'assistant',content:'Que ótimo! Botox é um dos nossos procedimentos mais populares. O resultado é natural e dura em média 4 a 6 meses. Você já fez algum procedimento estético antes?'},
+    {role:'user',content:'Nunca fiz, tenho um pouco de medo'},
+    {role:'assistant',content:'Entendo completamente! É super normal ter essa preocupação na primeira vez. 🌸 Nossas pacientes costumam se surpreender com o quanto é tranquilo — usamos produtos aprovados e técnicas que garantem resultados naturais. Que tal marcar uma avaliação gratuita para tirar todas as suas dúvidas antes de qualquer decisão?'},
+    {role:'user',content:'Gostaria de saber mais sobre o botox'},
+  ]},
+  {id:2,name:'Carlos Roberto',phone:'5511987654321',avatar:'👨',lastMsg:'Quanto custa o botox?',time:'13:10',unread:1,score:88,stage:3,temp:'hot',nicho:'clinica',history:[
+    {role:'user',content:'Boa tarde, quero agendar uma consulta'},
+    {role:'assistant',content:'Boa tarde! 😊 Seja bem-vindo! Sou Sofia da Clínica Bella. Que bom que entrou em contato! Para te indicar o melhor horário, posso te perguntar — qual tratamento você tem interesse?'},
+    {role:'user',content:'Botox e talvez preenchimento'},
+    {role:'assistant',content:'Perfeito! Ótima combinação! Os dois procedimentos se complementam muito bem. Você já teve alguma experiência com procedimentos estéticos antes?'},
+    {role:'user',content:'Sim, já fiz uma vez em outra clínica'},
+    {role:'assistant',content:'Que ótimo! Então você já sabe como é o processo. Nossa avaliação é gratuita e sem compromisso — nosso especialista analisa o caso e apresenta um protocolo personalizado para você. Qual é sua disponibilidade esta semana?'},
+    {role:'user',content:'Quanto custa o botox?'},
+  ]},
+  {id:3,name:'Juliana Lima',phone:'5511976543210',avatar:'👩‍💼',lastMsg:'Ok, vou pensar e retorno',time:'11:45',unread:0,score:31,stage:1,temp:'cold',nicho:'clinica',history:[
+    {role:'user',content:'Olá, preciso de informações'},
+    {role:'assistant',content:'Olá Juliana! 😊 Fico feliz em ajudar! Sou Sofia da Clínica Bella. Sobre qual tratamento você quer saber mais?'},
+    {role:'user',content:'Sobre limpeza de pele'},
+    {role:'assistant',content:'Ótimo! Nossa limpeza de pele profissional remove impurezas, desobstrui poros e deixa a pele com aquela luminosidade incrível. É um ótimo ponto de partida! Você tem alguma preocupação específica com a pele?'},
+    {role:'user',content:'Ok, vou pensar e retorno'},
+  ]},
+  {id:4,name:'Amanda Souza',phone:'5511965432109',avatar:'💁‍♀️',lastMsg:'Que horas vocês atendem?',time:'Ontem',unread:0,score:55,stage:2,temp:'warm',nicho:'clinica',history:[
+    {role:'user',content:'Oi, tudo bem?'},
+    {role:'assistant',content:'Olá Amanda! 😊 Tudo ótimo! Sou Sofia da Clínica Bella. Como posso te ajudar hoje?'},
+    {role:'user',content:'Que horas vocês atendem?'},
+  ]},
+];
+
+let currentContact = null;
+let chatHistory = [];
+let chatScore = 0;
+let chatStage = -1;
+let chatMsgCount = 0;
+const leadsData=[{name:'Carlos Roberto',biz:'Interesse em botox+preenchimento',temp:'hot',score:88,stage:'Decisão',date:'Hoje 13:10'},{name:'Maria Fernanda',biz:'Dúvidas sobre botox',temp:'warm',score:72,stage:'Consideração',date:'Hoje 14:32'},{name:'Amanda Souza',biz:'Informações gerais',temp:'warm',score:55,stage:'Consideração',date:'Ontem'},{name:'Juliana Lima',biz:'Interesse em limpeza',temp:'cold',score:31,stage:'Interesse',date:'Hoje 11:45'}];
 
 // ═══════════════════════════════════════════
-// LOGIN / AUTH
+// LOGIN
 // ═══════════════════════════════════════════
-function setLoginTab(type, el) {
+function setLoginTab(type,el){
   document.querySelectorAll('.ltab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('login-agency-form').style.display = type==='agency'?'block':'none';
-  document.getElementById('login-client-form').style.display = type==='client'?'block':'none';
-  document.getElementById('ag-err').style.display='none';
-  document.getElementById('cl-err').style.display='none';
+  document.getElementById('login-agency-form').style.display=type==='agency'?'block':'none';
+  document.getElementById('login-client-form').style.display=type==='client'?'block':'none';
+  ['ag-err','cl-err'].forEach(id=>document.getElementById(id).style.display='none');
 }
-
-function loginAgency() {
-  const e = document.getElementById('ag-email').value.trim();
-  const p = document.getElementById('ag-pass').value;
-  const err = document.getElementById('ag-err');
-  if (e === AGENCY_EMAIL && p === AGENCY_PASS) {
-    app.isAgency = true;
-    err.style.display = 'none';
-    const savedKey = localStorage.getItem('pulsar_agency_apikey') || '';
-    const savedModel = localStorage.getItem('pulsar_agency_model') || 'claude-sonnet-4-20250514';
-    if (savedKey) { document.getElementById('agencyApiKey').value = savedKey; app.apiKey = savedKey; }
-    if (savedModel) { document.getElementById('agencyModel').value = savedModel; app.model = savedModel; }
-    updateApiStatusBadge(savedKey);
-    clients = loadClients();
-    renderClients();
-    updateAgencyStats();
-    showScreen('agency');
-  } else {
-    err.style.display = 'block';
-  }
+function loginAgency(){
+  const e=document.getElementById('ag-email').value.trim();
+  const p=document.getElementById('ag-pass').value;
+  if(e===AGENCY_EMAIL&&p===AGENCY_PASS){
+    app.isAgency=true;
+    document.getElementById('ag-err').style.display='none';
+    const sk=localStorage.getItem('pulsar_agency_apikey')||'';
+    const sm=localStorage.getItem('pulsar_agency_model')||'claude-sonnet-4-20250514';
+    if(sk){document.getElementById('agencyApiKey').value=sk;app.apiKey=sk;}
+    document.getElementById('agencyModel').value=sm;app.model=sm;
+    updateApiStatusBadge(sk);
+    clients=loadClients();renderClients();updateAgencyStats();showScreen('agency');
+  }else{document.getElementById('ag-err').style.display='block';}
 }
-
-function loginClient() {
-  const e = document.getElementById('cl-email').value.trim().toLowerCase();
-  const p = document.getElementById('cl-pass').value;
-  const err = document.getElementById('cl-err');
-  clients = loadClients();
-  const client = clients.find(c => c.email.toLowerCase() === e && c.pass === p);
-  if (client) {
-    err.style.display = 'none';
-    app.isAgency = false;
-    app.currentClient = client;
-    app.apiKey = localStorage.getItem('pulsar_agency_apikey') || '';
-    app.model = localStorage.getItem('pulsar_agency_model') || 'claude-sonnet-4-20250514';
-    loadClientPanel(client);
-    showScreen('client');
-  } else {
-    err.style.display = 'block';
-  }
+function loginClient(){
+  const e=document.getElementById('cl-email').value.trim().toLowerCase();
+  const p=document.getElementById('cl-pass').value;
+  clients=loadClients();
+  const client=clients.find(c=>c.email.toLowerCase()===e&&c.pass===p);
+  if(client){
+    document.getElementById('cl-err').style.display='none';
+    app.isAgency=false;app.currentClient=client;
+    app.apiKey=localStorage.getItem('pulsar_agency_apikey')||'';
+    app.model=localStorage.getItem('pulsar_agency_model')||'claude-sonnet-4-20250514';
+    loadClientPanel(client);showScreen('client');
+  }else{document.getElementById('cl-err').style.display='block';}
 }
-
-function loadClientPanel(client) {
-  document.getElementById('sb-client-name').textContent = client.name;
-  document.getElementById('d-leads').textContent = client.leads;
-  document.getElementById('d-hot').textContent = client.hot;
-  document.getElementById('d-conv').textContent = client.conv;
-  document.getElementById('d-score').textContent = client.score + '%';
-  document.getElementById('leads-count').textContent = client.hot;
-  document.getElementById('cfg-email').value = client.email;
-  document.getElementById('cfg-empresa').value = client.name;
-  renderHotTable();
-  renderAllTable();
-  setTimeout(() => resetChat(), 200);
+function loadClientPanel(client){
+  document.getElementById('sb-client-name').textContent=client.name;
+  document.getElementById('d-conversas').textContent=client.leads;
+  document.getElementById('d-hot').textContent=client.hot;
+  document.getElementById('d-conv').textContent=client.conv;
+  document.getElementById('inbox-count').textContent=contactsData.filter(c=>c.unread>0).length;
+  document.getElementById('leads-count').textContent=client.hot;
+  document.getElementById('cfg-email').value=client.email;
+  document.getElementById('cfg-empresa').value=client.name;
+  // Load training data
+  const nicho=client.nicho||'clinica';
+  const nd=nichoData[nicho]||nichoData.clinica;
+  document.getElementById('t-negocio').value=nd.negocio;
+  document.getElementById('t-persona').value=nd.persona;
+  document.getElementById('t-servicos').value=nd.servicos;
+  document.getElementById('t-objecoes').value=nd.objecoes;
+  document.getElementById('t-perguntas').value='Qual é seu principal objetivo?\nJá fez algum procedimento antes?\nTem alguma data especial se aproximando?';
+  document.getElementById('t-cta').value=nd.cta;
+  // Load saved Zapi config
+  const zapi=JSON.parse(localStorage.getItem('pulsar_zapi_'+client.id)||'{}');
+  if(zapi.instance)document.getElementById('zapi-instance').value=zapi.instance;
+  if(zapi.token)document.getElementById('zapi-token').value=zapi.token;
+  if(zapi.clientToken)document.getElementById('zapi-client-token').value=zapi.clientToken;
+  if(zapi.webhookUrl)document.getElementById('n8n-webhook-url').value=zapi.webhookUrl;
+  if(zapi.n8nBase)document.getElementById('n8n-base-url').value=zapi.n8nBase;
+  const active=zapi.active!==false;
+  app.agentActive=active;
+  updateAgentToggleUI(active);
+  renderContactList();renderHotTable();renderAllTable();
 }
-
-function backToAgency() {
-  if (app.isAgency) {
-    clients = loadClients();
-    renderClients();
-    updateAgencyStats();
-    showScreen('agency');
-  } else {
-    logout();
-  }
+function backToAgency(){
+  if(app.isAgency){clients=loadClients();renderClients();updateAgencyStats();showScreen('agency');}
+  else logout();
 }
+function logout(){showScreen('login');app.currentClient=null;app.isAgency=false;}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');}
+function togglePw(id,btn){const inp=document.getElementById(id);if(!inp)return;inp.type=inp.type==='password'?'text':'password';btn.textContent=inp.type==='password'?'👁':'🙈';}
 
-function logout() { showScreen('login'); resetChat(); app.currentClient = null; app.isAgency = false; }
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
+// ═══════════════════════════════════════════
+// AGENT TOGGLE
+// ═══════════════════════════════════════════
+function toggleAgente(btn){
+  app.agentActive=!app.agentActive;
+  updateAgentToggleUI(app.agentActive);
+  saveZapiState();
+  showToast(app.agentActive?'✅ Agente ativado — respondendo leads!':'⏸️ Agente pausado — não responderá novas mensagens.');
 }
-
-function togglePw(id, btn) {
-  const inp = document.getElementById(id);
-  if (!inp) return;
-  inp.type = inp.type === 'password' ? 'text' : 'password';
-  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+function toggleMainAgente(btn){
+  app.agentActive=!app.agentActive;
+  updateAgentToggleUI(app.agentActive);
+  saveZapiState();
+  showToast(app.agentActive?'✅ Agente ativado!':'⏸️ Agente pausado!');
+}
+function updateAgentToggleUI(active){
+  ['agente-toggle','main-toggle'].forEach(id=>{
+    const t=document.getElementById(id);if(t){t.classList.toggle('on',active);}
+  });
+  const lbl=document.getElementById('agente-toggle-label');
+  if(lbl)lbl.textContent=active?'Agente ativo':'Agente pausado';
+  const mlbl=document.getElementById('main-toggle-lbl');
+  if(mlbl)mlbl.textContent=active?'Pausar':'Ativar';
+  // Sidebar badge
+  const badge=document.getElementById('ai-status-badge');
+  const pring=document.getElementById('pring-dot');
+  const stext=document.getElementById('ai-status-text');
+  if(badge){badge.className='ai-live'+(active?'':' ai-paused');}
+  if(pring){pring.className='pring'+(active?'':' pring-y');}
+  if(stext)stext.textContent=active?'IA ATIVA 24/7':'IA PAUSADA';
+  // Zapi status bar
+  const zbar=document.getElementById('zapi-main-status');
+  const zdot=document.getElementById('zapi-dot');
+  const zlbl=document.getElementById('zapi-status-label');
+  const zsub=document.getElementById('zapi-status-sub');
+  if(zbar){zbar.className='zapi-status-bar '+(active?'zapi-on':'zapi-off');}
+  if(zdot){zdot.className='zapi-dot '+(active?'zapi-dot-on':'zapi-dot-off');}
+  if(zlbl)zlbl.textContent=active?'Zapi + n8n — Agente Ativo':'⏸️ Agente Pausado';
+  if(zsub)zsub.textContent=active?'Recebendo e respondendo mensagens 24/7':'Use o toggle para reativar o agente';
+  // Dashboard status
+  const dst=document.getElementById('dash-agent-status');
+  const dstxt=document.getElementById('dash-status-text');
+  const n8nst=document.getElementById('dash-n8n-status');
+  if(dst)dst.style.background=active?'rgba(0,230,118,.06)':'rgba(255,211,42,.06)';
+  if(dst)dst.style.borderColor=active?'rgba(0,230,118,.15)':'rgba(255,211,42,.2)';
+  if(dstxt){dstxt.textContent=active?'Agente Ativo — Respondendo leads':'⏸️ Agente Pausado';dstxt.style.color=active?'var(--green)':'var(--yellow)';}
+  if(n8nst){n8nst.textContent=active?'● Ativo':'⏸ Pausado';n8nst.style.color=active?'var(--green)':'var(--yellow)';}
+}
+function saveZapiState(){
+  const c=app.currentClient;if(!c)return;
+  const key='pulsar_zapi_'+c.id;
+  const cur=JSON.parse(localStorage.getItem(key)||'{}');
+  cur.active=app.agentActive;
+  localStorage.setItem(key,JSON.stringify(cur));
 }
 
 // ═══════════════════════════════════════════
-// AGENCY PANEL
+// AGENCY
 // ═══════════════════════════════════════════
-function renderClients() {
-  const grid = document.getElementById('clientsGrid');
-  const colors = ['#ff6535','#38b6ff','#00e676','#e8369b','#8b5cf6','#ffd32a','#00d4ff'];
-  const planCls = {basico:'plan-basico',pro:'plan-pro',premium:'plan-premium'};
-  const statusCls = {active:'pill-active',trial:'pill-trial',paused:'pill-paused'};
-  const statusLabel = {active:'● Ativo',trial:'● Trial',paused:'● Pausado'};
-
-  grid.innerHTML = clients.map((c, i) => `
+function renderClients(){
+  const grid=document.getElementById('clientsGrid');
+  const colors=['#ff6535','#38b6ff','#00e676','#e8369b','#8b5cf6','#ffd32a'];
+  const planCls={basico:'plan-basico',pro:'plan-pro',premium:'plan-premium'};
+  const stCls={active:'pill-active',trial:'pill-trial',paused:'pill-paused'};
+  const stLbl={active:'● Ativo',trial:'● Trial',paused:'● Pausado'};
+  grid.innerHTML=clients.map((c,i)=>`
     <div class="client-card">
       <div class="cc-top">
         <div class="cc-avatar" style="background:${colors[i%colors.length]}22;border:1px solid ${colors[i%colors.length]}44;">${c.avatar}</div>
-        <div class="cc-info">
-          <div class="cc-name">${c.name}</div>
-          <div class="cc-nicho">${c.nichoLabel}</div>
-          <div class="cc-email">📧 ${c.email}</div>
-        </div>
+        <div class="cc-info"><div class="cc-name">${c.name}</div><div class="cc-nicho">${c.nichoLabel}</div><div class="cc-email">📧 ${c.email}</div></div>
         <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
-          <span class="pill ${statusCls[c.status]}">${statusLabel[c.status]}</span>
+          <span class="pill ${stCls[c.status]}">${stLbl[c.status]}</span>
           <span class="plan-badge ${planCls[c.plan]}">${c.planLabel}</span>
         </div>
       </div>
@@ -911,507 +943,393 @@ function renderClients() {
       <div class="cc-actions">
         <button class="btn btn-ghost btn-xs" onclick="openClientAsAgency(${c.id})">📊 Painel</button>
         <button class="btn btn-ghost btn-xs" onclick="editClientModal(${c.id})">✏️ Editar</button>
-        <button class="btn btn-red btn-xs" onclick="confirmDelete(${c.id},'${c.name.replace(/'/g,"\\'")}')">🗑️ Remover</button>
+        <button class="btn btn-red btn-xs" onclick="confirmDelete(${c.id},'${c.name.replace(/'/g,"\\'")}')">🗑️</button>
       </div>
     </div>
-  `).join('') + `
-    <div class="add-client-card" onclick="addClientModal()">
-      <span style="font-size:32px;">➕</span>
-      <div style="font-size:14px;font-weight:600;">Adicionar Cliente</div>
-      <div style="font-size:11px;text-align:center;max-width:180px;line-height:1.5;">Configure um novo agente SDR em minutos</div>
-    </div>
-  `;
+  `).join('')+`<div class="add-client-card" onclick="addClientModal()"><span style="font-size:32px;">➕</span><div style="font-size:14px;font-weight:600;">Adicionar Cliente</div><div style="font-size:11px;text-align:center;max-width:160px;line-height:1.5;">Configure um novo agente SDR em minutos</div></div>`;
 }
-
-function updateAgencyStats() {
-  const active = clients.filter(c => c.status === 'active');
-  const mrr = active.reduce((s, c) => s + (c.planPrice || 0), 0);
-  const leads = clients.reduce((s, c) => s + (c.leads || 0), 0);
-  const hot = clients.reduce((s, c) => s + (c.hot || 0), 0);
-  const iaCost = Math.round(active.length * 25);
-  const margem = mrr - iaCost - 150;
-
-  document.getElementById('stat-clientes').textContent = active.length;
-  document.getElementById('stat-clientes-sub').textContent = active.length > 0 ? `↑ +${active.length} ativo(s)` : 'Nenhum ainda';
-  document.getElementById('stat-leads').textContent = leads.toLocaleString('pt-BR');
-  document.getElementById('stat-hot').textContent = hot;
-  document.getElementById('stat-mrr').textContent = 'R$' + mrr.toLocaleString('pt-BR');
-  document.getElementById('activeClientsCount').textContent = active.length;
-  document.getElementById('ia-cost').textContent = '~R$' + iaCost;
-  document.getElementById('mrrDisplay').textContent = 'R$' + mrr.toLocaleString('pt-BR');
-  document.getElementById('margem-display').textContent = 'R$' + Math.max(margem, 0).toLocaleString('pt-BR');
+function updateAgencyStats(){
+  const active=clients.filter(c=>c.status==='active');
+  const mrr=active.reduce((s,c)=>s+(c.planPrice||0),0);
+  const leads=clients.reduce((s,c)=>s+(c.leads||0),0);
+  const hot=clients.reduce((s,c)=>s+(c.hot||0),0);
+  const iaCost=Math.round(active.length*25);
+  const margem=mrr-iaCost-150;
+  document.getElementById('stat-clientes').textContent=active.length;
+  document.getElementById('stat-clientes-sub').textContent=active.length>0?`↑ ${active.length} ativo(s)`:'Nenhum ainda';
+  document.getElementById('stat-leads').textContent=leads.toLocaleString('pt-BR');
+  document.getElementById('stat-hot').textContent=hot;
+  document.getElementById('stat-mrr').textContent='R$'+mrr.toLocaleString('pt-BR');
+  document.getElementById('activeClientsCount').textContent=active.length;
+  document.getElementById('ia-cost').textContent='~R$'+iaCost;
+  document.getElementById('mrrDisplay').textContent='R$'+mrr.toLocaleString('pt-BR');
+  document.getElementById('margem-display').textContent='R$'+Math.max(margem,0).toLocaleString('pt-BR');
 }
-
-function openClientAsAgency(id) {
-  const client = clients.find(c => c.id === id);
-  if (!client) return;
-  app.currentClient = client;
-  app.isAgency = true;
-  loadClientPanel(client);
-  showScreen('client');
+function openClientAsAgency(id){
+  const c=clients.find(x=>x.id===id);if(!c)return;
+  app.currentClient=c;app.isAgency=true;
+  loadClientPanel(c);showScreen('client');
 }
 
 // ═══════════════════════════════════════════
-// ADD / EDIT CLIENT MODAL
+// CLIENT MODAL
 // ═══════════════════════════════════════════
-function clientFormHTML(c) {
-  const planOptions = [
-    {v:'basico',l:'Básico — R$999/mês'},
-    {v:'pro',l:'Pro — R$1.299/mês'},
-    {v:'premium',l:'Premium — R$1.499/mês'},
-  ];
-  const nichoOptions = [
-    {v:'clinica',l:'🏥 Clínica Médica/Estética'},
-    {v:'restaurante',l:'🍕 Restaurante/Gastronomia'},
-    {v:'academia',l:'💪 Academia/Fitness'},
-    {v:'advocacia',l:'⚖️ Advocacia/Jurídico'},
-    {v:'imoveis',l:'🏠 Imóveis'},
-    {v:'salao',l:'💇 Salão de Beleza'},
-  ];
-  const nichoAvatars = {clinica:'🏥',restaurante:'🍕',academia:'💪',advocacia:'⚖️',imoveis:'🏠',salao:'💇'};
-  const planLabels = {basico:'BÁSICO',pro:'PRO',premium:'PREMIUM'};
-  const planPrices = {basico:999,pro:1299,premium:1499};
-
-  return `
-    <div class="ff"><label class="fl">Nome do Negócio <span style="color:var(--orange)">*</span></label><input class="fi" id="nc-name" placeholder="Ex: Clínica Bella Estética" value="${c?c.name:''}"/></div>
-    <div class="ff"><label class="fl">Nicho</label>
-      <select class="fi" id="nc-nicho">
-        ${nichoOptions.map(n=>`<option value="${n.v}" ${c&&c.nicho===n.v?'selected':''}>${n.l}</option>`).join('')}
-      </select>
-    </div>
+function clientFormHTML(c){
+  const planOpts=[{v:'basico',l:'Básico — R$999/mês'},{v:'pro',l:'Pro — R$1.299/mês'},{v:'premium',l:'Premium — R$1.499/mês'}];
+  const nichoOpts=[{v:'clinica',l:'🏥 Clínica'},{v:'restaurante',l:'🍕 Restaurante'},{v:'academia',l:'💪 Academia'},{v:'advocacia',l:'⚖️ Advocacia'},{v:'imoveis',l:'🏠 Imóveis'},{v:'salao',l:'💇 Salão'}];
+  return`
+    <div class="ff"><label class="fl">Nome do Negócio *</label><input class="fi" id="nc-name" value="${c?c.name:''}"/></div>
+    <div class="ff"><label class="fl">Nicho</label><select class="fi" id="nc-nicho">${nichoOpts.map(n=>`<option value="${n.v}"${c&&c.nicho===n.v?' selected':''}>${n.l}</option>`).join('')}</select></div>
     <div class="row2">
-      <div class="ff"><label class="fl">Plano</label>
-        <select class="fi" id="nc-plan">
-          ${planOptions.map(p=>`<option value="${p.v}" ${c&&c.plan===p.v?'selected':''}>${p.l}</option>`).join('')}
-        </select>
-      </div>
-      <div class="ff"><label class="fl">Status</label>
-        <select class="fi" id="nc-status">
-          <option value="active" ${!c||c.status==='active'?'selected':''}>✅ Ativo</option>
-          <option value="trial" ${c&&c.status==='trial'?'selected':''}>🟡 Trial</option>
-          <option value="paused" ${c&&c.status==='paused'?'selected':''}>⏸️ Pausado</option>
-        </select>
-      </div>
+      <div class="ff"><label class="fl">Plano</label><select class="fi" id="nc-plan">${planOpts.map(p=>`<option value="${p.v}"${c&&c.plan===p.v?' selected':''}>${p.l}</option>`).join('')}</select></div>
+      <div class="ff"><label class="fl">Status</label><select class="fi" id="nc-status"><option value="active"${!c||c.status==='active'?' selected':''}>✅ Ativo</option><option value="trial"${c&&c.status==='trial'?' selected':''}>🟡 Trial</option><option value="paused"${c&&c.status==='paused'?' selected':''}>⏸️ Pausado</option></select></div>
     </div>
-    <div class="ff"><label class="fl">E-mail de acesso do cliente <span style="color:var(--orange)">*</span></label><input class="fi" id="nc-email" type="email" placeholder="cliente@empresa.com" value="${c?c.email:''}"/></div>
-    <div class="ff">
-      <label class="fl">${c?'Nova senha (deixe em branco para manter)':'Senha de acesso'} <span style="color:var(--orange)">${c?'':'*'}</span></label>
-      <div class="pw-wrap">
-        <input class="fi" type="password" id="nc-pass" placeholder="${c?'••••••••':'Mínimo 6 caracteres'}" autocomplete="new-password"/>
-        <button class="pw-toggle" type="button" onclick="togglePw('nc-pass',this)">👁</button>
-      </div>
-    </div>
-    ${!c?`<div style="font-size:11px;color:var(--muted);background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--rs);padding:10px 12px;margin-top:-8px;">💡 Guarde as credenciais para compartilhar com o cliente. O navegador pode oferecer para salvar automaticamente.</div>`:''}
+    <div class="ff"><label class="fl">E-mail de acesso *</label><input class="fi" id="nc-email" type="email" value="${c?c.email:''}"/></div>
+    <div class="ff"><label class="fl">${c?'Nova senha (em branco = manter)':'Senha *'}</label><div class="pw-wrap"><input class="fi" type="password" id="nc-pass" autocomplete="new-password"/><button class="pw-toggle" type="button" onclick="togglePw('nc-pass',this)">👁</button></div></div>
+    ${!c?'<div style="font-size:11px;color:var(--muted2);background:rgba(56,182,255,.05);border:1px solid rgba(56,182,255,.1);border-radius:var(--rs);padding:10px;margin-top:-8px;">💡 O navegador do cliente pode salvar a senha automaticamente no primeiro login.</div>':''}
   `;
 }
-
-function addClientModal() {
-  document.getElementById('mTitle').textContent = '➕ Novo Cliente';
-  document.getElementById('mDesc').textContent = 'Configure um novo agente SDR. As credenciais criadas serão usadas pelo cliente para acessar o painel.';
-  document.getElementById('mBody').innerHTML = clientFormHTML(null);
-  document.getElementById('mOk').textContent = '🚀 Criar Cliente';
-  document.getElementById('mOk').onclick = confirmAddClient;
-  document.getElementById('mainModal').classList.add('open');
+function addClientModal(){document.getElementById('mTitle').textContent='➕ Novo Cliente';document.getElementById('mDesc').textContent='Configure o acesso do cliente ao painel Pulsar SDR.';document.getElementById('mBody').innerHTML=clientFormHTML(null);document.getElementById('mOk').textContent='🚀 Criar';document.getElementById('mOk').onclick=confirmAddClient;document.getElementById('mainModal').classList.add('open');}
+function editClientModal(id){const c=clients.find(x=>x.id===id);if(!c)return;document.getElementById('mTitle').textContent='✏️ Editar Cliente';document.getElementById('mDesc').textContent=`Editando: ${c.name}`;document.getElementById('mBody').innerHTML=clientFormHTML(c);document.getElementById('mOk').textContent='💾 Salvar';document.getElementById('mOk').onclick=()=>confirmEditClient(id);document.getElementById('mainModal').classList.add('open');}
+const nichoAvatars={clinica:'🏥',restaurante:'🍕',academia:'💪',advocacia:'⚖️',imoveis:'🏠',salao:'💇'};
+const nichoLabels={clinica:'🏥 Clínica Médica',restaurante:'🍕 Restaurante',academia:'💪 Academia',advocacia:'⚖️ Advocacia',imoveis:'🏠 Imóveis',salao:'💇 Salão'};
+const planLabels={basico:'BÁSICO',pro:'PRO',premium:'PREMIUM'};
+const planPrices={basico:999,pro:1299,premium:1499};
+function confirmAddClient(){
+  const name=document.getElementById('nc-name')?.value?.trim();
+  const email=document.getElementById('nc-email')?.value?.trim();
+  const pass=document.getElementById('nc-pass')?.value;
+  if(!name){showToast('⚠️ Preencha o nome');return;}
+  if(!email){showToast('⚠️ Preencha o e-mail');return;}
+  if(!pass||pass.length<6){showToast('⚠️ Senha mínima de 6 caracteres');return;}
+  const nicho=document.getElementById('nc-nicho')?.value||'clinica';
+  const plan=document.getElementById('nc-plan')?.value||'basico';
+  const status=document.getElementById('nc-status')?.value||'active';
+  clients.push({id:Date.now(),name,nicho,avatar:nichoAvatars[nicho],nichoLabel:nichoLabels[nicho],plan,planLabel:planLabels[plan],planPrice:planPrices[plan],status,leads:0,hot:0,conv:0,score:0,email,pass});
+  saveClients(clients);closeModal();renderClients();updateAgencyStats();showToast(`✅ Cliente "${name}" criado!`);
 }
-
-function editClientModal(id) {
-  const c = clients.find(x => x.id === id);
-  if (!c) return;
-  document.getElementById('mTitle').textContent = '✏️ Editar Cliente';
-  document.getElementById('mDesc').textContent = `Editando: ${c.name}`;
-  document.getElementById('mBody').innerHTML = clientFormHTML(c);
-  document.getElementById('mOk').textContent = '💾 Salvar Alterações';
-  document.getElementById('mOk').onclick = () => confirmEditClient(id);
-  document.getElementById('mainModal').classList.add('open');
+function confirmEditClient(id){
+  const idx=clients.findIndex(x=>x.id===id);if(idx<0)return;
+  const name=document.getElementById('nc-name')?.value?.trim();
+  const email=document.getElementById('nc-email')?.value?.trim();
+  const pass=document.getElementById('nc-pass')?.value;
+  if(!name||!email){showToast('⚠️ Preencha nome e e-mail');return;}
+  const nicho=document.getElementById('nc-nicho')?.value||clients[idx].nicho;
+  const plan=document.getElementById('nc-plan')?.value||clients[idx].plan;
+  const status=document.getElementById('nc-status')?.value||clients[idx].status;
+  clients[idx]={...clients[idx],name,email,nicho,avatar:nichoAvatars[nicho],nichoLabel:nichoLabels[nicho],plan,planLabel:planLabels[plan],planPrice:planPrices[plan],status,pass:pass&&pass.length>=6?pass:clients[idx].pass};
+  saveClients(clients);closeModal();renderClients();updateAgencyStats();showToast(`✅ "${name}" atualizado!`);
 }
-
-function confirmAddClient() {
-  const name = document.getElementById('nc-name')?.value?.trim();
-  const email = document.getElementById('nc-email')?.value?.trim();
-  const pass = document.getElementById('nc-pass')?.value;
-  if (!name) { showToast('⚠️ Preencha o nome'); return; }
-  if (!email) { showToast('⚠️ Preencha o e-mail'); return; }
-  if (!pass || pass.length < 6) { showToast('⚠️ Senha deve ter ao menos 6 caracteres'); return; }
-
-  const nicho = document.getElementById('nc-nicho')?.value || 'clinica';
-  const plan = document.getElementById('nc-plan')?.value || 'basico';
-  const status = document.getElementById('nc-status')?.value || 'active';
-  const nichoAvatars = {clinica:'🏥',restaurante:'🍕',academia:'💪',advocacia:'⚖️',imoveis:'🏠',salao:'💇'};
-  const nichoLabels = {clinica:'🏥 Clínica Médica',restaurante:'🍕 Restaurante',academia:'💪 Academia',advocacia:'⚖️ Advocacia',imoveis:'🏠 Imóveis',salao:'💇 Salão'};
-  const planLabels = {basico:'BÁSICO',pro:'PRO',premium:'PREMIUM'};
-  const planPrices = {basico:999,pro:1299,premium:1499};
-  const newId = Date.now();
-
-  clients.push({
-    id: newId, name, nicho, avatar: nichoAvatars[nicho], nichoLabel: nichoLabels[nicho],
-    plan, planLabel: planLabels[plan], planPrice: planPrices[plan],
-    status, leads: 0, hot: 0, conv: 0, score: 0, email, pass
-  });
-  saveClients(clients);
-  closeModal();
-  renderClients();
-  updateAgencyStats();
-  showToast(`✅ Cliente "${name}" criado! Login: ${email}`);
-}
-
-function confirmEditClient(id) {
-  const idx = clients.findIndex(x => x.id === id);
-  if (idx < 0) return;
-  const name = document.getElementById('nc-name')?.value?.trim();
-  const email = document.getElementById('nc-email')?.value?.trim();
-  const pass = document.getElementById('nc-pass')?.value;
-  if (!name || !email) { showToast('⚠️ Preencha nome e e-mail'); return; }
-
-  const nicho = document.getElementById('nc-nicho')?.value || clients[idx].nicho;
-  const plan = document.getElementById('nc-plan')?.value || clients[idx].plan;
-  const status = document.getElementById('nc-status')?.value || clients[idx].status;
-  const nichoAvatars = {clinica:'🏥',restaurante:'🍕',academia:'💪',advocacia:'⚖️',imoveis:'🏠',salao:'💇'};
-  const nichoLabels = {clinica:'🏥 Clínica Médica',restaurante:'🍕 Restaurante',academia:'💪 Academia',advocacia:'⚖️ Advocacia',imoveis:'🏠 Imóveis',salao:'💇 Salão'};
-  const planLabels = {basico:'BÁSICO',pro:'PRO',premium:'PREMIUM'};
-  const planPrices = {basico:999,pro:1299,premium:1499};
-
-  clients[idx] = {
-    ...clients[idx], name, email, nicho,
-    avatar: nichoAvatars[nicho], nichoLabel: nichoLabels[nicho],
-    plan, planLabel: planLabels[plan], planPrice: planPrices[plan], status,
-    pass: pass && pass.length >= 6 ? pass : clients[idx].pass
-  };
-  saveClients(clients);
-  closeModal();
-  renderClients();
-  updateAgencyStats();
-  showToast(`✅ Cliente "${name}" atualizado!`);
-}
-
-function confirmDelete(id, name) {
-  document.getElementById('confirm-msg').textContent = `Remover "${name}" permanentemente? Todos os dados serão apagados.`;
-  document.getElementById('confirm-ok').onclick = () => {
-    clients = clients.filter(c => c.id !== id);
-    saveClients(clients);
-    closeConfirm();
-    renderClients();
-    updateAgencyStats();
-    showToast(`🗑️ Cliente "${name}" removido.`);
-  };
+function confirmDelete(id,name){
+  document.getElementById('confirm-msg').textContent=`Remover "${name}" permanentemente?`;
+  document.getElementById('confirm-ok').onclick=()=>{clients=clients.filter(c=>c.id!==id);saveClients(clients);closeConfirm();renderClients();updateAgencyStats();showToast(`🗑️ "${name}" removido.`);};
   document.getElementById('confirmModal').classList.add('open');
 }
-function closeConfirm() { document.getElementById('confirmModal').classList.remove('open'); }
-function closeModal() { document.getElementById('mainModal').classList.remove('open'); }
-document.getElementById('mainModal').addEventListener('click', e => { if (e.target === document.getElementById('mainModal')) closeModal(); });
-document.getElementById('confirmModal').addEventListener('click', e => { if (e.target === document.getElementById('confirmModal')) closeConfirm(); });
+function closeModal(){document.getElementById('mainModal').classList.remove('open');}
+function closeConfirm(){document.getElementById('confirmModal').classList.remove('open');}
+document.getElementById('mainModal').addEventListener('click',e=>{if(e.target===document.getElementById('mainModal'))closeModal();});
+document.getElementById('confirmModal').addEventListener('click',e=>{if(e.target===document.getElementById('confirmModal'))closeConfirm();});
 
 // ═══════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════
-const titles = {dash:'Dashboard',agente:'🤖 Agente SDR',leads:'👥 Leads',funil:'🔻 Funil',treinamento:'🧠 Treinamento',whatsapp:'📱 WhatsApp (Zapi)',config:'⚙️ Configurações'};
-function showView(id, btn) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  const el = document.getElementById('view-' + id);
-  if (el) el.classList.add('active');
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  const pt = document.getElementById('pageTitle');
-  if (pt) pt.textContent = titles[id] || id;
+const titles={dash:'Dashboard',inbox:'💬 Conversas',leads:'👥 Leads',funil:'🔻 Funil',treinamento:'🧠 Treinamento',zapi:'📱 Zapi & Workflow',config:'⚙️ Configurações'};
+function showView(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const el=document.getElementById('view-'+id);if(el)el.classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const pt=document.getElementById('pageTitle');if(pt)pt.textContent=titles[id]||id;
 }
+
+// ═══════════════════════════════════════════
+// INBOX / CONVERSAS
+// ═══════════════════════════════════════════
+function renderContactList(filter=''){
+  const list=document.getElementById('contactList');if(!list)return;
+  const filtered=filter?contactsData.filter(c=>c.name.toLowerCase().includes(filter.toLowerCase())):contactsData;
+  list.innerHTML=filtered.map(c=>{
+    const tc={hot:'cs-hot',warm:'cs-warm',cold:'cs-cold'};
+    const tl={hot:'🔥 Quente',warm:'🌡️ Morno',cold:'❄️ Frio'};
+    const isActive=currentContact&&currentContact.id===c.id;
+    return`<div class="contact-item${c.unread?' unread':''}${isActive?' active':''}" onclick="openContact(${c.id})">
+      <div class="ci-ava">${c.avatar}</div>
+      <div class="ci-body">
+        <div class="ci-top"><div class="ci-name">${c.name}</div><div class="ci-time">${c.time}</div></div>
+        <div class="ci-preview">${c.lastMsg}</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px;">
+          <span class="ci-score ${tc[c.temp]}">${tl[c.temp]} · ${c.score}%</span>
+          ${c.unread?`<span class="ci-badge">${c.unread}</span>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function filterContacts(val){renderContactList(val);}
+
+function openContact(id){
+  const c=contactsData.find(x=>x.id===id);if(!c)return;
+  currentContact=c;
+  c.unread=0;
+  chatHistory=[...c.history];
+  chatScore=c.score;chatStage=c.stage;chatMsgCount=c.history.filter(m=>m.role==='user').length;
+  // Show chat
+  document.getElementById('chat-placeholder').style.display='none';
+  const ac=document.getElementById('active-chat');ac.style.display='flex';
+  document.getElementById('ch-ava').textContent=c.avatar;
+  document.getElementById('ch-name').textContent=c.name;
+  document.getElementById('ch-sub').textContent=`${c.phone} · ${nichoData[c.nicho]?.name||'Negócio'}`;
+  // Lead side
+  const ls=document.getElementById('leadSide');ls.style.display='flex';ls.style.flexDirection='column';
+  document.getElementById('ls-ava').textContent=c.avatar;
+  document.getElementById('ls-name').textContent=c.name;
+  updateLeadSideUI(chatScore,chatStage);
+  // Render history
+  const win=document.getElementById('chatWin');win.innerHTML='';
+  chatHistory.forEach(m=>renderBubble(m.role==='assistant'?'ai':'lead',m.content,false));
+  win.scrollTop=win.scrollHeight;
+  renderContactList(document.getElementById('search-contacts')?.value||'');
+  document.getElementById('inbox-count').textContent=contactsData.filter(x=>x.unread>0).length;
+}
+function closeChat(){
+  currentContact=null;
+  document.getElementById('chat-placeholder').style.display='flex';
+  document.getElementById('active-chat').style.display='none';
+  document.getElementById('leadSide').style.display='none';
+  renderContactList();
+}
+function renderBubble(role,text,scroll){
+  const clean=text.replace('[LEAD_QUENTE]','').trim();
+  const win=document.getElementById('chatWin');if(!win)return;
+  const row=document.createElement('div');
+  row.className='bubble-row '+(role==='lead'?'lr':'');
+  const now=new Date();const t=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+  row.innerHTML=`<div class="av ${role==='ai'?'ai':'lead'}">${role==='ai'?'SDR':currentContact?.avatar||'👤'}</div>
+    <div class="bdy">
+      <div class="bsender">${role==='ai'?'Agente SDR — IA':'Lead'}</div>
+      <div class="bubble ${role==='ai'?'ai-bub':'lead-bub'}">${clean}</div>
+      <div class="btime">${t}</div>
+    </div>`;
+  win.appendChild(row);if(scroll)win.scrollTop=win.scrollHeight;
+}
+function showTypingInbox(){
+  const win=document.getElementById('chatWin');if(!win)return;
+  const r=document.createElement('div');r.className='typing-row';r.id='tr_inbox';
+  r.innerHTML=`<div class="av ai">SDR</div><div class="tbub"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  win.appendChild(r);win.scrollTop=win.scrollHeight;
+}
+function hideTypingInbox(){document.getElementById('tr_inbox')?.remove();}
+
+async function sendInboxMsg(){
+  const inp=document.getElementById('chatIn');
+  const btn=document.getElementById('sendBtn');
+  if(!inp||!currentContact||btn?.disabled)return;
+  const text=inp.value.trim();if(!text)return;
+  inp.value='';inp.style.height='auto';
+  if(btn)btn.disabled=true;
+  chatHistory.push({role:'user',content:text});
+  renderBubble('lead',text,true);
+  currentContact.lastMsg=text;currentContact.time='Agora';
+  showTypingInbox();
+  const reply=await callAI_inbox(text,currentContact.nicho);
+  hideTypingInbox();
+  const isHot=reply.includes('[LEAD_QUENTE]');
+  chatMsgCount++;
+  chatStage=isHot?4:Math.min(Math.floor(chatMsgCount/1.2),3);
+  chatScore=isHot?92:Math.min((chatScore||0)+(Math.random()*8+4),98);
+  chatHistory.push({role:'assistant',content:reply});
+  currentContact.history=[...chatHistory];
+  renderBubble('ai',reply,true);
+  updateLeadSideUI(chatScore,chatStage);
+  if(isHot){
+    setTimeout(()=>{showToast('🔥 Lead Quente! Notificando vendedor...');document.getElementById('ls-wa-btn').disabled=false;},400);
+    currentContact.temp='hot';currentContact.score=Math.round(chatScore);
+  }else{
+    currentContact.score=Math.round(chatScore);
+  }
+  renderContactList(document.getElementById('search-contacts')?.value||'');
+  if(btn)btn.disabled=false;inp.focus();
+}
+function hkInbox(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendInboxMsg();}}
+
+async function callAI_inbox(msg,nicho){
+  const key=app.apiKey;
+  const nd=nichoData[nicho]||nichoData.clinica;
+  const system=`Você é ${nd.persona} trabalhando para ${nd.negocio}. SDR especialista em ${nd.name}.\nSERVIÇOS: ${nd.servicos}\nOBJETIVO: Qualificar leads até o CTA: "${nd.cta}". TOM: ${nd.tom}. Mensagens curtas, máx 2-3 parágrafos. Emojis moderados.\nOBJEÇÕES: ${nd.objecoes}\nCONTEXTO: Você pode estar no meio de uma conversa — leia todo o histórico e NUNCA repita perguntas já feitas. Continue de onde parou.\nFUNIL: Consciência→Interesse→Consideração→Decisão→Lead Quente\nQuando lead demonstrar alta intenção, inclua: [LEAD_QUENTE]\nNunca invente preços. Responda SEMPRE em português.`;
+  if(!key)return getFallbackMsg(nicho,chatMsgCount);
+  try{
+    const messages=chatHistory.slice(-12);
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:app.model,max_tokens:600,system,messages})});
+    const data=await res.json();
+    if(data.error)return getFallbackMsg(nicho,chatMsgCount);
+    return data.content?.[0]?.text||'Desculpe, tente novamente.';
+  }catch(e){return getFallbackMsg(nicho,chatMsgCount);}
+}
+
+function getFallbackMsg(nicho,count){
+  const msgs={
+    clinica:['Olá! 😊 Sou a Sofia da Clínica Bella. O que te trouxe até nós hoje?','Entendo! Você já fez algum procedimento estético antes?','Ótimo! Que tal uma avaliação gratuita para conhecer o protocolo ideal para você?','Perfeito! Você prefere manhã ou tarde?','Maravilha! Vou verificar os horários disponíveis 😊'],
+    restaurante:['Olá! 😊 Sou o Lucas. Como posso ajudar?','Ótimo! Qual seria a ocasião?','Quantas pessoas seriam?','Que data você tem em mente?','Maravilha! Vou verificar a disponibilidade.'],
+  };
+  const list=msgs[nicho]||msgs.clinica;
+  return list[Math.min(count,list.length-1)];
+}
+
+function updateLeadSideUI(score,stage){
+  const pct=Math.round(score)+'%';
+  const stNames=['Consciência','Interesse','Consideração','Decisão','🔥 Quente'];
+  const tempLbls=['❄️ Frio','❄️ Frio','🌡️ Morno','🌡️ Morno','🔥 Quente'];
+  const intLbls=['❄️ Baixa','❄️ Baixa','🌡️ Média','🔥 Alta','🔥 Muito Alta'];
+  const el=id=>document.getElementById(id);
+  if(el('ls-score'))el('ls-score').textContent=pct;
+  if(el('ls-score-fill'))el('ls-score-fill').style.width=pct;
+  if(el('ls-sub'))el('ls-sub').textContent=stage>=0?(stNames[stage]||'—')+' — Em qualificação':'Aguardando qualificação';
+  if(el('ls-temp')&&stage>=0)el('ls-temp').textContent=tempLbls[stage];
+  if(el('ls-intent')&&stage>=0)el('ls-intent').textContent=intLbls[stage];
+  // Tags
+  const lt=el('ls-tags');if(lt){
+    let tags=[];
+    if(score>=70)tags.push('<span class="tag" style="color:var(--orange);border-color:rgba(255,101,53,.3);">🔥 Alta intenção</span>');
+    if(stage>=3)tags.push('<span class="tag" style="color:var(--green);border-color:rgba(0,230,118,.3);">📅 Disponível</span>');
+    if(chatMsgCount>=2)tags.push('<span class="tag">💬 Engajado</span>');
+    lt.innerHTML=tags.join('')||'<span class="tag">💬 Em contato</span>';
+  }
+  // Jornada
+  const jtrack=el('ls-jtrack');if(jtrack){
+    const icons=['🔍','💡','⚖️','🎯','🤝'];
+    jtrack.querySelectorAll('.jstep').forEach((s,i)=>{
+      const d=s.querySelector('.jdot');d.className='jdot';
+      if(i<stage){d.classList.add('done');d.textContent='✓';}
+      else if(i===stage){d.classList.add('now');d.textContent=icons[i];}
+      else{d.classList.add('todo');d.textContent=icons[i];}
+    });
+  }
+  if(stage>=4&&el('ls-wa-btn'))el('ls-wa-btn').disabled=false;
+}
+
+function newConvoModal(){
+  const name=prompt('Nome do lead simulado:','Lead Teste');
+  if(!name)return;
+  const newContact={id:Date.now(),name,phone:'5511'+Math.floor(Math.random()*900000000+100000000),avatar:'🧑',lastMsg:'Nova conversa',time:'Agora',unread:0,score:0,stage:-1,temp:'cold',nicho:app.currentClient?.nicho||'clinica',history:[]};
+  contactsData.unshift(newContact);
+  renderContactList();
+  setTimeout(()=>openContact(newContact.id),100);
+}
+function loadConversations(){renderContactList();showToast('🔄 Conversas atualizadas!');}
 
 // ═══════════════════════════════════════════
 // TABLES
 // ═══════════════════════════════════════════
-function renderHotTable() {
-  const hot = leadsData.filter(l => l.temp === 'hot').slice(0, 4);
-  const tbody = document.getElementById('hotTbl');
-  if (!tbody) return;
-  tbody.innerHTML = hot.map(l => `
-    <tr>
-      <td><div class="tname">${l.name}</div><div class="tsub">${l.biz}</div></td>
-      <td><span class="temp t-hot">🔥 Quente</span></td>
-      <td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td>
-      <td><span class="sbadge s3">${l.stage}</span></td>
-      <td><button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button></td>
-    </tr>
-  `).join('');
+function renderHotTable(){
+  const tbody=document.getElementById('hotTbl');if(!tbody)return;
+  const hot=leadsData.filter(l=>l.temp==='hot');
+  tbody.innerHTML=hot.map(l=>`<tr><td><div class="tname">${l.name}</div><div class="tsub">${l.biz}</div></td><td><span class="temp t-hot">🔥 Quente</span></td><td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td><td><button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button></td></tr>`).join('');
 }
-
-function renderAllTable() {
-  const tbody = document.getElementById('allTbl');
-  if (!tbody) return;
-  const tc = {hot:'t-hot',warm:'t-warm',cold:'t-cold'};
-  const tl = {hot:'🔥 Quente',warm:'🌡️ Morno',cold:'❄️ Frio'};
-  tbody.innerHTML = leadsData.map(l => `
-    <tr>
-      <td><div class="tname">${l.name}</div><div class="tsub">${l.biz}</div></td>
-      <td><span class="temp ${tc[l.temp]}">${tl[l.temp]}</span></td>
-      <td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td>
-      <td><span class="sbadge s2">${l.stage}</span></td>
-      <td style="font-size:10px;color:var(--muted);">${l.date}</td>
-      <td>${l.temp==='hot'?`<button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button>`:`<button class="btn btn-ghost btn-xs">Ver</button>`}</td>
-    </tr>
-  `).join('');
+function renderAllTable(){
+  const tbody=document.getElementById('allTbl');if(!tbody)return;
+  const tc={hot:'t-hot',warm:'t-warm',cold:'t-cold'};
+  const tl={hot:'🔥 Quente',warm:'🌡️ Morno',cold:'❄️ Frio'};
+  tbody.innerHTML=leadsData.map(l=>`<tr><td><div class="tname">${l.name}</div><div class="tsub">${l.biz}</div></td><td><span class="temp ${tc[l.temp]}">${tl[l.temp]}</span></td><td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td><td><span class="sbadge s2">${l.stage}</span></td><td style="font-size:10px;color:var(--muted);">${l.date}</td><td>${l.temp==='hot'?`<button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button>`:`<button class="btn btn-ghost btn-xs">Ver</button>`}</td></tr>`).join('');
 }
-
-function exportHot() { showToast(`📱 Leads quentes enviados ao WhatsApp!`); }
+function exportHot(){showToast('📱 Leads quentes enviados ao WhatsApp!');}
 
 // ═══════════════════════════════════════════
-// AI CHAT
+// TREINAMENTO
 // ═══════════════════════════════════════════
-function buildPrompt(nicho) {
-  const d = nichoData[nicho] || nichoData.clinica;
-  return `Você é ${d.persona} trabalhando para ${d.negocio}. Você é um SDR especialista em ${d.name}.\n\nSERVIÇOS: ${d.servicos}\nOBJETIVO: Qualificar leads e conduzi-los até o CTA: "${d.cta}". Você NÃO fecha a venda — entrega leads quentes ao vendedor humano.\nTOM: ${d.tom}. Mensagens curtas como WhatsApp. Máx 2-3 parágrafos. Emojis moderados.\nOBJEÇÕES: ${d.objecoes}\n\nFUNIL: Consciência→Interesse→Consideração→Decisão→Lead Quente\nQuando o lead demonstrar alta intenção (disponibilidade + interesse real), inclua exatamente: [LEAD_QUENTE]\nNunca invente preços. Não repita a saudação se já foi feita. Pergunte UMA coisa por vez.\nResponda SEMPRE em português brasileiro.`;
+function saveTraining(){
+  const negocio=document.getElementById('t-negocio')?.value||'';
+  const persona=document.getElementById('t-persona')?.value||'';
+  const servicos=document.getElementById('t-servicos')?.value||'';
+  const objecoes=document.getElementById('t-objecoes')?.value||'';
+  const perguntas=document.getElementById('t-perguntas')?.value||'';
+  const cta=document.getElementById('t-cta')?.value||'';
+  const tom=document.getElementById('t-tom')?.value||'';
+  const promo=document.getElementById('t-promo')?.value||'';
+  const prompt=`Voce e ${persona} trabalhando para ${negocio}. Voce e um SDR especialista no segmento.
+
+SERVICOS: ${servicos}
+OBJETIVO: Qualificar leads e conduzi-los ate o CTA: "${cta}". Voce NAO fecha a venda - entrega leads quentes ao vendedor humano.
+TOM: ${tom}. Mensagens curtas como WhatsApp. Max 2-3 paragrafos. Emojis moderados.
+OBJECOES: ${objecoes}
+PERGUNTAS DE QUALIFICACAO: ${perguntas}
+${promo?`PROMOCAO ATUAL: ${promo}`:''}
+
+CONTEXTO IMPORTANTE: voce ja pode estar no meio de uma conversa - leia todo o historico antes de responder e NUNCA repita perguntas ja feitas. Continue a conversa de onde parou.
+FUNIL: Consciencia→Interesse→Consideracao→Decisao→Lead Quente
+Quando o lead demonstrar alta intencao (disponibilidade + interesse real), inclua exatamente: [LEAD_QUENTE]
+Nunca invente precos. Nao repita saudacoes se conversa ja comecou. Pergunte UMA coisa por vez.
+Responda SEMPRE em portugues brasileiro.`;
+  document.getElementById('prompt-output').style.display='block';
+  document.getElementById('prompt-text').value=prompt;
+  showToast('✅ Configurações salvas! Copie o prompt para o n8n.');
+}
+function copyPrompt(){
+  const t=document.getElementById('prompt-text');
+  if(t){navigator.clipboard.writeText(t.value).then(()=>showToast('📋 Prompt copiado! Cole no nó Code do n8n.'));}
 }
 
-async function callAI(msg, nicho) {
-  app.history.push({ role: 'user', content: msg });
-  const key = app.apiKey;
-  if (!key) return getFallback(nicho, app.msgCount);
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model: app.model, max_tokens: 800, system: buildPrompt(nicho), messages: app.history })
-    });
-    const data = await res.json();
-    if (data.error) return getFallback(nicho, app.msgCount);
-    const reply = data.content?.[0]?.text || 'Desculpe, tente novamente.';
-    app.history.push({ role: 'assistant', content: reply });
-    return reply;
-  } catch (e) { return getFallback(nicho, app.msgCount); }
-}
-
-function getFallback(nicho, count) {
-  const list = fallbackMsgs[nicho] || fallbackMsgs.clinica;
-  return list[Math.min(count, list.length - 1)];
-}
-
-function getNicho() {
-  const v = document.querySelector('.view.active');
-  if (v?.id === 'view-agente') return document.getElementById('nichoSel2')?.value || 'clinica';
-  return app.currentClient?.nicho || 'clinica';
-}
-
-function getWelcome(nicho) {
-  const d = nichoData[nicho] || nichoData.clinica;
-  const name = d.persona.split(',')[0];
-  const w = {
-    clinica:`Olá! 😊 Seja bem-vindo à ${d.negocio}! Sou ${name} e estou aqui para te ajudar. O que te trouxe até aqui hoje?`,
-    restaurante:`Olá! 👋 Bem-vindo ao ${d.negocio}! Sou ${name}. Como posso tornar sua experiência incrível hoje?`,
-    academia:`E aí! 💪 Bem-vindo à ${d.negocio}! Sou ${name}. Qual é o seu objetivo de transformação?`,
-    advocacia:`Olá! 👋 Bem-vindo ao ${d.negocio}. Sou ${name}. Como posso te orientar hoje?`,
-    imoveis:`Olá! 🏠 Bem-vindo à ${d.negocio}! Sou ${name}. O que você está buscando no mercado imobiliário?`,
-    salao:`Oi! ✨ Bem-vindo ao ${d.negocio}! Sou ${name}. O que você quer arrasar hoje?`,
+// ═══════════════════════════════════════════
+// ZAPI CONFIG
+// ═══════════════════════════════════════════
+function saveZapiConfig(){
+  const c=app.currentClient;if(!c){showToast('⚠️ Faça login como cliente');return;}
+  const config={
+    instance:document.getElementById('zapi-instance')?.value||'',
+    token:document.getElementById('zapi-token')?.value||'',
+    clientToken:document.getElementById('zapi-client-token')?.value||'',
+    webhookUrl:document.getElementById('n8n-webhook-url')?.value||'',
+    n8nBase:document.getElementById('n8n-base-url')?.value||'',
+    active:app.agentActive,
   };
-  return w[nicho] || w.clinica;
+  localStorage.setItem('pulsar_zapi_'+c.id,JSON.stringify(config));
+  showToast('✅ Configurações Zapi salvas!');
 }
-
-function resetChat() {
-  app.history = []; app.score = 0; app.stage = -1; app.msgCount = 0;
-  ['chatWin2'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.innerHTML = '';
-  });
-  const nicho = getNicho();
-  const welcome = getWelcome(nicho);
-  addBubble(welcome, 'ai', -1, true);
-  app.history.push({ role: 'assistant', content: welcome });
-  updateScoreUI(0, -1);
-  setEl('leadName', 'Aguardando...');
-  setEl('leadSub', 'Inicie uma conversa');
-  const la = document.getElementById('leadAva'); if (la) la.textContent = '👤';
-  const wb2 = document.getElementById('waBtn2'); if (wb2) wb2.disabled = true;
-  const lt = document.getElementById('leadTags'); if (lt) lt.innerHTML = '<span class="tag">💬 Aguardando</span>';
-  setEl('score-display', 'Score: —');
-}
-
-async function sendMsg(inputId, winId, btnId) {
-  const inp = document.getElementById(inputId);
-  const btn = document.getElementById(btnId);
-  if (!inp || btn?.disabled) return;
-  const text = inp.value.trim(); if (!text) return;
-  inp.value = ''; inp.style.height = 'auto';
-  if (btn) btn.disabled = true;
-  addBubble(text, 'lead', -1, true);
-  showTyping();
-  const nicho = getNicho();
-  const reply = await callAI(text, nicho);
-  hideTyping();
-  const isHot = reply.includes('[LEAD_QUENTE]');
-  app.msgCount++;
-  updateScoreUI(app.msgCount, isHot ? 4 : Math.min(Math.floor(app.msgCount / 1.2), 3));
-  addBubble(reply, 'ai', app.stage, true);
-  if (isHot) setTimeout(() => {
-    showToast('🔥 Lead Quente! Notificando vendedor...');
-    const wb2 = document.getElementById('waBtn2'); if (wb2) wb2.disabled = false;
-  }, 400);
-  if (btn) btn.disabled = false;
-  inp.focus();
-}
-
-function addBubble(text, role, stage, scroll) {
-  const clean = text.replace('[LEAD_QUENTE]', '').trim();
-  const wins = [document.getElementById('chatWin2')].filter(Boolean);
-  const stageCls = ['s0','s1','s2','s3','s4'];
-  const stageNm = ['Consciência','Interesse','Consideração','Decisão','🔥 Lead Quente'];
-  wins.forEach(win => {
-    const row = document.createElement('div');
-    row.className = 'bubble-row ' + (role === 'lead' ? 'lr' : '');
-    row.innerHTML = `
-      <div class="av ${role==='ai'?'ai':'lead'}">${role==='ai'?'SDR':'👤'}</div>
-      <div class="bdy">
-        <div class="bsender">${role==='ai'?'Agente SDR — IA':'Você (Lead)'}</div>
-        <div class="bubble ${role==='ai'?'ai-bub':'lead-bub'}">${clean}</div>
-        ${role==='ai'&&stage>=0?`<span class="sbadge ${stageCls[stage]}">${stageNm[stage]}</span>`:''}
-      </div>`;
-    win.appendChild(row);
-    if (scroll) win.scrollTop = win.scrollHeight;
-  });
-}
-
-function showTyping() {
-  const win = document.getElementById('chatWin2'); if (!win) return;
-  const r = document.createElement('div'); r.className = 'typing-row'; r.id = 'tr_chat';
-  r.innerHTML = `<div class="av ai">SDR</div><div class="tbub"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
-  win.appendChild(r); win.scrollTop = win.scrollHeight;
-}
-function hideTyping() { document.getElementById('tr_chat')?.remove(); }
-
-// ═══════════════════════════════════════════
-// SCORE & JOURNEY
-// ═══════════════════════════════════════════
-function updateScoreUI(msgCount, stage) {
-  app.stage = stage;
-  let score = 0;
-  if (stage >= 0) {
-    const base = [20, 38, 56, 72, 88];
-    score = Math.min((base[stage] || 80) + Math.floor(Math.random() * 8), 100);
-  }
-  app.score = score;
-  const pct = score + '%';
-  const stNames = ['Consciência','Interesse','Consideração','Decisão','🔥 Quente'];
-  const stColors = ['var(--purple)','var(--blue)','var(--orange)','#00d4ff','var(--pink)'];
-  const tempLbls = ['❄️ Frio','❄️ Frio','🌡️ Morno','🌡️ Morno','🔥 Quente'];
-  const intLbls = ['❄️ Baixa','❄️ Baixa','🌡️ Média','🔥 Alta','🔥 Muito Alta'];
-
-  setEl('score-display', 'Score: ' + pct);
-  setEl('sc2', pct, 'var(--orange)');
-  if (stage >= 0) {
-    setEl('tp2', tempLbls[stage]);
-    setEl('in2', intLbls[stage]);
-  }
-
-  const sf = document.getElementById('scoreFill'); if (sf) sf.style.width = pct;
-
-  const jtrack = document.getElementById('jtrack2');
-  if (jtrack) {
-    jtrack.querySelectorAll('.jstep').forEach((s, i) => {
-      const d = s.querySelector('.jdot'); d.className = 'jdot';
-      const icons = ['🔍','💡','⚖️','🎯','🤝'];
-      if (i < stage) { d.classList.add('done'); d.textContent = '✓'; }
-      else if (i === stage) { d.classList.add('now'); d.textContent = icons[i]; }
-      else { d.classList.add('todo'); d.textContent = icons[i]; }
-    });
-  }
-
-  if (msgCount >= 1) {
-    setEl('leadName', 'Lead #' + String(100 + msgCount).padStart(3, '0'));
-    setEl('leadSub', (nichoData[getNicho()]?.name || 'Prospect') + ' — Em qualificação');
-    const la = document.getElementById('leadAva'); if (la) la.textContent = '🧑';
-  }
-
-  const lt = document.getElementById('leadTags');
-  if (lt) {
-    let tags = [];
-    if (score >= 70) tags.push('<span class="tag" style="color:var(--orange);border-color:rgba(255,101,53,.3);">🔥 Alta intenção</span>');
-    if (stage >= 3) tags.push('<span class="tag" style="color:var(--green);border-color:rgba(0,230,118,.3);">📅 Disponível</span>');
-    if (msgCount >= 2) tags.push('<span class="tag">💬 Engajado</span>');
-    lt.innerHTML = tags.join('') || '<span class="tag">💬 Em contato</span>';
-  }
-}
-
-function setEl(id, txt, color) {
-  const e = document.getElementById(id);
-  if (e) { e.textContent = txt; if (color) e.style.color = color; }
-}
-
-// ═══════════════════════════════════════════
-// WHATSAPP
-// ═══════════════════════════════════════════
-function openWA() {
-  const wa = app.waNumber || localStorage.getItem('p_wa') || '5511999999999';
-  const nicho = getNicho();
-  const msg = encodeURIComponent(`🔥 *LEAD QUENTE — Pulsar SDR*\n\nScore: ${app.score}%\nNicho: ${nichoData[nicho]?.name || 'Negócio local'}\n\nLead qualificado pelo Agente SDR. Pronto para fechamento! 💪`);
-  window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-}
-function sendToWA(name) {
-  const wa = app.waNumber || localStorage.getItem('p_wa') || '5511999999999';
-  const msg = encodeURIComponent(`🔥 Lead Quente: ${name}\nQualificado pelo Agente SDR Pulsar — Pronto para fechamento!`);
-  window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-}
-function hk(e, ci, sb) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(ci, 'chatWin2', sb); } }
-
-function copyField(id) {
-  const el = document.getElementById(id);
-  if (el) navigator.clipboard.writeText(el.value || el.textContent || '').then(() => showToast('📋 Copiado!'));
-}
+function openN8nWorkflow(){const url=document.getElementById('n8n-base-url')?.value||'https://app.n8n.cloud';window.open(url,'_blank');}
+function openZapi(){window.open('https://app.z-api.io','_blank');}
+function openClaude(){window.open('https://console.anthropic.com','_blank');}
 
 // ═══════════════════════════════════════════
 // API KEY
 // ═══════════════════════════════════════════
-function saveAgencyApiKey() {
-  const key = document.getElementById('agencyApiKey')?.value?.trim();
-  const model = document.getElementById('agencyModel')?.value;
-  if (!key || !key.startsWith('sk-')) { showToast('⚠️ Insira uma chave válida (começa com sk-)'); return; }
-  localStorage.setItem('pulsar_agency_apikey', key);
-  if (model) localStorage.setItem('pulsar_agency_model', model);
-  app.apiKey = key; app.model = model || app.model;
-  updateApiStatusBadge(key);
-  showToast('✅ API Key salva! Todos os clientes usando IA real agora.');
+function saveAgencyApiKey(){
+  const key=document.getElementById('agencyApiKey')?.value?.trim();
+  const model=document.getElementById('agencyModel')?.value;
+  if(!key||!key.startsWith('sk-')){showToast('⚠️ Chave inválida — deve começar com sk-');return;}
+  localStorage.setItem('pulsar_agency_apikey',key);
+  if(model)localStorage.setItem('pulsar_agency_model',model);
+  app.apiKey=key;app.model=model||app.model;
+  updateApiStatusBadge(key);showToast('✅ API Key salva!');
 }
-function checkApiKey(val) { updateApiStatusBadge(val); }
-function updateApiStatusBadge(key) {
-  const badge = document.getElementById('apiStatusBadge'); if (!badge) return;
-  if (key && key.startsWith('sk-') && key.length > 20) {
-    badge.textContent = '✅ Ativa'; badge.style.cssText = 'font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.2);';
-  } else {
-    badge.textContent = 'Não configurada'; badge.style.cssText = 'font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.2);';
-  }
+function checkApiKey(val){updateApiStatusBadge(val);}
+function updateApiStatusBadge(key){
+  const b=document.getElementById('apiStatusBadge');if(!b)return;
+  if(key&&key.startsWith('sk-')&&key.length>20){b.textContent='✅ Ativa';b.style.cssText='font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.2);';}
+  else{b.textContent='Não configurada';b.style.cssText='font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.2);';}
 }
-function toggleApiKeyVisibility() {
-  const inp = document.getElementById('agencyApiKey'); if (!inp) return;
-  inp.type = inp.type === 'password' ? 'text' : 'password';
-}
-function saveClientWA() {
-  const wa = document.getElementById('waInp')?.value?.trim();
-  if (wa) { app.waNumber = wa; localStorage.setItem('p_wa', wa); }
-  showToast('✅ Número salvo!');
-}
-function openSupportWA() {
-  const msg = encodeURIComponent('Olá! Preciso de suporte com o Pulsar SDR.');
-  window.open('https://wa.me/5511999999999?text=' + msg, '_blank');
-}
+function toggleApiKeyVisibility(){const inp=document.getElementById('agencyApiKey');if(!inp)return;inp.type=inp.type==='password'?'text':'password';}
 
 // ═══════════════════════════════════════════
-// TOAST
+// WA / MISC
 // ═══════════════════════════════════════════
-function showToast(msg) {
-  document.getElementById('tMsg').textContent = msg;
-  const t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+function sendToWA(name){
+  const wa=app.waNumber||localStorage.getItem('p_wa')||'5511999999999';
+  const msg=encodeURIComponent(`🔥 Lead Quente: ${name}\nQualificado pelo Agente SDR Pulsar!\nScore: ${Math.round(chatScore||88)}%\nPronto para fechamento 💪`);
+  window.open(`https://wa.me/${wa}?text=${msg}`,'_blank');
 }
-
-// ═══════════════════════════════════════════
-// AUTO-RESIZE
-// ═══════════════════════════════════════════
-document.querySelectorAll('.chat-in').forEach(inp => {
-  inp.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 100) + 'px'; });
-});
+function copyField(id){const el=document.getElementById(id);if(el)navigator.clipboard.writeText(el.value||'').then(()=>showToast('📋 Copiado!'));}
+function saveClientWA(){const wa=document.getElementById('waInp')?.value?.trim();if(wa){app.waNumber=wa;localStorage.setItem('p_wa',wa);}showToast('✅ Número salvo!');}
+function openSupportWA(){window.open('https://wa.me/5511999999999?text='+encodeURIComponent('Preciso de suporte com o Pulsar SDR.'),'_blank');}
+function showToast(msg){document.getElementById('tMsg').textContent=msg;const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+document.querySelectorAll('.chat-in').forEach(inp=>{inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px';});});
 
 // INIT
-window.addEventListener('load', () => {
-  const k = localStorage.getItem('pulsar_agency_apikey');
-  if (k) app.apiKey = k;
-  const m = localStorage.getItem('pulsar_agency_model');
-  if (m) app.model = m;
-  const wa = localStorage.getItem('p_wa');
-  if (wa) app.waNumber = wa;
+window.addEventListener('load',()=>{
+  const k=localStorage.getItem('pulsar_agency_apikey');if(k)app.apiKey=k;
+  const m=localStorage.getItem('pulsar_agency_model');if(m)app.model=m;
+  const wa=localStorage.getItem('p_wa');if(wa)app.waNumber=wa;
+  // Set dashboard last response time
+  const lr=document.getElementById('dash-last-resp');if(lr)lr.textContent=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const dac=document.getElementById('dash-active-conv');if(dac)dac.textContent=contactsData.filter(c=>c.unread>0).length;
 });
 </script>
 </body>
