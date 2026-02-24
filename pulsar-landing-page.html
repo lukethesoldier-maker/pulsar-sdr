@@ -8,28 +8,20 @@
 <style>
 :root{
   --bg:#04040a;--s1:#080810;--s2:#0d0d18;
-  --orange:#ff5c1a;--pink:#e8249a;--purple:#7c3aed;--blue:#0ea5e9;--green:#10b981;
+  --orange:#ff5c1a;--pink:#e8249a;--purple:#7c3aed;--blue:#0ea5e9;--green:#10b981;--red:#ef4444;
   --white:#f0f0fa;--muted:#6b6b8a;--muted2:#9090b0;
   --grad:linear-gradient(135deg,var(--orange),var(--pink));
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:'Sora',sans-serif;overflow-x:hidden;}
-
-/* CURSOR */
-*{cursor:default;}
 a,button,[onclick]{cursor:pointer;}
 
 /* NOISE */
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
 
 /* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:16px 5%;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(4,4,10,.85);backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,.04);
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(4,4,10,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04);}
 .nav-logo{font-family:'Bebas Neue';font-size:26px;letter-spacing:3px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .nav-links{display:flex;align-items:center;gap:28px;}
 .nav-links a{font-size:13px;color:var(--muted2);text-decoration:none;transition:color .2s;}
@@ -38,108 +30,62 @@ nav{
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,92,26,.5);}
 
 /* HERO */
-.hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:120px 5% 80px;position:relative;overflow:hidden;
-}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 5% 80px;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;overflow:hidden;}
 .hb{position:absolute;border-radius:50%;filter:blur(100px);}
 .hb1{width:700px;height:700px;background:radial-gradient(circle,rgba(255,92,26,.12),transparent 70%);top:-200px;left:50%;transform:translateX(-50%);}
 .hb2{width:500px;height:500px;background:radial-gradient(circle,rgba(232,36,154,.08),transparent 70%);bottom:-100px;left:-100px;animation:hbf 15s ease-in-out infinite alternate;}
 .hb3{width:400px;height:400px;background:radial-gradient(circle,rgba(14,165,233,.07),transparent 70%);bottom:-100px;right:-100px;animation:hbf 18s ease-in-out infinite alternate-reverse;}
 @keyframes hbf{0%{transform:translate(0,0);}100%{transform:translate(40px,-40px);}}
-
-/* GRID LINES */
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
-  background-size:60px 60px;pointer-events:none;
-}
-
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
 .hero-inner{position:relative;z-index:1;max-width:900px;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,92,26,.1);border:1px solid rgba(255,92,26,.25);
-  border-radius:100px;padding:6px 16px;font-size:12px;font-weight:700;
-  color:var(--orange);letter-spacing:1px;text-transform:uppercase;
-  margin-bottom:28px;animation:fadeUp .8s ease both;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,26,.1);border:1px solid rgba(255,92,26,.25);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .8s ease both;}
 .badge-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:bd 1.5s infinite;}
 @keyframes bd{0%,100%{opacity:1;}50%{opacity:.3;}}
-
-.hero h1{
-  font-family:'Bebas Neue';font-size:clamp(56px,10vw,110px);
-  line-height:.95;letter-spacing:2px;margin-bottom:20px;
-  animation:fadeUp .8s .1s ease both;
-}
-.h1-fire{
-  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  display:block;
-}
-.hero-sub{
-  font-size:clamp(16px,2.5vw,22px);color:var(--muted2);line-height:1.6;
-  max-width:660px;margin:0 auto 40px;animation:fadeUp .8s .2s ease both;
-  font-weight:300;
-}
+.hero h1{font-family:'Bebas Neue';font-size:clamp(56px,10vw,110px);line-height:.95;letter-spacing:2px;margin-bottom:20px;animation:fadeUp .8s .1s ease both;}
+.h1-fire{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.hero-sub{font-size:clamp(16px,2.5vw,22px);color:var(--muted2);line-height:1.6;max-width:660px;margin:0 auto 40px;animation:fadeUp .8s .2s ease both;font-weight:300;}
 .hero-sub strong{color:var(--white);font-weight:600;}
-
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .3s ease both;}
-.btn-hero{
-  padding:16px 36px;border-radius:10px;font-size:15px;font-weight:700;
-  text-decoration:none;border:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;
-}
+.btn-hero{padding:16px 36px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;border:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
 .btn-main{background:var(--grad);color:white;box-shadow:0 6px 30px rgba(255,92,26,.35);}
 .btn-main:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,92,26,.55);}
 .btn-sec{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.1);}
 .btn-sec:hover{background:rgba(255,255,255,.1);}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
 
-/* PROOF TICKER */
+/* TICKER */
 .ticker-wrap{padding:20px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);overflow:hidden;background:rgba(255,255,255,.015);animation:fadeUp .8s .4s ease both;}
 .ticker-inner{display:flex;gap:60px;animation:tick 25s linear infinite;white-space:nowrap;}
 .ticker-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--muted2);}
-.ticker-item span{font-size:16px;}
 @keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* PAIN SECTION */
-.pain{padding:100px 5%;max-width:1200px;margin:0 auto;}
+/* SECTIONS */
 .sec-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
 .sec-title{font-family:'Bebas Neue';font-size:clamp(36px,6vw,64px);letter-spacing:1px;line-height:1;margin-bottom:16px;}
 .sec-desc{font-size:16px;color:var(--muted2);line-height:1.7;max-width:560px;}
+
+/* PAIN */
+.pain{padding:100px 5%;max-width:1200px;margin:0 auto;}
 .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:60px;}
 .pain-cards{display:flex;flex-direction:column;gap:12px;}
-.pain-card{
-  background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.15);
-  border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:12px;
-  transition:border-color .3s;
-}
+.pain-card{background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.15);border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:12px;transition:border-color .3s;}
 .pain-card:hover{border-color:rgba(255,71,87,.3);}
 .pain-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
 .pain-text{font-size:14px;line-height:1.6;color:var(--muted2);}
 .pain-text strong{color:var(--white);}
-.pain-vs{
-  text-align:center;
-  background:linear-gradient(135deg,rgba(255,92,26,.08),rgba(232,36,154,.05));
-  border:1px solid rgba(255,92,26,.15);border-radius:20px;padding:40px;
-}
+.pain-vs{text-align:center;background:linear-gradient(135deg,rgba(255,92,26,.08),rgba(232,36,154,.05));border:1px solid rgba(255,92,26,.15);border-radius:20px;padding:40px;}
 .vs-num{font-family:'Bebas Neue';font-size:80px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
 .vs-label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;}
 .vs-vs{font-size:20px;color:var(--muted);margin:12px 0;}
 .vs-good{font-size:14px;color:var(--green);font-weight:600;line-height:1.8;}
 
-/* HOW IT WORKS */
+/* HOW */
 .how{padding:100px 5%;max-width:1200px;margin:0 auto;text-align:center;}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;position:relative;}
 .steps::before{content:'';position:absolute;top:40px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,92,26,.3),rgba(232,36,154,.3),transparent);}
 .step{position:relative;}
-.step-num{
-  width:80px;height:80px;border-radius:50%;margin:0 auto 20px;
-  display:flex;align-items:center;justify-content:center;font-size:28px;
-  background:var(--s2);border:1px solid rgba(255,92,26,.2);
-  box-shadow:0 0 30px rgba(255,92,26,.1);
-  transition:all .3s;
-}
+.step-num{width:80px;height:80px;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--s2);border:1px solid rgba(255,92,26,.2);box-shadow:0 0 30px rgba(255,92,26,.1);transition:all .3s;}
 .step:hover .step-num{border-color:rgba(255,92,26,.5);box-shadow:0 0 40px rgba(255,92,26,.25);transform:scale(1.05);}
 .step-title{font-size:15px;font-weight:700;margin-bottom:8px;}
 .step-desc{font-size:13px;color:var(--muted2);line-height:1.6;}
@@ -147,10 +93,7 @@ nav{
 /* FEATURES */
 .features{padding:100px 5%;max-width:1200px;margin:0 auto;}
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px;}
-.feat{
-  background:var(--s1);border:1px solid rgba(255,255,255,.05);
-  border-radius:16px;padding:28px;transition:all .3s;position:relative;overflow:hidden;
-}
+.feat{background:var(--s1);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:28px;transition:all .3s;position:relative;overflow:hidden;}
 .feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .3s;}
 .feat:hover{border-color:rgba(255,92,26,.2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.3);}
 .feat:hover::before{opacity:1;}
@@ -158,18 +101,11 @@ nav{
 .feat-title{font-size:16px;font-weight:700;margin-bottom:8px;}
 .feat-desc{font-size:13px;color:var(--muted2);line-height:1.7;}
 
-/* FUNNEL VISUAL */
+/* FUNNEL */
 .funnel-sec{padding:100px 5%;max-width:1200px;margin:0 auto;}
-.funnel-visual{
-  background:var(--s1);border:1px solid rgba(255,255,255,.05);border-radius:24px;
-  padding:50px;margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
-}
+.funnel-visual{background:var(--s1);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:50px;margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
 .funnel-stages{display:flex;flex-direction:column;gap:8px;}
-.fs{
-  display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:10px;
-  background:var(--s2);border:1px solid rgba(255,255,255,.04);
-  transition:border-color .3s;cursor:default;
-}
+.fs{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:10px;background:var(--s2);border:1px solid rgba(255,255,255,.04);transition:border-color .3s;}
 .fs:hover{border-color:rgba(255,92,26,.25);}
 .fs-icon{font-size:18px;width:28px;text-align:center;}
 .fs-label{font-size:13px;font-weight:600;flex:1;}
@@ -182,44 +118,78 @@ nav{
 .funnel-label{font-size:14px;color:var(--muted2);margin-bottom:24px;}
 .funnel-tag{display:inline-block;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:var(--green);padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;}
 
-/* PRICING */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PRICING — IMPLEMENTAÇÃO + MENSALIDADE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .pricing{padding:100px 5%;max-width:1200px;margin:0 auto;text-align:center;}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;max-width:1000px;margin-left:auto;margin-right:auto;}
-.price-card{
-  background:var(--s1);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:36px 28px;
-  position:relative;transition:all .3s;
+
+/* TABS DE PERÍODO */
+.plan-tabs{display:inline-flex;gap:6px;background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:5px;margin-bottom:50px;}
+.ptab{padding:9px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted2);transition:all .2s;position:relative;}
+.ptab.active{background:var(--grad);color:white;box-shadow:0 4px 16px rgba(255,92,26,.3);}
+.ptab .disc{position:absolute;top:-10px;right:-8px;background:var(--green);color:#000;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px;letter-spacing:.5px;}
+
+/* IMPLEMENTAÇÃO CALLOUT */
+.impl-callout{
+  background:linear-gradient(135deg,rgba(255,92,26,.06),rgba(232,36,154,.04));
+  border:1px solid rgba(255,92,26,.2);border-radius:20px;
+  padding:32px 40px;margin-bottom:40px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+  text-align:left;max-width:1000px;margin-left:auto;margin-right:auto;
 }
+.impl-left{}
+.impl-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);background:rgba(255,92,26,.1);border:1px solid rgba(255,92,26,.2);border-radius:20px;padding:4px 12px;margin-bottom:12px;}
+.impl-title{font-family:'Bebas Neue';font-size:36px;letter-spacing:1px;line-height:1;margin-bottom:8px;}
+.impl-sub{font-size:13px;color:var(--muted2);line-height:1.7;}
+.impl-right{display:flex;flex-direction:column;gap:12px;}
+.impl-card{background:var(--s2);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;}
+.impl-card.destaque{background:linear-gradient(135deg,rgba(255,92,26,.1),rgba(232,36,154,.06));border-color:rgba(255,92,26,.25);}
+.impl-ico{font-size:28px;flex-shrink:0;}
+.impl-info{}
+.impl-plan-name{font-size:13px;font-weight:700;margin-bottom:2px;}
+.impl-prazo{font-size:11px;color:var(--muted2);margin-bottom:6px;}
+.impl-price{display:flex;align-items:baseline;gap:6px;}
+.impl-val{font-family:'Bebas Neue';font-size:28px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.impl-parc{font-size:11px;color:var(--green);}
+
+/* PRICE GRID */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto;}
+.price-card{background:var(--s1);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:34px 26px;position:relative;transition:all .3s;}
 .price-card:hover{transform:translateY(-6px);border-color:rgba(255,92,26,.25);box-shadow:0 30px 60px rgba(0,0,0,.3);}
-.price-card.featured{
-  background:linear-gradient(135deg,rgba(255,92,26,.12),rgba(232,36,154,.08));
-  border-color:rgba(255,92,26,.35);
-  box-shadow:0 0 60px rgba(255,92,26,.12);
-}
-.featured-badge{
-  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-  background:var(--grad);color:white;font-size:11px;font-weight:700;
-  padding:4px 16px;border-radius:100px;letter-spacing:1px;white-space:nowrap;
-}
-.price-name{font-size:13px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
-.price-val{font-family:'Bebas Neue';font-size:60px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.price-period{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.price-card.featured{background:linear-gradient(135deg,rgba(255,92,26,.12),rgba(232,36,154,.08));border-color:rgba(255,92,26,.35);box-shadow:0 0 60px rgba(255,92,26,.12);}
+.featured-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--grad);color:white;font-size:11px;font-weight:700;padding:4px 16px;border-radius:100px;letter-spacing:1px;white-space:nowrap;}
+.price-name{font-size:13px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;}
+.price-old{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:4px;min-height:20px;}
+.price-val{font-family:'Bebas Neue';font-size:58px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.price-period{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.price-economy{font-size:12px;font-weight:700;color:var(--green);margin-bottom:20px;min-height:20px;}
+.price-divider{height:1px;background:rgba(255,255,255,.06);margin-bottom:20px;}
 .price-features{list-style:none;margin-bottom:28px;text-align:left;}
-.price-features li{padding:8px 0;font-size:13px;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:8px;}
+.price-features li{padding:7px 0;font-size:13px;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:8px;}
 .price-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
-.price-note{font-size:11px;color:var(--muted);margin-top:12px;}
+.price-features li.no::before{content:'✗';color:var(--muted);}
+.price-features li.no{opacity:.5;}
+.price-note{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5;}
 .btn-price{width:100%;padding:13px;border-radius:10px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;}
 .bp-main{background:var(--grad);color:white;box-shadow:0 4px 20px rgba(255,92,26,.3);}
 .bp-main:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,92,26,.5);}
 .bp-ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15);}
 .bp-ghost:hover{background:rgba(255,255,255,.05);}
 
+/* FIDELIDADE INFO */
+.fidelidade-info{
+  margin-top:40px;max-width:720px;margin-left:auto;margin-right:auto;
+  background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px 28px;
+  display:flex;gap:20px;align-items:flex-start;text-align:left;
+}
+.fi-icon{font-size:28px;flex-shrink:0;}
+.fi-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.fi-desc{font-size:13px;color:var(--muted2);line-height:1.6;}
+
 /* TESTIMONIALS */
 .testi{padding:100px 5%;max-width:1200px;margin:0 auto;}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;}
-.testi-card{
-  background:var(--s1);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:28px;
-  transition:border-color .3s;
-}
+.testi-card{background:var(--s1);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:28px;transition:border-color .3s;}
 .testi-card:hover{border-color:rgba(255,92,26,.2);}
 .stars{color:var(--orange);font-size:16px;margin-bottom:14px;letter-spacing:2px;}
 .testi-text{font-size:14px;color:var(--muted2);line-height:1.75;margin-bottom:20px;font-style:italic;}
@@ -231,21 +201,15 @@ nav{
 /* FAQ */
 .faq{padding:100px 5%;max-width:800px;margin:0 auto;}
 .faq-item{border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden;}
-.faq-q{
-  padding:20px 0;font-size:15px;font-weight:600;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;
-  transition:color .2s;
-}
+.faq-q{padding:20px 0;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s;}
 .faq-q:hover{color:var(--orange);}
 .faq-arrow{font-size:12px;color:var(--muted);transition:transform .3s;}
 .faq-item.open .faq-arrow{transform:rotate(180deg);}
 .faq-a{font-size:14px;color:var(--muted2);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;}
-.faq-item.open .faq-a{max-height:300px;padding-bottom:20px;}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:20px;}
 
 /* CTA */
-.cta-section{
-  padding:120px 5%;text-align:center;position:relative;overflow:hidden;
-}
+.cta-section{padding:120px 5%;text-align:center;position:relative;overflow:hidden;}
 .cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(255,92,26,.1),transparent 70%);pointer-events:none;}
 .cta-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
 .cta-title{font-family:'Bebas Neue';font-size:clamp(48px,8vw,90px);line-height:.95;letter-spacing:1px;margin-bottom:20px;}
@@ -254,15 +218,7 @@ nav{
 .cta-guarantee span{color:var(--green);}
 
 /* WA FLOAT */
-.wa-float{
-  position:fixed;bottom:28px;right:28px;z-index:200;
-  width:58px;height:58px;border-radius:50%;
-  background:linear-gradient(135deg,#25d366,#128c7e);
-  display:flex;align-items:center;justify-content:center;font-size:26px;
-  box-shadow:0 6px 24px rgba(37,211,102,.4);
-  animation:waFloat 3s ease-in-out infinite;text-decoration:none;
-  transition:transform .2s;
-}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:200;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 24px rgba(37,211,102,.4);animation:waFloat 3s ease-in-out infinite;text-decoration:none;transition:transform .2s;}
 .wa-float:hover{transform:scale(1.1);}
 @keyframes waFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
 
@@ -273,16 +229,17 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .pain-grid,.funnel-visual,.price-grid{grid-template-columns:1fr;}
+  .pain-grid,.funnel-visual,.price-grid,.impl-callout{grid-template-columns:1fr;}
   .steps{grid-template-columns:repeat(2,1fr);}
   .feat-grid,.testi-grid{grid-template-columns:1fr;}
   .steps::before{display:none;}
   .nav-links{display:none;}
-  .pain-vs{margin-top:30px;}
+  .plan-tabs{flex-wrap:wrap;justify-content:center;}
 }
 @media(max-width:600px){
   .steps{grid-template-columns:1fr;}
   .hero-btns{flex-direction:column;align-items:center;}
+  .fidelidade-info{flex-direction:column;}
 }
 
 /* SCROLL REVEAL */
@@ -301,24 +258,24 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
     <a href="#precos">Preços</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a href="#precos" class="nav-cta">Quero contratar →</a>
+  <a class="nav-cta" href="#" onclick="openWA();return false;">📱 Falar com a Pulsar</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"><div class="hb hb1"></div><div class="hb hb2"></div><div class="hb hb3"></div></div>
   <div class="hero-inner">
-    <div class="hero-badge"><span class="badge-dot"></span> Powered by Inteligência Artificial</div>
+    <div class="hero-badge"><div class="badge-dot"></div>Agente de IA para vendas no WhatsApp</div>
     <h1>
       SEU VENDEDOR<br>
       <span class="h1-fire">QUE NUNCA DORME</span>
     </h1>
     <p class="hero-sub">
-      Um <strong>Agente SDR com IA</strong> que responde seus leads no WhatsApp em segundos, qualifica, identifica o momento de compra e entrega apenas <strong>clientes prontos para fechar</strong> — 24 horas por dia, 7 dias por semana.
+      Um agente de IA treinado com o seu negócio que <strong>responde leads no WhatsApp 24h/dia</strong>, qualifica a intenção de compra e entrega ao vendedor apenas os leads prontos para fechar.
     </p>
     <div class="hero-btns">
-      <a href="#precos" class="btn-hero btn-main">🚀 Quero meu Agente SDR</a>
-      <a href="#como-funciona" class="btn-hero btn-sec">▶ Ver como funciona</a>
+      <a href="#" class="btn-hero btn-main" onclick="openWA();return false;">📱 Quero meu agente SDR</a>
+      <a href="#precos" class="btn-hero btn-sec">Ver planos →</a>
     </div>
   </div>
 </section>
@@ -326,66 +283,49 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-inner">
-    <span class="ticker-item"><span>🏥</span> Clínicas Médicas</span>
-    <span class="ticker-item"><span>🍕</span> Restaurantes</span>
-    <span class="ticker-item"><span>💪</span> Academias</span>
-    <span class="ticker-item"><span>⚖️</span> Escritórios de Advocacia</span>
-    <span class="ticker-item"><span>🏠</span> Imobiliárias</span>
-    <span class="ticker-item"><span>💇</span> Salões de Beleza</span>
-    <span class="ticker-item"><span>🐾</span> Pet Shops</span>
-    <span class="ticker-item"><span>🎓</span> Escolas e Cursos</span>
-    <span class="ticker-item"><span>🔧</span> Assistência Técnica</span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item"><span>🏥</span> Clínicas Médicas</span>
-    <span class="ticker-item"><span>🍕</span> Restaurantes</span>
-    <span class="ticker-item"><span>💪</span> Academias</span>
-    <span class="ticker-item"><span>⚖️</span> Escritórios de Advocacia</span>
-    <span class="ticker-item"><span>🏠</span> Imobiliárias</span>
-    <span class="ticker-item"><span>💇</span> Salões de Beleza</span>
-    <span class="ticker-item"><span>🐾</span> Pet Shops</span>
-    <span class="ticker-item"><span>🎓</span> Escolas e Cursos</span>
+    <div class="ticker-item"><span>🏥</span>Clínicas Estéticas</div>
+    <div class="ticker-item"><span>🍕</span>Restaurantes</div>
+    <div class="ticker-item"><span>💪</span>Academias</div>
+    <div class="ticker-item"><span>⚖️</span>Advocacia</div>
+    <div class="ticker-item"><span>🏠</span>Imobiliárias</div>
+    <div class="ticker-item"><span>💇</span>Salões de Beleza</div>
+    <div class="ticker-item"><span>🦷</span>Odontologia</div>
+    <div class="ticker-item"><span>📚</span>Cursos e Educação</div>
+    <div class="ticker-item"><span>🏥</span>Clínicas Estéticas</div>
+    <div class="ticker-item"><span>🍕</span>Restaurantes</div>
+    <div class="ticker-item"><span>💪</span>Academias</div>
+    <div class="ticker-item"><span>⚖️</span>Advocacia</div>
+    <div class="ticker-item"><span>🏠</span>Imobiliárias</div>
+    <div class="ticker-item"><span>💇</span>Salões de Beleza</div>
+    <div class="ticker-item"><span>🦷</span>Odontologia</div>
+    <div class="ticker-item"><span>📚</span>Cursos e Educação</div>
   </div>
 </div>
 
 <!-- PAIN SECTION -->
-<section class="pain" id="problema">
-  <div class="reveal">
-    <div class="sec-label">O problema real</div>
-    <h2 class="sec-title">QUANTO CUSTA<br>NÃO TER UM SDR?</h2>
-    <p class="sec-desc">A maioria das empresas locais perde vendas todo dia porque não consegue responder leads rápido o suficiente.</p>
-  </div>
+<section class="pain">
   <div class="pain-grid">
-    <div class="pain-cards reveal">
-      <div class="pain-card">
-        <div class="pain-icon">😴</div>
-        <div class="pain-text"><strong>Lead chega à noite ou no fim de semana</strong> — ninguém responde, ele vai para o concorrente que atendeu primeiro.</div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">💸</div>
-        <div class="pain-text"><strong>Vendedor caro gastando tempo qualificando</strong> — horas perdidas com leads frios que nunca vão comprar.</div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">😤</div>
-        <div class="pain-text"><strong>Rotatividade de vendedores</strong> — treinamento, salário, encargos, e aí ele sai. Recomeça tudo do zero.</div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">📉</div>
-        <div class="pain-text"><strong>Conversão baixa</strong> — sem follow-up consistente, sem funil definido, os leads esfriam e somem.</div>
+    <div>
+      <div class="sec-label">O problema</div>
+      <h2 class="sec-title">VOCÊ PERDE LEAD<br>TODA NOITE</h2>
+      <div class="sec-desc" style="margin-bottom:30px;">Enquanto você dorme, curte o final de semana ou atende outro cliente, leads qualificados ficam sem resposta — e vão para o concorrente.</div>
+      <div class="pain-cards">
+        <div class="pain-card"><div class="pain-icon">😴</div><div class="pain-text"><strong>95% dos leads</strong> esperam resposta em até 5 minutos. Depois disso, o interesse cai drasticamente.</div></div>
+        <div class="pain-card"><div class="pain-icon">💸</div><div class="pain-text">Você gasta em <strong>tráfego pago</strong> para atrair leads e depois não consegue atender todos na hora certa.</div></div>
+        <div class="pain-card"><div class="pain-icon">🔄</div><div class="pain-text">Sua equipe de vendas passa horas <strong>qualificando leads frios</strong> em vez de focar em quem realmente quer comprar.</div></div>
+        <div class="pain-card"><div class="pain-icon">🌙</div><div class="pain-text">Leads chegam às 22h, sábado, feriado. <strong>Ninguém responde</strong> — e eles vão para o Google pesquisar o concorrente.</div></div>
       </div>
     </div>
-    <div class="pain-vs reveal">
-      <div class="vs-num">R$4.800</div>
-      <div class="vs-label">Custo médio de um SDR/mês</div>
-      <div class="vs-vs">VS</div>
-      <div style="font-family:'Bebas Neue';font-size:52px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">A PARTIR DE<br>R$999</div>
-      <div class="vs-label">Agente SDR IA — 24/7</div>
-      <div style="height:1px;background:rgba(255,255,255,.07);margin:20px 0;"></div>
+    <div class="pain-vs">
+      <div class="vs-num">23h</div>
+      <div class="vs-label">Lead chegou no WhatsApp</div>
+      <div style="font-size:14px;color:#f87171;margin-bottom:8px;">❌ Sem o agente: sem resposta até manhã</div>
+      <div class="vs-vs">vs</div>
       <div class="vs-good">
-        ✅ Responde em segundos, não horas<br>
-        ✅ Disponível 24h/dia, 7 dias/semana<br>
-        ✅ Nunca pede aumento ou sai<br>
-        ✅ Escala sem custo extra<br>
-        ✅ Treinável para qualquer nicho
+        ✅ Com o agente: resposta em 3 segundos<br>
+        ✅ Lead qualificado durante a noite<br>
+        ✅ Você acorda com leads quentes esperando<br>
+        ✅ Sua concorrência não tem isso
       </div>
     </div>
   </div>
@@ -396,7 +336,7 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
   <div class="reveal">
     <div class="sec-label">O processo</div>
     <h2 class="sec-title">COMO FUNCIONA</h2>
-    <p style="font-size:16px;color:var(--muted2);max-width:560px;margin:0 auto;">Do lead frio ao cliente quente — tudo automático, sem você precisar fazer nada.</p>
+    <p style="font-size:16px;color:var(--muted2);max-width:560px;margin:0 auto;">Do lead frio ao cliente quente — tudo automático.</p>
   </div>
   <div class="steps">
     <div class="step reveal">
@@ -412,12 +352,12 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
     <div class="step reveal" style="transition-delay:.2s;">
       <div class="step-num">🔥</div>
       <div class="step-title">Score de qualificação</div>
-      <div class="step-desc">O agente mede a intenção de compra. Quando o lead está quente, você recebe uma notificação.</div>
+      <div class="step-desc">O agente mede a intenção de compra. Quando o lead está quente, você é notificado imediatamente.</div>
     </div>
     <div class="step reveal" style="transition-delay:.3s;">
       <div class="step-num">🤝</div>
       <div class="step-title">Você só fecha a venda</div>
-      <div class="step-desc">Receba apenas leads prontos. Você entra para negociar e fechar — a parte mais lucrativa.</div>
+      <div class="step-desc">Receba apenas leads prontos para comprar. Você entra para negociar — a parte mais lucrativa.</div>
     </div>
   </div>
 </section>
@@ -429,36 +369,12 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
     <h2 class="sec-title">TUDO QUE VOCÊ PRECISA</h2>
   </div>
   <div class="feat-grid">
-    <div class="feat reveal">
-      <div class="feat-icon">🧠</div>
-      <div class="feat-title">IA Treinável por Nicho</div>
-      <div class="feat-desc">Configure o agente com os serviços, objeções e linguagem do seu negócio. Ele fala como um especialista do seu setor.</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.05s;">
-      <div class="feat-icon">🗺️</div>
-      <div class="feat-title">Detecção da Jornada de Compra</div>
-      <div class="feat-desc">O agente identifica em qual etapa o lead está — Consciência, Interesse, Consideração ou Decisão — e age de forma diferente em cada uma.</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.1s;">
-      <div class="feat-icon">📊</div>
-      <div class="feat-title">Score de Qualificação</div>
-      <div class="feat-desc">Cada lead recebe uma pontuação de 0 a 100%. Você é notificado automaticamente quando o score supera o limite que você definiu.</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.15s;">
-      <div class="feat-icon">📱</div>
-      <div class="feat-title">Integração WhatsApp 24/7</div>
-      <div class="feat-desc">Conectado via WhatsApp Business API. Responde automaticamente, sem limites de horário, sem dias de folga.</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.2s;">
-      <div class="feat-icon">🏪</div>
-      <div class="feat-title">Multi-Nicho e Multi-Cliente</div>
-      <div class="feat-desc">Um painel para gerenciar vários negócios. Cada cliente tem seu agente configurado de forma independente.</div>
-    </div>
-    <div class="feat reveal" style="transition-delay:.25s;">
-      <div class="feat-icon">💰</div>
-      <div class="feat-title">Dashboard com ROI em Tempo Real</div>
-      <div class="feat-desc">Acompanhe leads gerados, taxa de conversão, leads quentes e receita atribuída ao agente SDR.</div>
-    </div>
+    <div class="feat reveal"><div class="feat-icon">🧠</div><div class="feat-title">IA Treinada no Seu Negócio</div><div class="feat-desc">Configuramos o agente com os seus serviços, objeções e linguagem. Ele fala como um especialista do seu setor.</div></div>
+    <div class="feat reveal" style="transition-delay:.05s;"><div class="feat-icon">🗺️</div><div class="feat-title">Detecção da Jornada de Compra</div><div class="feat-desc">O agente identifica em qual etapa o lead está — Consciência, Interesse, Consideração ou Decisão — e age de forma diferente em cada uma.</div></div>
+    <div class="feat reveal" style="transition-delay:.1s;"><div class="feat-icon">📊</div><div class="feat-title">Score de Qualificação 0–100%</div><div class="feat-desc">Cada lead recebe uma pontuação em tempo real. Você é notificado no WhatsApp quando o score supera o limite definido.</div></div>
+    <div class="feat reveal" style="transition-delay:.15s;"><div class="feat-icon">⚡</div><div class="feat-title">Integração Zapi + n8n</div><div class="feat-desc">Conectado via Zapi ao WhatsApp Business. Responde automaticamente 24h/dia, com memória de contexto da conversa.</div></div>
+    <div class="feat reveal" style="transition-delay:.2s;"><div class="feat-icon">🏪</div><div class="feat-title">Multi-Nicho e Multi-Cliente</div><div class="feat-desc">Para agências: gerencie vários clientes num painel. Cada negócio tem seu agente configurado de forma independente.</div></div>
+    <div class="feat reveal" style="transition-delay:.25s;"><div class="feat-icon">💰</div><div class="feat-title">Dashboard com ROI</div><div class="feat-desc">Acompanhe leads gerados, taxa de conversão e leads quentes. Veja o retorno real que o agente está gerando.</div></div>
   </div>
 </section>
 
@@ -487,63 +403,137 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PRICING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <section class="pricing" id="precos">
   <div class="reveal">
     <div class="sec-label">Investimento</div>
     <h2 class="sec-title">ESCOLHA SEU PLANO</h2>
-    <p style="font-size:15px;color:var(--muted2);">Setup incluso. Sem fidelidade. Cancele quando quiser.</p>
+    <p style="font-size:15px;color:var(--muted2);margin-bottom:36px;">Planos mensais ou com fidelidade de 3, 6 e 12 meses — quanto maior o período, maior o desconto.</p>
   </div>
-  <div class="price-grid">
-    <div class="price-card reveal">
-      <div class="price-name">Starter</div>
-      <div class="price-val">R$999</div>
+
+  <!-- PERÍODO TABS -->
+  <div class="plan-tabs reveal">
+    <div class="ptab active" onclick="setPeriod('mensal',this)">Mensal</div>
+    <div class="ptab" onclick="setPeriod('trim',this)">3 meses<div class="disc">5% OFF</div></div>
+    <div class="ptab" onclick="setPeriod('sem',this)">6 meses<div class="disc">10% OFF</div></div>
+    <div class="ptab" onclick="setPeriod('anual',this)">12 meses<div class="disc">15% OFF</div></div>
+  </div>
+
+  <!-- IMPLEMENTAÇÃO CALLOUT -->
+  <div class="impl-callout reveal">
+    <div class="impl-left">
+      <div class="impl-badge">🛠️ Taxa única de implementação</div>
+      <div class="impl-title">SETUP PROFISSIONAL<br>DO SEU AGENTE</div>
+      <div class="impl-sub">Nossa equipe configura tudo para você: integração com WhatsApp via Zapi, treinamento do agente com o briefing do seu negócio, fluxo no n8n, testes e ajustes. Você não precisa fazer nada técnico.<br><br>
+        <strong style="color:var(--white);">Prazo:</strong> 15 a 30 dias corridos após a assinatura.<br>
+        <strong style="color:var(--green);">Parcelamento:</strong> em até 12x sem juros no cartão.</div>
+    </div>
+    <div class="impl-right">
+      <div class="impl-card">
+        <div class="impl-ico">🚀</div>
+        <div class="impl-info">
+          <div class="impl-plan-name">Plano Básico</div>
+          <div class="impl-prazo">⏱️ Implementação em até 15 dias</div>
+          <div class="impl-price">
+            <div class="impl-val">R$1.500</div>
+            <div class="impl-parc">ou 12x R$125 sem juros</div>
+          </div>
+        </div>
+      </div>
+      <div class="impl-card destaque">
+        <div class="impl-ico">⚡</div>
+        <div class="impl-info">
+          <div class="impl-plan-name">Plano Pro / Premium</div>
+          <div class="impl-prazo">⏱️ Implementação em até 30 dias</div>
+          <div class="impl-price">
+            <div class="impl-val">R$3.000</div>
+            <div class="impl-parc">ou 12x R$250 sem juros</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE CARDS -->
+  <div class="price-grid reveal">
+
+    <!-- BÁSICO -->
+    <div class="price-card">
+      <div class="price-name">Básico</div>
+      <div class="price-old" id="old-basico"></div>
+      <div class="price-val" id="val-basico">R$999</div>
       <div class="price-period">/mês</div>
+      <div class="price-economy" id="eco-basico"></div>
+      <div class="price-divider"></div>
       <ul class="price-features">
         <li>1 número de WhatsApp</li>
         <li>1 nicho configurado</li>
         <li>Até 500 conversas/mês</li>
         <li>Painel de leads básico</li>
-        <li>Suporte por e-mail</li>
         <li>Score de qualificação</li>
+        <li>Suporte por WhatsApp</li>
+        <li class="no">Conversas ilimitadas</li>
+        <li class="no">Multi-nicho</li>
       </ul>
       <button class="btn-price bp-ghost" onclick="openWA()">Começar agora</button>
-      <div class="price-note">Ideal para testar e validar</div>
+      <div class="price-note" id="fidel-basico">Fidelidade: sem contrato mínimo</div>
     </div>
-    <div class="price-card featured reveal" style="transition-delay:.1s;">
+
+    <!-- PRO (destaque) -->
+    <div class="price-card featured">
       <div class="featured-badge">⭐ MAIS POPULAR</div>
       <div class="price-name">Pro</div>
-      <div class="price-val">R$1.299</div>
+      <div class="price-old" id="old-pro"></div>
+      <div class="price-val" id="val-pro">R$1.299</div>
       <div class="price-period">/mês</div>
+      <div class="price-economy" id="eco-pro"></div>
+      <div class="price-divider"></div>
       <ul class="price-features">
         <li>1 número de WhatsApp</li>
         <li>Até 3 nichos configurados</li>
         <li>Conversas ilimitadas</li>
         <li>Painel completo + funil</li>
+        <li>Score + alertas de lead quente</li>
         <li>Suporte prioritário WhatsApp</li>
         <li>Treinamento da IA incluso</li>
-        <li>Alertas de lead quente</li>
-        <li>Relatórios mensais</li>
+        <li>Relatórios mensais de desempenho</li>
       </ul>
       <button class="btn-price bp-main" onclick="openWA()">🚀 Quero o Pro</button>
-      <div class="price-note" style="color:var(--green);">Retorno em até 30 dias ou devolvemos</div>
+      <div class="price-note" style="color:var(--green);" id="fidel-pro">Retorno em até 30 dias ou devolvemos</div>
     </div>
-    <div class="price-card reveal" style="transition-delay:.2s;">
+
+    <!-- PREMIUM -->
+    <div class="price-card">
       <div class="price-name">Premium</div>
-      <div class="price-val">R$1.499</div>
+      <div class="price-old" id="old-premium"></div>
+      <div class="price-val" id="val-premium">R$1.499</div>
       <div class="price-period">/mês</div>
+      <div class="price-economy" id="eco-premium"></div>
+      <div class="price-divider"></div>
       <ul class="price-features">
         <li>2 números de WhatsApp</li>
         <li>Nichos ilimitados</li>
         <li>Conversas ilimitadas</li>
         <li>Painel multi-cliente</li>
         <li>Suporte VIP 24/7</li>
-        <li>Consultoria de setup inclusa</li>
-        <li>Integrações CRM</li>
+        <li>Consultoria de estratégia mensal</li>
+        <li>Integrações CRM sob medida</li>
         <li>IA personalizada avançada</li>
       </ul>
       <button class="btn-price bp-ghost" onclick="openWA()">Falar com consultor</button>
-      <div class="price-note">Para múltiplos negócios</div>
+      <div class="price-note" id="fidel-premium">Para múltiplos negócios</div>
+    </div>
+
+  </div>
+
+  <!-- FIDELIDADE INFO -->
+  <div class="fidelidade-info reveal">
+    <div class="fi-icon">📋</div>
+    <div>
+      <div class="fi-title">Como funcionam os planos com fidelidade?</div>
+      <div class="fi-desc">Ao escolher um plano de 3, 6 ou 12 meses, você paga a mensalidade com desconto durante todo o período contratado. Ao final do período, o plano renova automaticamente no valor mensal cheio — ou você pode escolher renovar com fidelidade para manter o desconto. <strong style="color:var(--white);">Cancelamentos antecipados estão sujeitos a multa proporcional ao período restante.</strong></div>
     </div>
   </div>
 </section>
@@ -565,7 +555,7 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
     </div>
     <div class="testi-card reveal" style="transition-delay:.1s;">
       <div class="stars">★★★★★</div>
-      <div class="testi-text">"Meu restaurante recebia leads pelo Instagram e eu não conseguia responder a tempo. Com o SDR, o retorno em cima do que eu investia já pagou os próximos 6 meses."</div>
+      <div class="testi-text">"Meu restaurante recebia leads pelo Instagram e eu não conseguia responder a tempo. Com o SDR, o retorno em cima do que eu investia já pagou o semestre inteiro."</div>
       <div class="testi-author">
         <div class="ta-ava" style="background:rgba(56,182,255,.15);">👨‍🍳</div>
         <div><div class="ta-name">Pedro Carvalho</div><div class="ta-biz">Restaurante Sabor & Arte — RJ</div></div>
@@ -591,27 +581,35 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
   <div class="reveal">
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Preciso saber programar para usar? <span class="faq-arrow">▼</span></div>
-      <div class="faq-a">Não. Você preenche as informações do seu negócio numa tela simples e nós cuidamos de tudo. O setup é feito pela nossa equipe e você começa a receber leads qualificados em menos de 48 horas.</div>
+      <div class="faq-a">Não. Você preenche o briefing do seu negócio e nossa equipe cuida de tudo: configuração, integração com WhatsApp via Zapi, criação do fluxo no n8n e treinamento do agente. O setup leva de 15 a 30 dias e você começa a receber leads qualificados automaticamente.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">O agente realmente responde pelo WhatsApp? <span class="faq-arrow">▼</span></div>
-      <div class="faq-a">Sim. O agente responde mensagens reais no WhatsApp Business, 24 horas por dia. O lead conversa normalmente — ele não sabe que está falando com uma IA, a não ser que você queira deixar claro isso.</div>
+      <div class="faq-a">Sim. O agente responde mensagens reais no WhatsApp Business 24 horas por dia via Zapi. O lead conversa normalmente — a IA lembra do histórico da conversa e nunca repete perguntas já feitas.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Como o agente sabe quando o lead está pronto? <span class="faq-arrow">▼</span></div>
-      <div class="faq-a">O sistema calcula um Score de 0 a 100% baseado em sinais como: intenção expressa, disponibilidade de horário, perguntas sobre preço ou serviços específicos. Quando o score supera o limite que você definiu, você recebe uma notificação no WhatsApp.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">Qual é o custo de implementação? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">A taxa de implementação é única: R$1.500 para o plano Básico (setup em até 15 dias) e R$3.000 para os planos Pro e Premium (setup em até 30 dias). Pode ser parcelada em até 12x sem juros no cartão. Esta taxa cobre toda a configuração técnica, treinamento do agente e testes antes do lançamento.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Como funcionam os planos com fidelidade? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Ao escolher fidelidade de 3, 6 ou 12 meses, você paga a mensalidade com desconto (5%, 10% ou 15%) durante todo o período. No plano mensal, você pode cancelar a qualquer momento sem multa. Nos planos com fidelidade, cancelamentos antecipados estão sujeitos a multa proporcional ao período restante.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Como o agente sabe quando o lead está pronto para comprar? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">O sistema calcula um Score de 0 a 100% baseado em sinais como intenção expressa, disponibilidade de horário e perguntas específicas sobre preço ou serviços. Quando o score supera o limite definido, você recebe uma notificação imediata no WhatsApp com o histórico da conversa.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">E se o agente errar uma resposta? <span class="faq-arrow">▼</span></div>
-      <div class="faq-a">O agente é treinado especificamente para o seu negócio e tem instruções claras para nunca dar informações erradas de preço ou produto. Se surgir algo fora do escopo, ele direciona para a equipe humana de forma natural.</div>
+      <div class="faq-a">O agente é treinado especificamente com as informações do seu negócio e tem instruções claras para nunca inventar preços ou informações incorretas. Se surgir algo fora do escopo treinado, ele direciona para a equipe humana de forma natural e transparente.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Funciona para qualquer tipo de negócio local? <span class="faq-arrow">▼</span></div>
-      <div class="faq-a">Sim. Temos templates prontos para clínicas, restaurantes, academias, salões, imobiliárias, escritórios de advocacia, pet shops, escolas, assistência técnica e muito mais. Se o seu nicho não está na lista, criamos um template personalizado para você.</div>
+      <div class="faq-a">Sim. Temos templates prontos para clínicas, restaurantes, academias, salões, imobiliárias, escritórios de advocacia, pet shops, escolas e muito mais. Se o seu nicho não está na lista, criamos um template personalizado incluído na implementação.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Tem fidelidade ou contrato mínimo? <span class="faq-arrow">▼</span></div>
-      <div class="faq-a">Não existe fidelidade. Você pode cancelar a qualquer momento. Mas honestamente: ninguém cancela depois de ver os resultados nos primeiros 30 dias.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">O plano mensal tem fidelidade? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">O plano mensal não tem fidelidade — você pode cancelar a qualquer momento, sem multa, com aviso de 30 dias. Para quem quer garantir desconto e estabilidade, recomendamos os planos de 6 ou 12 meses.</div>
     </div>
   </div>
 </section>
@@ -621,11 +619,13 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
   <div class="cta-bg"></div>
   <div class="cta-inner reveal">
     <h2 class="cta-title">PRONTO PARA PARAR<br>DE <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">PERDER LEADS?</span></h2>
-    <p class="cta-sub">Configure seu Agente SDR agora e comece a receber leads qualificados ainda essa semana. Sem complicação, sem código.</p>
+    <p class="cta-sub">Configure seu Agente SDR e comece a receber leads qualificados automaticamente. Nossa equipe cuida de tudo do início ao fim.</p>
     <a href="#" class="btn-hero btn-main" onclick="openWA();return false;" style="font-size:16px;padding:18px 44px;">
       📱 Falar com a Pulsar Marketing
     </a>
-    <div class="cta-guarantee"><span>✅ Setup em até 48h</span> · <span>✅ Sem fidelidade</span> · <span>✅ Suporte incluso</span></div>
+    <div class="cta-guarantee" style="margin-top:20px;">
+      <span>✅ Setup profissional incluso</span> · <span>✅ Planos com e sem fidelidade</span> · <span>✅ Suporte contínuo</span>
+    </div>
   </div>
 </section>
 
@@ -633,43 +633,94 @@ footer{padding:50px 5%;border-top:1px solid rgba(255,255,255,.05);display:flex;a
 <footer>
   <div class="foot-logo">PULSAR SDR</div>
   <div class="foot-copy">© 2025 Pulsar Marketing 360. Todos os direitos reservados.</div>
-  <div style="font-size:12px;color:var(--muted);">Powered by Claude AI · WhatsApp Business API</div>
+  <div style="font-size:12px;color:var(--muted);">Powered by Claude AI · WhatsApp via Zapi</div>
 </footer>
 
 <!-- WA FLOAT -->
 <a class="wa-float" href="#" onclick="openWA();return false;" title="Falar no WhatsApp">📱</a>
 
 <script>
-// FAQ TOGGLE
-function toggleFaq(el){
-  const item=el.parentElement;
-  const isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!isOpen)item.classList.add('open');
+// ──────────────────────────────
+// PRICING LOGIC
+// ──────────────────────────────
+const basePrecos = { basico: 999, pro: 1299, premium: 1499 };
+const descontos = { mensal: 0, trim: 0.05, sem: 0.10, anual: 0.15 };
+const periodLabels = { mensal: 'Sem fidelidade', trim: '3 meses', sem: '6 meses', anual: '12 meses' };
+let currentPeriod = 'mensal';
+
+function setPeriod(p, el) {
+  currentPeriod = p;
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  updatePrices();
 }
 
+function updatePrices() {
+  const disc = descontos[currentPeriod];
+  const label = periodLabels[currentPeriod];
+  ['basico', 'pro', 'premium'].forEach(plan => {
+    const base = basePrecos[plan];
+    const novo = Math.round(base * (1 - disc));
+    const eco = Math.round((base - novo) * (currentPeriod === 'anual' ? 12 : currentPeriod === 'sem' ? 6 : currentPeriod === 'trim' ? 3 : 1));
+
+    document.getElementById('val-' + plan).textContent = 'R$' + novo.toLocaleString('pt-BR');
+    const oldEl = document.getElementById('old-' + plan);
+    const ecoEl = document.getElementById('eco-' + plan);
+    const fidelEl = document.getElementById('fidel-' + plan);
+
+    if (disc > 0) {
+      oldEl.textContent = 'De R$' + base.toLocaleString('pt-BR');
+      ecoEl.textContent = '💰 Economia de R$' + eco.toLocaleString('pt-BR') + ' no período';
+      if (fidelEl && plan !== 'pro') fidelEl.textContent = 'Fidelidade: ' + label;
+    } else {
+      oldEl.textContent = '';
+      ecoEl.textContent = '';
+      if (fidelEl && plan !== 'pro') fidelEl.textContent = 'Sem fidelidade — cancele quando quiser';
+    }
+  });
+}
+
+// ──────────────────────────────
+// FAQ
+// ──────────────────────────────
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ──────────────────────────────
 // WHATSAPP
-function openWA(){
-  const msg=encodeURIComponent('Olá! Vi sobre o Agente SDR com IA da Pulsar Marketing e quero saber mais. Pode me ajudar?');
-  window.open('https://wa.me/5511999999999?text='+msg,'_blank');
+// ──────────────────────────────
+function openWA() {
+  const msg = encodeURIComponent('Olá! Vi sobre o Agente SDR com IA da Pulsar Marketing e quero saber mais. Pode me ajudar?');
+  window.open('https://wa.me/5511999999999?text=' + msg, '_blank');
 }
 
+// ──────────────────────────────
 // SCROLL REVEAL
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+// ──────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// SMOOTH SCROLL NAV
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const id=a.getAttribute('href');
-    if(id==='#')return;
+// ──────────────────────────────
+// SMOOTH SCROLL
+// ──────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
     e.preventDefault();
-    const el=document.querySelector(id);
-    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// Init
+updatePrices();
 </script>
 </body>
 </html>

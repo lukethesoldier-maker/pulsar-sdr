@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing do Agente SDR — Pulsar Marketing 360</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04040c;
+  --s1: #08080f;
+  --s2: #0d0d1a;
+  --card: #0f0f1e;
+  --card2: #131325;
+  --border: #1a1a32;
+  --border2: #242440;
+  --orange: #ff5c1a;
+  --pink: #e8249a;
+  --blue: #38b6ff;
+  --green: #10b981;
+  --white: #eeeefa;
+  --muted: #5a5a7a;
+  --muted2: #8888aa;
+  --grad: linear-gradient(135deg, #ff5c1a, #e8249a);
+  --grad2: linear-gradient(135deg, #e8249a, #38b6ff);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Sora', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(232,36,154,.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,92,26,.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.logo {
+  font-family: 'Bebas Neue';
+  font-size: 13px;
+  letter-spacing: 5px;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.logo::before, .logo::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--grad);
+  opacity: .4;
+}
+.header h1 {
+  font-family: 'Bebas Neue';
+  font-size: clamp(36px, 7vw, 58px);
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.header h1 span {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header p {
+  font-size: 14px;
+  color: var(--muted2);
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Progress */
+.progress-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--border2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--grad);
+  border-radius: 2px;
+  transition: width .5s ease;
+  width: 0%;
+}
+.progress-text {
+  font-size: 12px;
+  color: var(--muted2);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.progress-pct {
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+/* Section */
+.section {
+  margin-bottom: 12px;
+  animation: fadeUp .4s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px 14px 0 0;
+  cursor: pointer;
+  transition: border-color .2s;
+  user-select: none;
+}
+.section-header:hover { border-color: var(--border2); }
+.section-header.open {
+  border-color: rgba(255,92,26,.3);
+  border-bottom-color: transparent;
+  border-radius: 14px 14px 0 0;
+}
+.section-ico {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: rgba(255,92,26,.1);
+  border: 1px solid rgba(255,92,26,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+.section-info { flex: 1; }
+.section-num {
+  font-size: 10px;
+  color: var(--orange);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+.section-sub {
+  font-size: 11px;
+  color: var(--muted2);
+  margin-top: 1px;
+}
+.section-arrow {
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform .3s;
+}
+.section-header.open .section-arrow { transform: rotate(180deg); }
+
+.section-body {
+  background: var(--card);
+  border: 1px solid rgba(255,92,26,.2);
+  border-top: none;
+  border-radius: 0 0 14px 14px;
+  padding: 0 22px 22px;
+  display: none;
+}
+.section-body.open { display: block; }
+
+/* Field */
+.field {
+  margin-top: 20px;
+}
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.field .hint {
+  font-size: 11px;
+  color: var(--muted2);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  color: var(--white);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: rgba(255,92,26,.5);
+  box-shadow: 0 0 0 3px rgba(255,92,26,.06);
+}
+.field input::placeholder, .field textarea::placeholder {
+  color: var(--muted);
+}
+.field select option {
+  background: var(--s2);
+  color: var(--white);
+}
+.field textarea { min-height: 90px; }
+
+/* Checkbox group */
+.check-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s;
+  font-size: 13px;
+  color: var(--muted2);
+}
+.check-item:hover {
+  border-color: rgba(255,92,26,.3);
+  color: var(--white);
+}
+.check-item input[type="checkbox"] { display: none; }
+.check-item.checked {
+  background: rgba(255,92,26,.08);
+  border-color: rgba(255,92,26,.4);
+  color: var(--white);
+}
+.check-box {
+  width: 16px; height: 16px;
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  transition: all .2s;
+}
+.check-item.checked .check-box {
+  background: var(--grad);
+  border-color: transparent;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.radio-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.radio-item:hover { border-color: rgba(255,92,26,.3); }
+.radio-item.selected {
+  background: rgba(255,92,26,.08);
+  border-color: rgba(255,92,26,.4);
+}
+.radio-item input[type="radio"] { display: none; }
+.radio-dot {
+  width: 18px; height: 18px;
+  border: 2px solid var(--border2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.radio-item.selected .radio-dot {
+  border-color: var(--orange);
+}
+.radio-item.selected .radio-dot::after {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+}
+.radio-label { font-size: 13px; font-weight: 600; color: var(--white); }
+.radio-desc { font-size: 11px; color: var(--muted2); margin-top: 2px; }
+
+/* Tag input */
+.tag-wrap {
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 48px;
+  transition: border-color .2s;
+  cursor: text;
+}
+.tag-wrap:focus-within {
+  border-color: rgba(255,92,26,.5);
+}
+.tag {
+  background: rgba(255,92,26,.12);
+  border: 1px solid rgba(255,92,26,.25);
+  border-radius: 6px;
+  padding: 3px 8px 3px 10px;
+  font-size: 12px;
+  color: var(--white);
+  display: flex; align-items: center; gap: 6px;
+}
+.tag-remove {
+  cursor: pointer;
+  color: var(--muted2);
+  font-size: 14px;
+  line-height: 1;
+  transition: color .15s;
+}
+.tag-remove:hover { color: var(--orange); }
+.tag-input {
+  border: none !important;
+  background: transparent !important;
+  padding: 4px 4px !important;
+  min-width: 140px;
+  flex: 1;
+  font-size: 12px !important;
+  box-shadow: none !important;
+}
+
+/* Scale */
+.scale-wrap {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.scale-btn {
+  flex: 1;
+  padding: 10px 4px;
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--muted2);
+  transition: all .2s;
+  font-family: 'Sora', sans-serif;
+}
+.scale-btn:hover { border-color: rgba(255,92,26,.3); color: var(--white); }
+.scale-btn.active {
+  background: rgba(255,92,26,.1);
+  border-color: rgba(255,92,26,.4);
+  color: var(--white);
+  font-weight: 700;
+}
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  padding: 0 2px;
+}
+
+/* Submit */
+.submit-area {
+  margin-top: 36px;
+  text-align: center;
+}
+.submit-note {
+  font-size: 12px;
+  color: var(--muted2);
+  margin-bottom: 20px;
+}
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 48px;
+  background: var(--grad);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Bebas Neue';
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background .2s;
+}
+.btn-submit:hover::before { background: rgba(255,255,255,.08); }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,92,26,.3); }
+.btn-submit:active { transform: translateY(0); }
+
+/* Success */
+.success {
+  display: none;
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--card);
+  border: 1px solid rgba(16,185,129,.2);
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.success.show { display: block; }
+.success-ico { font-size: 52px; margin-bottom: 16px; }
+.success h2 {
+  font-family: 'Bebas Neue';
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.success h2 span { color: var(--green); }
+.success p { font-size: 14px; color: var(--muted2); line-height: 1.7; max-width: 400px; margin: 0 auto; }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 18px 0;
+}
+
+/* Required star */
+.req { color: var(--orange); margin-left: 3px; }
+
+/* Char counter */
+.char-count {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* Section complete badge */
+.section-complete {
+  width: 22px; height: 22px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.section-complete.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">PULSAR MARKETING 360</div>
+    <h1>Briefing do<br><span>Agente SDR</span></h1>
+    <p>Preencha as informações abaixo para configurarmos seu agente de vendas com IA. Quanto mais detalhado, melhor será o atendimento.</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <span class="progress-text">Progresso</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-pct" id="progressPct">0%</span>
+  </div>
+
+  <form id="briefingForm" novalidate>
+
+    <!-- 1. Identificação -->
+    <div class="section" style="animation-delay:.05s">
+      <div class="section-header open" onclick="toggleSection(this)">
+        <div class="section-ico">🏢</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 01</div>
+          <div class="section-title">Identificação do Negócio</div>
+          <div class="section-sub">Dados básicos do seu estabelecimento</div>
+        </div>
+        <div class="section-complete" id="complete-1">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body open">
+        <div class="field">
+          <label>Nome do estabelecimento <span class="req">*</span></label>
+          <div class="hint">Como seus clientes conhecem seu negócio</div>
+          <input type="text" name="nome_negocio" placeholder="Ex: Clínica Bella, Restaurante São Paulo, Academia FitLife" required>
+        </div>
+        <div class="field">
+          <label>Nicho / Segmento <span class="req">*</span></label>
+          <select name="nicho" required>
+            <option value="">Selecione seu segmento...</option>
+            <option>Clínica Estética / Médica</option>
+            <option>Restaurante / Gastronomia</option>
+            <option>Academia / Fitness</option>
+            <option>Advocacia / Jurídico</option>
+            <option>Imobiliária / Corretor</option>
+            <option>Salão de Beleza / Studio</option>
+            <option>Odontologia</option>
+            <option>Psicologia / Terapia</option>
+            <option>Educação / Cursos</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Nome do atendente virtual <span class="req">*</span></label>
+          <div class="hint">A IA vai se apresentar com este nome. Escolha um nome que combine com sua marca.</div>
+          <input type="text" name="nome_atendente" placeholder="Ex: Sofia, Lucas, Ana, Rafael">
+        </div>
+        <div class="field">
+          <label>Cidade e estado</label>
+          <input type="text" name="cidade" placeholder="Ex: São Paulo - SP">
+        </div>
+        <div class="field">
+          <label>Site ou Instagram do negócio</label>
+          <input type="text" name="site" placeholder="Ex: @clinicabella ou clinicabella.com.br">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Serviços -->
+    <div class="section" style="animation-delay:.1s">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-ico">📋</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 02</div>
+          <div class="section-title">Serviços & Produtos</div>
+          <div class="section-sub">O que você oferece e como apresentar</div>
+        </div>
+        <div class="section-complete" id="complete-2">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Liste seus serviços principais <span class="req">*</span></label>
+          <div class="hint">Digite cada serviço e pressione Enter para adicionar. Inclua os mais vendidos e os que deseja promover.</div>
+          <div class="tag-wrap" id="servicos-wrap" onclick="document.getElementById('servicos-input').focus()">
+            <input type="text" id="servicos-input" class="tag-input field" placeholder="Digite um serviço e pressione Enter...">
+          </div>
+          <input type="hidden" name="servicos" id="servicos-value">
+        </div>
+        <div class="field">
+          <label>Qual é o seu serviço/produto mais vendido?</label>
+          <input type="text" name="mais_vendido" placeholder="Ex: Botox, Combo Revitalização, Personal Training">
+        </div>
+        <div class="field">
+          <label>Qual serviço você mais quer vender / promover agora?</label>
+          <input type="text" name="promover" placeholder="Ex: Preenchimento labial — temos promoção este mês">
+        </div>
+        <div class="field">
+          <label>Você pode informar preços pelo WhatsApp?</label>
+          <div class="radio-group">
+            <label class="radio-item" onclick="selectRadio(this)">
+              <input type="radio" name="precos" value="sim">
+              <div class="radio-dot"></div>
+              <div><div class="radio-label">Sim, pode informar</div><div class="radio-desc">O agente informa tabela de preços quando perguntado</div></div>
+            </label>
+            <label class="radio-item" onclick="selectRadio(this)">
+              <input type="radio" name="precos" value="avaliacao">
+              <div class="radio-dot"></div>
+              <div><div class="radio-label">Somente após avaliação</div><div class="radio-desc">Depende do caso — direcionar para avaliação gratuita</div></div>
+            </label>
+            <label class="radio-item" onclick="selectRadio(this)">
+              <input type="radio" name="precos" value="nao">
+              <div class="radio-dot"></div>
+              <div><div class="radio-label">Não informar preços</div><div class="radio-desc">Sempre direcionar para visita ou contato humano</div></div>
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Se puder informar preços, qual é a faixa de valores? (opcional)</label>
+          <input type="text" name="faixa_precos" placeholder="Ex: Botox a partir de R$600 / Consulta R$150">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Público-alvo -->
+    <div class="section" style="animation-delay:.15s">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-ico">🎯</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 03</div>
+          <div class="section-title">Público-Alvo</div>
+          <div class="section-sub">Quem são seus clientes ideais</div>
+        </div>
+        <div class="section-complete" id="complete-3">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Faixa etária predominante dos seus clientes</label>
+          <div class="check-group" id="idade-group">
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="idade" value="18-25"><div class="check-box"></div>18 a 25 anos</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="idade" value="25-35"><div class="check-box"></div>25 a 35 anos</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="idade" value="35-50"><div class="check-box"></div>35 a 50 anos</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="idade" value="50+"><div class="check-box"></div>50 anos ou mais</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Gênero predominante</label>
+          <div class="radio-group">
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="genero" value="feminino"><div class="radio-dot"></div><div><div class="radio-label">Majoritariamente feminino</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="genero" value="masculino"><div class="radio-dot"></div><div><div class="radio-label">Majoritariamente masculino</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="genero" value="misto"><div class="radio-dot"></div><div><div class="radio-label">Misto / Ambos igualmente</div></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Como seu cliente ideal te encontra?</label>
+          <div class="check-group">
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="canal" value="instagram"><div class="check-box"></div>Instagram</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="canal" value="google"><div class="check-box"></div>Google</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="canal" value="indicacao"><div class="check-box"></div>Indicação</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="canal" value="trafego"><div class="check-box"></div>Tráfego pago</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="canal" value="whatsapp"><div class="check-box"></div>WhatsApp direto</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="canal" value="pessoalmente"><div class="check-box"></div>Pessoalmente</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Descreva seu cliente ideal em poucas palavras</label>
+          <div class="hint">Ex: "Mulheres 30-45 anos, classe B/C, preocupadas com aparência, buscam procedimentos seguros e naturais"</div>
+          <textarea name="cliente_ideal" placeholder="Descreva o perfil de quem você mais quer atender..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Tom e Personalidade -->
+    <div class="section" style="animation-delay:.2s">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-ico">🎭</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 04</div>
+          <div class="section-title">Tom & Personalidade do Agente</div>
+          <div class="section-sub">Como o agente deve se comunicar</div>
+        </div>
+        <div class="section-complete" id="complete-4">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Qual tom de comunicação combina com sua marca? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="tom" value="formal"><div class="radio-dot"></div><div><div class="radio-label">🤝 Formal e profissional</div><div class="radio-desc">Ideal para advocacia, medicina, finanças</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="tom" value="acolhedor"><div class="radio-dot"></div><div><div class="radio-label">🌸 Acolhedor e empático</div><div class="radio-desc">Ideal para estética, saúde, bem-estar</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="tom" value="descontraido"><div class="radio-dot"></div><div><div class="radio-label">😄 Descontraído e animado</div><div class="radio-desc">Ideal para salão, academia, restaurante</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="tom" value="consultivo"><div class="radio-dot"></div><div><div class="radio-label">💼 Consultivo e técnico</div><div class="radio-desc">Ideal para imóveis, tecnologia, B2B</div></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Nível de uso de emojis</label>
+          <div class="scale-wrap" id="emoji-scale">
+            <button type="button" class="scale-btn" onclick="selectScale(this,'emoji-scale')">1</button>
+            <button type="button" class="scale-btn" onclick="selectScale(this,'emoji-scale')">2</button>
+            <button type="button" class="scale-btn" onclick="selectScale(this,'emoji-scale')">3</button>
+            <button type="button" class="scale-btn" onclick="selectScale(this,'emoji-scale')">4</button>
+            <button type="button" class="scale-btn" onclick="selectScale(this,'emoji-scale')">5</button>
+          </div>
+          <input type="hidden" name="emojis" id="emoji-scale-value">
+          <div class="scale-labels"><span>Nenhum emoji</span><span>Muitos emojis</span></div>
+        </div>
+        <div class="field">
+          <label>Como prefere que o agente trate o cliente?</label>
+          <div class="radio-group">
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="tratamento" value="voce"><div class="radio-dot"></div><div><div class="radio-label">Você</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="tratamento" value="tu"><div class="radio-dot"></div><div><div class="radio-label">Tu</div></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Palavras ou frases que o agente DEVE usar</label>
+          <div class="hint">Termos, expressões ou bordões que fazem parte da linguagem da sua marca</div>
+          <textarea name="palavras_usar" placeholder="Ex: 'nossa especialista', 'protocolo personalizado', 'resultado natural'..."></textarea>
+        </div>
+        <div class="field">
+          <label>Palavras ou frases que o agente NÃO deve usar</label>
+          <textarea name="palavras_evitar" placeholder="Ex: 'barato', 'cirurgia', 'garantia de resultado'..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Objeções -->
+    <div class="section" style="animation-delay:.25s">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-ico">🛡️</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 05</div>
+          <div class="section-title">Objeções & Respostas</div>
+          <div class="section-sub">O que seus clientes dizem para não comprar</div>
+        </div>
+        <div class="section-complete" id="complete-5">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Quais são as objeções mais comuns que você enfrenta? <span class="req">*</span></label>
+          <div class="check-group">
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="preco"><div class="check-box"></div>Preço alto</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="tempo"><div class="check-box"></div>Falta de tempo</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="medo"><div class="check-box"></div>Medo / insegurança</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="distancia"><div class="check-box"></div>Distância / localização</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="comparacao"><div class="check-box"></div>"Vou pesquisar mais"</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="conjuge"><div class="check-box"></div>"Vou falar com meu cônjuge"</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="parcelamento"><div class="check-box"></div>Forma de pagamento</label>
+            <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="objecoes" value="necessidade"><div class="check-box"></div>"Não preciso agora"</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Como você normalmente quebra a objeção de preço?</label>
+          <div class="hint">O argumento que mais funciona para você. Ex: parcelamento, comparação com concorrente, ROI emocional...</div>
+          <textarea name="quebrar_preco" placeholder="Ex: 'Parcelamos em até 12x. Além disso, nossa avaliação é gratuita para você conhecer o protocolo antes de decidir.'"></textarea>
+        </div>
+        <div class="field">
+          <label>Quais são seus principais diferenciais competitivos?</label>
+          <div class="hint">O que faz seu negócio ser melhor que os concorrentes na sua cidade</div>
+          <textarea name="diferenciais" placeholder="Ex: Única clínica com profissional certificada em NY, 500+ avaliações 5 estrelas, estacionamento gratuito, protocolo exclusivo..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. CTA e Fechamento -->
+    <div class="section" style="animation-delay:.3s">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-ico">🎯</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 06</div>
+          <div class="section-title">CTA & Fechamento</div>
+          <div class="section-sub">Como o agente deve fechar cada conversa</div>
+        </div>
+        <div class="section-complete" id="complete-6">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Qual deve ser o objetivo final de cada conversa? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="cta" value="agendamento"><div class="radio-dot"></div><div><div class="radio-label">📅 Agendar horário / consulta / visita</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="cta" value="ligacao"><div class="radio-dot"></div><div><div class="radio-label">📞 Transferir para ligação com vendedor humano</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="cta" value="link"><div class="radio-dot"></div><div><div class="radio-label">🔗 Enviar link de pagamento / reserva online</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="cta" value="visita"><div class="radio-dot"></div><div><div class="radio-label">🏠 Convidar para visitar pessoalmente</div></div></label>
+            <label class="radio-item" onclick="selectRadio(this)"><input type="radio" name="cta" value="orcamento"><div class="radio-dot"></div><div><div class="radio-label">📄 Coletar dados para enviar orçamento</div></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Horário de funcionamento</label>
+          <div class="hint">O agente pode informar aos clientes que entram em contato fora do horário</div>
+          <input type="text" name="horario" placeholder="Ex: Segunda a sexta 9h–19h, Sábados 9h–13h">
+        </div>
+        <div class="field">
+          <label>Endereço (se receber clientes presencialmente)</label>
+          <input type="text" name="endereco" placeholder="Ex: Rua das Flores, 123 — Jardins, São Paulo">
+        </div>
+        <div class="field">
+          <label>Número do vendedor humano para transferência</label>
+          <div class="hint">Quando o lead estiver qualificado, o agente pode indicar este número para finalizar a venda</div>
+          <input type="text" name="numero_vendedor" placeholder="Ex: (11) 99999-9999 — falar com Juliana">
+        </div>
+        <div class="field">
+          <label>Você tem alguma promoção ou urgência atual?</label>
+          <div class="hint">O agente pode usar isso para criar senso de urgência e acelerar a decisão</div>
+          <textarea name="promocao" placeholder="Ex: 'Este mês temos 20% off no combo botox + preenchimento. Vagas limitadas!'"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Extras -->
+    <div class="section" style="animation-delay:.35s">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-ico">✨</div>
+        <div class="section-info">
+          <div class="section-num">SEÇÃO 07</div>
+          <div class="section-title">Informações Extras</div>
+          <div class="section-sub">Contexto adicional para personalizar o agente</div>
+        </div>
+        <div class="section-complete" id="complete-7">✓</div>
+        <div class="section-arrow">⌄</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Conte um pouco da história do seu negócio</label>
+          <div class="hint">Tempo de mercado, conquistas, certificações, prêmios. O agente pode usar isso para gerar confiança.</div>
+          <textarea name="historia" placeholder="Ex: 'Fundada em 2018, somos referência em estética no bairro. Mais de 2.000 clientes atendidos. Profissional certificada em Harvard Extension.'"></textarea>
+        </div>
+        <div class="field">
+          <label>Há algum tipo de cliente que você NÃO atende?</label>
+          <div class="hint">Ex: menores de 18 anos, gestantes, casos que exigem médico especialista</div>
+          <textarea name="restricoes" placeholder="Ex: 'Não atendemos menores de 18 anos sem responsável. Gestantes precisam de liberação médica.'"></textarea>
+        </div>
+        <div class="field">
+          <label>Alguma instrução especial para o agente?</label>
+          <div class="hint">Regras específicas, situações que podem surgir, o que fazer se o cliente ficar irritado, etc.</div>
+          <textarea name="instrucoes_extras" placeholder="Ex: 'Se cliente mencionar dor ou efeito colateral, transfira imediatamente para atendimento humano.'"></textarea>
+        </div>
+        <div class="field">
+          <label>Exemplos de como você gostaria que o agente respondesse</label>
+          <div class="hint">Cole exemplos de conversas reais ou do jeito que você atenderia — isso ajuda muito a treinar o agente</div>
+          <textarea name="exemplos" style="min-height:120px;" placeholder="Ex:&#10;Cliente: 'Quanto custa o botox?'&#10;Resposta ideal: 'Ótima pergunta! O valor do botox varia conforme as áreas tratadas e o protocolo ideal para você. Por isso nossa avaliação é gratuita — assim você sai com o plano completo e os valores certinhos. Posso verificar uma data esta semana para você?'"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-area">
+      <p class="submit-note">Ao enviar, nossa equipe receberá suas informações e iniciará a configuração do seu agente em até 48h úteis.</p>
+      <button type="submit" class="btn-submit">
+        <span>🚀</span>
+        ENVIAR BRIEFING
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Success -->
+  <div class="success" id="successMsg">
+    <div class="success-ico">🎉</div>
+    <h2>Briefing <span>Recebido!</span></h2>
+    <p>Perfeito! Recebemos todas as informações. Nossa equipe vai configurar seu agente SDR e entrar em contato em até <strong>48 horas úteis</strong> para validar o prompt e fazer os últimos ajustes.</p>
+  </div>
+
+</div>
+
+<script>
+// Toggle sections
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// Radio select
+function selectRadio(item) {
+  const name = item.querySelector('input[type="radio"]').name;
+  document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+    r.closest('.radio-item').classList.remove('selected');
+  });
+  item.classList.add('selected');
+  item.querySelector('input[type="radio"]').checked = true;
+  updateProgress();
+}
+
+// Checkbox toggle
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  const cb = item.querySelector('input[type="checkbox"]');
+  cb.checked = item.classList.contains('checked');
+  if (item.classList.contains('checked')) {
+    item.querySelector('.check-box').textContent = '✓';
+  } else {
+    item.querySelector('.check-box').textContent = '';
+  }
+  updateProgress();
+}
+
+// Scale select
+function selectScale(btn, groupId) {
+  const group = document.getElementById(groupId);
+  group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(groupId + '-value').value = btn.textContent;
+  updateProgress();
+}
+
+// Tag input
+const servicosInput = document.getElementById('servicos-input');
+const servicosWrap = document.getElementById('servicos-wrap');
+const servicosValue = document.getElementById('servicos-value');
+let servicosList = [];
+
+servicosInput.addEventListener('keydown', function(e) {
+  if ((e.key === 'Enter' || e.key === ',') && this.value.trim()) {
+    e.preventDefault();
+    addTag(this.value.trim());
+    this.value = '';
+  }
+  if (e.key === 'Backspace' && !this.value && servicosList.length) {
+    removeTag(servicosList.length - 1);
+  }
+});
+
+function addTag(text) {
+  servicosList.push(text);
+  const tag = document.createElement('div');
+  tag.className = 'tag';
+  tag.innerHTML = `${text} <span class="tag-remove" onclick="removeTag(${servicosList.length-1})">×</span>`;
+  servicosWrap.insertBefore(tag, servicosInput);
+  servicosValue.value = servicosList.join(', ');
+  updateProgress();
+}
+
+function removeTag(index) {
+  servicosList.splice(index, 1);
+  servicosValue.value = servicosList.join(', ');
+  renderTags();
+  updateProgress();
+}
+
+function renderTags() {
+  servicosWrap.querySelectorAll('.tag').forEach(t => t.remove());
+  servicosList.forEach((s, i) => {
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.innerHTML = `${s} <span class="tag-remove" onclick="removeTag(${i})">×</span>`;
+    servicosWrap.insertBefore(tag, servicosInput);
+  });
+}
+
+// Progress calculation
+const requiredFields = ['nome_negocio', 'nicho', 'nome_atendente', 'tom', 'cta'];
+
+function updateProgress() {
+  let filled = 0;
+  const total = requiredFields.length + 2; // +2 for servicos and precos
+  
+  requiredFields.forEach(name => {
+    const el = document.querySelector(`[name="${name}"]`);
+    if (el && el.value.trim()) filled++;
+  });
+  
+  if (servicosList.length > 0) filled++;
+  if (document.querySelector('input[name="precos"]:checked')) filled++;
+
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+// Input events for progress
+document.querySelectorAll('input[type="text"], textarea, select').forEach(el => {
+  el.addEventListener('input', updateProgress);
+});
+
+// Form submit
+document.getElementById('briefingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Collect all data
+  const data = {};
+  new FormData(this).forEach((v, k) => {
+    if (data[k]) {
+      data[k] = data[k] + ', ' + v;
+    } else {
+      data[k] = v;
+    }
+  });
+  
+  console.log('Briefing data:', JSON.stringify(data, null, 2));
+  
+  this.style.display = 'none';
+  document.getElementById('successMsg').classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Open first section on load
+document.querySelector('.section-header').classList.add('open');
+document.querySelector('.section-body').classList.add('open');
+</script>
+</body>
+</html>
