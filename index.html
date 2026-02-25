@@ -451,6 +451,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
         <div class="sec-hdr">
           <div><div class="sec-title">💬 Conversas — Inbox WhatsApp</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Todas as conversas do seu agente SDR em tempo real</div></div>
           <div style="display:flex;gap:8px;">
+            <button class="btn btn-fire btn-sm" id="btn-load-zapi" onclick="fetchZapiChats()">📲 Sincronizar WhatsApp</button>
             <button class="btn btn-ghost btn-sm" onclick="loadConversations()">🔄 Atualizar</button>
             <button class="btn btn-fire btn-sm" onclick="newConvoModal()">+ Simular Lead</button>
           </div>
@@ -482,7 +483,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
               </div>
               <div class="chat-win" id="chatWin"></div>
               <div class="chat-bar">
-                <textarea class="chat-in" id="chatIn" placeholder="Digite como lead para simular..." rows="1" onkeydown="hkInbox(event)"></textarea>
+                <textarea class="chat-in" id="chatIn" placeholder="Simular lead (contatos reais respondem via agente n8n)..." rows="1" onkeydown="hkInbox(event)"></textarea>
                 <button class="send-b" id="sendBtn" onclick="sendInboxMsg()">➤</button>
               </div>
             </div>
@@ -634,7 +635,8 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
             <div class="setup-step"><div class="snum">2</div><div class="si"><div class="si-t">Token</div><div class="si-d">Token principal da instância</div></div><input class="fi" id="zapi-token" style="width:260px;font-size:11px;font-family:monospace;" placeholder="D8FD069AD1E30FDE0B7624DB"/></div>
             <div class="setup-step" style="border-color:rgba(255,101,53,.2);"><div class="snum">3</div><div class="si"><div class="si-t">Client-Token <span style="color:var(--orange);font-size:10px;">(obrigatório)</span></div><div class="si-d">Aba Security dentro da instância no Zapi</div></div><input class="fi" id="zapi-client-token" style="width:260px;font-size:11px;font-family:monospace;" placeholder="Fxxxxxxxxxxxxxxxxx"/></div>
             <div class="setup-step"><div class="snum">4</div><div class="si"><div class="si-t">URL do Webhook n8n</div><div class="si-d">Cole no campo "On Message Received" no painel Zapi</div></div><div style="display:flex;gap:8px;align-items:center;"><input class="fi" id="n8n-webhook-url" style="width:280px;font-size:11px;" placeholder="https://usuario.app.n8n.cloud/webhook/zapi"/><button class="btn btn-ghost btn-xs" onclick="copyField('n8n-webhook-url')">Copiar</button></div></div>
-            <div class="setup-step"><div class="snum">5</div><div class="si"><div class="si-t">URL do workflow n8n</div><div class="si-d">URL da sua instância n8n para abrir o workflow direto</div></div><input class="fi" id="n8n-base-url" style="width:280px;font-size:11px;" placeholder="https://usuario.app.n8n.cloud"/></div>
+            <div class="setup-step"><div class="snum">5</div><div class="si"><div class="si-t">URL Base do n8n</div><div class="si-d">URL da sua instância n8n — usada para buscar conversas e status</div></div><input class="fi" id="n8n-base-url" style="width:280px;font-size:11px;" placeholder="https://usuario.app.n8n.cloud"/></div>
+            <div class="setup-step" style="border-color:rgba(56,182,255,.2);background:rgba(56,182,255,.03);"><div class="snum" style="background:linear-gradient(135deg,#38b6ff,#8b5cf6);">6</div><div class="si"><div class="si-t">Token de Autenticação n8n <span style="color:var(--blue);font-size:10px;">(obrigatório)</span></div><div class="si-d">Token secreto configurado no n8n para autenticar requisições do app. Defina qualquer string segura (ex: <code style="font-size:10px;">pulsar_abc123</code>) e use o mesmo valor no workflow n8n.</div></div><div style="display:flex;gap:8px;align-items:center;"><input class="fi" id="n8n-auth-token" style="width:260px;font-size:11px;font-family:monospace;" placeholder="pulsar_seutoken_secreto"/><button class="btn btn-ghost btn-xs" onclick="copyField('n8n-auth-token')">Copiar</button></div></div>
           </div>
         </div>
 
@@ -743,46 +745,332 @@ const nichoData = {
   salao:{name:'Salão de Beleza',negocio:'Studio Hair',persona:'Camila, consultora de beleza',servicos:'Corte, coloração, escova, manicure, maquiagem',cta:'Agendar horário',tom:'descontraído e criativo',objecoes:'Preço→qualidade e durabilidade | Horário→agenda flexível'},
 };
 
-// CONTATOS SIMULADOS (inbox)
-let contactsData = [
-  {id:1,name:'Maria Fernanda',phone:'5511991234567',avatar:'👩',lastMsg:'Gostaria de saber mais sobre o botox',time:'14:32',unread:2,score:72,stage:2,temp:'warm',nicho:'clinica',history:[
-    {role:'user',content:'Oi! Vi no Instagram sobre vocês'},
-    {role:'assistant',content:'Olá Maria! 😊 Seja bem-vinda à Clínica Bella! Sou Sofia. Fico feliz que tenha nos encontrado! O que te trouxe até nós hoje?'},
-    {role:'user',content:'Quero saber sobre botox'},
-    {role:'assistant',content:'Que ótimo! Botox é um dos nossos procedimentos mais populares. O resultado é natural e dura em média 4 a 6 meses. Você já fez algum procedimento estético antes?'},
-    {role:'user',content:'Nunca fiz, tenho um pouco de medo'},
-    {role:'assistant',content:'Entendo completamente! É super normal ter essa preocupação na primeira vez. 🌸 Nossas pacientes costumam se surpreender com o quanto é tranquilo — usamos produtos aprovados e técnicas que garantem resultados naturais. Que tal marcar uma avaliação gratuita para tirar todas as suas dúvidas antes de qualquer decisão?'},
-    {role:'user',content:'Gostaria de saber mais sobre o botox'},
-  ]},
-  {id:2,name:'Carlos Roberto',phone:'5511987654321',avatar:'👨',lastMsg:'Quanto custa o botox?',time:'13:10',unread:1,score:88,stage:3,temp:'hot',nicho:'clinica',history:[
-    {role:'user',content:'Boa tarde, quero agendar uma consulta'},
-    {role:'assistant',content:'Boa tarde! 😊 Seja bem-vindo! Sou Sofia da Clínica Bella. Que bom que entrou em contato! Para te indicar o melhor horário, posso te perguntar — qual tratamento você tem interesse?'},
-    {role:'user',content:'Botox e talvez preenchimento'},
-    {role:'assistant',content:'Perfeito! Ótima combinação! Os dois procedimentos se complementam muito bem. Você já teve alguma experiência com procedimentos estéticos antes?'},
-    {role:'user',content:'Sim, já fiz uma vez em outra clínica'},
-    {role:'assistant',content:'Que ótimo! Então você já sabe como é o processo. Nossa avaliação é gratuita e sem compromisso — nosso especialista analisa o caso e apresenta um protocolo personalizado para você. Qual é sua disponibilidade esta semana?'},
-    {role:'user',content:'Quanto custa o botox?'},
-  ]},
-  {id:3,name:'Juliana Lima',phone:'5511976543210',avatar:'👩‍💼',lastMsg:'Ok, vou pensar e retorno',time:'11:45',unread:0,score:31,stage:1,temp:'cold',nicho:'clinica',history:[
-    {role:'user',content:'Olá, preciso de informações'},
-    {role:'assistant',content:'Olá Juliana! 😊 Fico feliz em ajudar! Sou Sofia da Clínica Bella. Sobre qual tratamento você quer saber mais?'},
-    {role:'user',content:'Sobre limpeza de pele'},
-    {role:'assistant',content:'Ótimo! Nossa limpeza de pele profissional remove impurezas, desobstrui poros e deixa a pele com aquela luminosidade incrível. É um ótimo ponto de partida! Você tem alguma preocupação específica com a pele?'},
-    {role:'user',content:'Ok, vou pensar e retorno'},
-  ]},
-  {id:4,name:'Amanda Souza',phone:'5511965432109',avatar:'💁‍♀️',lastMsg:'Que horas vocês atendem?',time:'Ontem',unread:0,score:55,stage:2,temp:'warm',nicho:'clinica',history:[
-    {role:'user',content:'Oi, tudo bem?'},
-    {role:'assistant',content:'Olá Amanda! 😊 Tudo ótimo! Sou Sofia da Clínica Bella. Como posso te ajudar hoje?'},
-    {role:'user',content:'Que horas vocês atendem?'},
-  ]},
-];
+// ═══════════════════════════════════════════
+// CONVERSAS — POR CLIENTE, PERSISTIDAS NO LOCALSTORAGE
+// + INTEGRAÇÃO REAL COM Z-API
+// ═══════════════════════════════════════════
 
+// Conversas são SEMPRE isoladas por cliente via localStorage
+// Chave: pulsar_contacts_{clientId}
+
+function getClientContacts(clientId){
+  try{const s=localStorage.getItem('pulsar_contacts_'+clientId);if(s)return JSON.parse(s);}catch(e){}
+  return []; // novo cliente = inbox vazio
+}
+function saveClientContacts(clientId,data){
+  localStorage.setItem('pulsar_contacts_'+clientId,JSON.stringify(data));
+}
+
+let contactsData = []; // sempre resetado ao trocar de cliente
 let currentContact = null;
 let chatHistory = [];
 let chatScore = 0;
 let chatStage = -1;
 let chatMsgCount = 0;
-const leadsData=[{name:'Carlos Roberto',biz:'Interesse em botox+preenchimento',temp:'hot',score:88,stage:'Decisão',date:'Hoje 13:10'},{name:'Maria Fernanda',biz:'Dúvidas sobre botox',temp:'warm',score:72,stage:'Consideração',date:'Hoje 14:32'},{name:'Amanda Souza',biz:'Informações gerais',temp:'warm',score:55,stage:'Consideração',date:'Ontem'},{name:'Juliana Lima',biz:'Interesse em limpeza',temp:'cold',score:31,stage:'Interesse',date:'Hoje 11:45'}];
+
+// LeadsData derivado dos contatos reais
+function getLeadsData(){
+  return contactsData.map(c=>({
+    name:c.name,biz:c.lastMsg||'—',temp:c.temp,score:c.score,
+    stage:['Consciência','Interesse','Consideração','Decisão','🔥 Quente'][Math.min(c.stage+1,4)]||'—',
+    date:c.time,phone:c.phone
+  }));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// INTEGRAÇÃO VIA N8N COMO PROXY
+//
+// O browser NÃO pode chamar o Z-API diretamente (CORS bloqueado).
+// O n8n age como intermediário:
+//   App → n8n webhook → n8n chama Z-API → retorna JSON ao app
+//
+// URLs configuradas pelo cliente na aba Zapi & Workflow:
+//   n8n Base URL: https://usuario.app.n8n.cloud
+//   Endpoints esperados:
+//     GET  {base}/webhook/pulsar-status    → status da conexão
+//     GET  {base}/webhook/pulsar-chats     → lista de chats
+//     GET  {base}/webhook/pulsar-messages?phone=xxx → histórico
+//     POST {base}/webhook/pulsar-send      → enviar mensagem manual
+// ═══════════════════════════════════════════════════════════════════════════
+
+function getN8nBase(){
+  const c=app.currentClient;if(!c)return null;
+  const zapi=JSON.parse(localStorage.getItem('pulsar_zapi_'+c.id)||'{}');
+  return zapi.n8nBase?.replace(/\/$/,'')||null;
+}
+function getN8nToken(){
+  const c=app.currentClient;if(!c)return '';
+  const zapi=JSON.parse(localStorage.getItem('pulsar_zapi_'+c.id)||'{}');
+  return zapi.n8nAuthToken||''; // token dedicado para autenticar chamadas app→n8n
+}
+
+async function n8nGet(endpoint,params){
+  const base=getN8nBase();if(!base)return null;
+  const token=getN8nToken();
+  let url=base+endpoint;
+  const allParams={...params||{},...(token?{token}:{})};
+  if(Object.keys(allParams).length){const q=new URLSearchParams(allParams);url+='?'+q;}
+  try{
+    const r=await fetch(url,{
+      headers:{
+        'Content-Type':'application/json',
+        ...(token?{'x-pulsar-token':token}:{})
+      }
+    });
+    if(!r.ok){console.warn('n8n GET error:',r.status,url);return null;}
+    return await r.json();
+  }catch(e){console.warn('n8n GET failed:',e.message);return null;}
+}
+
+async function n8nPost(endpoint,body){
+  const base=getN8nBase();if(!base)return null;
+  const token=getN8nToken();
+  const url=base+endpoint;
+  try{
+    const r=await fetch(url,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        ...(token?{'x-pulsar-token':token}:{})
+      },
+      body:JSON.stringify(body)
+    });
+    if(!r.ok){console.warn('n8n POST error:',r.status);return null;}
+    return await r.json();
+  }catch(e){console.warn('n8n POST failed:',e.message);return null;}
+}
+
+// Verifica status de conexão via n8n
+async function checkZapiStatus(){
+  const base=getN8nBase();
+  if(!base){updateZapiStatusUI(false,null);return false;}
+  const tok=getN8nToken();
+  if(!tok){
+    const sub=document.getElementById('zapi-status-sub');
+    if(sub)sub.textContent='⚠️ Configure o Token de Autenticação n8n (campo 6)';
+    updateZapiStatusUI(false,null);return false;
+  }
+  const data=await n8nGet('/webhook/pulsar-status');
+  const connected=data?.connected===true||data?.status==='CONNECTED'||data?.value==='CONNECTED';
+  updateZapiStatusUI(connected,data);
+  return connected;
+}
+
+function updateZapiStatusUI(connected,data){
+  const lbl=document.getElementById('zapi-status-label');
+  const sub=document.getElementById('zapi-status-sub');
+  const dot=document.getElementById('zapi-dot');
+  const bar=document.getElementById('zapi-main-status');
+  const istat=document.getElementById('zapi-instance-status');
+  if(connected){
+    if(lbl)lbl.textContent='Zapi — WhatsApp Conectado ✅';
+    if(sub)sub.textContent='Recebendo e respondendo mensagens via n8n + Z-API';
+    if(dot)dot.className='zapi-dot zapi-dot-on';
+    if(bar)bar.style.borderColor='rgba(0,230,118,.25)';
+    if(istat)istat.textContent='● Conectado';
+    if(istat)istat.style.color='var(--green)';
+  }else{
+    const base=getN8nBase();
+    if(lbl)lbl.textContent=base?'⚠️ n8n — Sem resposta do endpoint':'Configure a URL do n8n abaixo';
+    if(sub)sub.textContent=base?'Verifique se o workflow pulsar-status está ativo no n8n':'Preencha a URL Base do n8n para ativar a integração';
+    if(dot)dot.className='zapi-dot zapi-dot-off';
+    if(istat)istat.textContent=base?'⚠️ Sem resposta':'Não configurado';
+    if(istat)istat.style.color=base?'var(--yellow)':'var(--muted)';
+  }
+}
+
+// Busca conversas reais via n8n → Z-API
+async function fetchZapiChats(){
+  const btn=document.getElementById('btn-load-zapi');
+  if(btn){btn.disabled=true;btn.textContent='⏳ Buscando...';}
+  showToast('🔄 Buscando conversas via n8n...');
+
+  const base=getN8nBase();
+  if(!base){
+    showToast('⚠️ Configure a URL Base do n8n na aba Zapi & Workflow');
+    if(btn){btn.disabled=false;btn.textContent='📲 Sincronizar WhatsApp';}
+    return;
+  }
+
+  const data=await n8nGet('/webhook/pulsar-chats');
+  if(btn){btn.disabled=false;btn.textContent='📲 Sincronizar WhatsApp';}
+
+  if(!data){
+    showToast('⚠️ n8n não respondeu — verifique se o workflow pulsar-chats está ativo');
+    return;
+  }
+
+  const c=app.currentClient;if(!c)return;
+  const chats=Array.isArray(data)?data:(data.chats||data.value||[]);
+
+  if(!chats.length){showToast('📭 Nenhuma conversa encontrada no WhatsApp');return;}
+
+  let added=0;
+  for(const chat of chats.slice(0,60)){
+    const phone=(chat.phone||chat.id||'').replace('@c.us','').replace(/\D/g,'');
+    if(!phone||phone.includes('g.us'))continue; // ignora grupos
+    const name=chat.name||chat.pushName||chat.senderName||formatPhone(phone);
+    const existing=contactsData.find(x=>x.phone===phone);
+
+    if(!existing){
+      const msgs=await fetchZapiHistory(phone);
+      const lastTxt=chat.lastMessage?.text||chat.text||chat.body||msgs.at(-1)?.content||'—';
+      const ts=chat.lastMessage?.timestamp||chat.timestamp||Date.now()/1000;
+      contactsData.unshift({
+        id:'zapi_'+phone,name,phone,
+        avatar:getAvatar(name),
+        lastMsg:lastTxt,
+        time:formatTime(ts),
+        unread:chat.unreadCount||0,
+        score:0,stage:-1,temp:'cold',
+        nicho:c.nicho||'geral',
+        history:msgs,
+        fromZapi:true
+      });
+      added++;
+    }else{
+      const lastTxt=chat.lastMessage?.text||chat.text||chat.body||existing.lastMsg;
+      existing.lastMsg=lastTxt;
+      existing.unread=chat.unreadCount||existing.unread;
+      existing.time=formatTime(chat.lastMessage?.timestamp||chat.timestamp||Date.now()/1000);
+      existing.fromZapi=true;
+    }
+  }
+
+  saveClientContacts(c.id,contactsData);
+  renderContactList();
+  renderHotTable();renderAllTable();
+  updateInboxBadges();
+  showToast(added>0?`✅ ${added} novas conversas carregadas!`:'✅ Conversas atualizadas!');
+}
+
+// Busca histórico de mensagens de um telefone via n8n
+async function fetchZapiHistory(phone){
+  const data=await n8nGet('/webhook/pulsar-messages',{phone});
+  if(!data)return[];
+  const msgs=Array.isArray(data)?data:(data.messages||data.value||[]);
+  return msgs
+    .map(m=>({
+      role:m.fromMe?'assistant':'user',
+      content:m.text?.message||m.text||m.message||m.body||'',
+      timestamp:m.timestamp,
+      isFromZapi:true
+    }))
+    .filter(m=>m.content.trim().length>0)
+    .reverse(); // Z-API retorna mais recente primeiro
+}
+
+// Atualiza mensagens do contato aberto
+async function refreshContactMessages(phone){
+  const msgs=await fetchZapiHistory(phone);
+  if(!msgs.length)return;
+  const c=app.currentClient;if(!c)return;
+  const contact=contactsData.find(x=>x.phone===phone);
+  if(!contact)return;
+  const prevCount=contact.history.length;
+  contact.history=msgs;
+  saveClientContacts(c.id,contactsData);
+  if(currentContact&&currentContact.phone===phone&&msgs.length!==prevCount){
+    chatHistory=[...msgs];
+    const win=document.getElementById('chatWin');
+    if(win){
+      win.innerHTML='';
+      chatHistory.forEach(m=>renderBubble(m.role==='assistant'?'ai':'lead',m.content,false));
+      win.scrollTop=win.scrollHeight;
+    }
+  }
+}
+
+// Envia mensagem manual via n8n → Z-API (resposta do vendedor)
+async function sendManualReply(phone,message){
+  if(!phone||!message)return false;
+  const result=await n8nPost('/webhook/pulsar-send',{phone,message});
+  return result?.sent===true||result?.success===true||!!result;
+}
+
+// ── POLLING AUTOMÁTICO (via n8n) ──────────────────────────────────────────
+let pollingInterval=null;
+function startPolling(){
+  if(pollingInterval)clearInterval(pollingInterval);
+  const base=getN8nBase();
+  if(!base)return; // sem n8n configurado, sem polling
+  window._pollCount=0;
+  pollingInterval=setInterval(async()=>{
+    if(!app.currentClient)return;
+    window._pollCount=(window._pollCount||0)+1;
+    // A cada poll: atualiza mensagens do contato aberto
+    if(currentContact?.fromZapi){
+      await refreshContactMessages(currentContact.phone);
+    }
+    // A cada 4 polls (~60s): verifica novos chats
+    if(window._pollCount%4===0){
+      const data=await n8nGet('/webhook/pulsar-chats');
+      if(data){
+        const chats=Array.isArray(data)?data:(data.chats||data.value||[]);
+        let changed=false;
+        for(const chat of chats.slice(0,20)){
+          const phone=(chat.phone||chat.id||'').replace('@c.us','').replace(/\D/g,'');
+          if(!phone||phone.includes('g.us'))continue;
+          const existing=contactsData.find(x=>x.phone===phone);
+          if(existing){
+            if((chat.unreadCount||0)>existing.unread){
+              existing.unread=chat.unreadCount;changed=true;
+              existing.lastMsg=chat.lastMessage?.text||chat.text||existing.lastMsg;
+              existing.time=formatTime(chat.lastMessage?.timestamp||Date.now()/1000);
+            }
+          }else if((chat.unreadCount||0)>0){
+            const name=chat.name||chat.pushName||formatPhone(phone);
+            const msgs=await fetchZapiHistory(phone);
+            contactsData.unshift({
+              id:'zapi_'+phone,name,phone,avatar:getAvatar(name),
+              lastMsg:chat.lastMessage?.text||chat.text||'Nova mensagem',
+              time:'Agora',unread:chat.unreadCount,score:0,stage:-1,temp:'cold',
+              nicho:app.currentClient?.nicho||'geral',history:msgs,fromZapi:true
+            });
+            changed=true;
+            showToast('💬 Nova mensagem de '+name);
+          }
+        }
+        if(changed){
+          saveClientContacts(app.currentClient?.id,contactsData);
+          renderContactList();updateInboxBadges();
+        }
+      }
+    }
+  },15000);
+}
+function stopPolling(){
+  if(pollingInterval){clearInterval(pollingInterval);pollingInterval=null;}
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function formatPhone(phone){return phone?'+'+phone:'—';}
+function getAvatar(name){
+  const avatars=['👤','👩','👨','👩‍💼','👨‍💼','💁‍♀️','🧑','👱‍♀️','👱','🧔'];
+  const idx=name?.charCodeAt(0)%avatars.length||0;return avatars[idx];
+}
+function formatTime(ts){
+  if(!ts)return'—';
+  const d=new Date(ts>9999999999?ts:ts*1000);
+  const now=new Date();
+  const diff=now-d;
+  if(diff<60000)return'Agora';
+  if(diff<3600000)return Math.floor(diff/60000)+'min';
+  if(d.toDateString()===now.toDateString())return d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const yesterday=new Date(now);yesterday.setDate(now.getDate()-1);
+  if(d.toDateString()===yesterday.toDateString())return'Ontem';
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+}
+function updateInboxBadges(){
+  const unread=contactsData.filter(x=>x.unread>0).length;
+  const hot=contactsData.filter(x=>x.temp==='hot').length;
+  const icount=document.getElementById('inbox-count');
+  const lcount=document.getElementById('leads-count');
+  if(icount)icount.textContent=unread;
+  if(lcount)lcount.textContent=hot;
+  const dac=document.getElementById('dash-active-conv');
+  if(dac)dac.textContent=contactsData.filter(x=>x.unread>0).length;
+}
 
 // ═══════════════════════════════════════════
 // LOGIN
@@ -822,40 +1110,73 @@ function loginClient(){
   }else{document.getElementById('cl-err').style.display='block';}
 }
 function loadClientPanel(client){
+  // ── PARA polling do cliente anterior ──
+  stopPolling();
+  currentContact=null;
+
   document.getElementById('sb-client-name').textContent=client.name;
   document.getElementById('d-conversas').textContent=client.leads;
   document.getElementById('d-hot').textContent=client.hot;
   document.getElementById('d-conv').textContent=client.conv;
-  document.getElementById('inbox-count').textContent=contactsData.filter(c=>c.unread>0).length;
-  document.getElementById('leads-count').textContent=client.hot;
   document.getElementById('cfg-email').value=client.email;
   document.getElementById('cfg-empresa').value=client.name;
-  // Load training data
+
+  // ── CARREGA CONTATOS DO CLIENTE (isolado por id) ──
+  contactsData=getClientContacts(client.id);
+
+  updateInboxBadges();
+
+  // ── TRAINING ──
   const nicho=client.nicho||'clinica';
   const nd=nichoData[nicho]||nichoData.clinica;
-  document.getElementById('t-negocio').value=nd.negocio;
-  document.getElementById('t-persona').value=nd.persona;
-  document.getElementById('t-servicos').value=nd.servicos;
-  document.getElementById('t-objecoes').value=nd.objecoes;
-  document.getElementById('t-perguntas').value='Qual é seu principal objetivo?\nJá fez algum procedimento antes?\nTem alguma data especial se aproximando?';
-  document.getElementById('t-cta').value=nd.cta;
-  // Load saved Zapi config
+  // Tenta carregar training salvo primeiro
+  const savedTraining=JSON.parse(localStorage.getItem('pulsar_training_'+client.id)||'{}');
+  document.getElementById('t-negocio').value=savedTraining.negocio||nd.negocio;
+  document.getElementById('t-persona').value=savedTraining.persona||nd.persona;
+  document.getElementById('t-servicos').value=savedTraining.servicos||nd.servicos;
+  document.getElementById('t-objecoes').value=savedTraining.objecoes||nd.objecoes;
+  document.getElementById('t-perguntas').value=savedTraining.perguntas||'Qual é seu principal objetivo?\nJá fez algum procedimento antes?\nTem alguma data especial se aproximando?';
+  document.getElementById('t-cta').value=savedTraining.cta||nd.cta;
+  document.getElementById('t-tom').value=savedTraining.tom||nd.tom||'profissional';
+
+  // ── ZAPI CONFIG ──
   const zapi=JSON.parse(localStorage.getItem('pulsar_zapi_'+client.id)||'{}');
   if(zapi.instance)document.getElementById('zapi-instance').value=zapi.instance;
   if(zapi.token)document.getElementById('zapi-token').value=zapi.token;
   if(zapi.clientToken)document.getElementById('zapi-client-token').value=zapi.clientToken;
   if(zapi.webhookUrl)document.getElementById('n8n-webhook-url').value=zapi.webhookUrl;
   if(zapi.n8nBase)document.getElementById('n8n-base-url').value=zapi.n8nBase;
+  if(zapi.n8nAuthToken)document.getElementById('n8n-auth-token').value=zapi.n8nAuthToken;
   const active=zapi.active!==false;
   app.agentActive=active;
   updateAgentToggleUI(active);
-  renderContactList();renderHotTable();renderAllTable();
+
+  // ── INBOX: fecha chat aberto ──
+  const chatEl=document.getElementById('active-chat');
+  const phEl=document.getElementById('chat-placeholder');
+  const lsEl=document.getElementById('leadSide');
+  if(chatEl)chatEl.style.display='none';
+  if(phEl)phEl.style.display='flex';
+  if(lsEl)lsEl.style.display='none';
+
+  renderContactList();
+  renderHotTable();
+  renderAllTable();
+
+  // ── VERIFICA STATUS DO ZAPI E INICIA POLLING ──
+  if(zapi.instance&&zapi.token&&zapi.clientToken){
+    checkZapiStatus();
+    if(active)startPolling();
+  }else{
+    updateZapiStatusUI(false,null);
+  }
 }
 function backToAgency(){
+  stopPolling();contactsData=[];currentContact=null;
   if(app.isAgency){clients=loadClients();renderClients();updateAgencyStats();showScreen('agency');}
   else logout();
 }
-function logout(){showScreen('login');app.currentClient=null;app.isAgency=false;}
+function logout(){stopPolling();contactsData=[];currentContact=null;showScreen('login');app.currentClient=null;app.isAgency=false;}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');}
 function togglePw(id,btn){const inp=document.getElementById(id);if(!inp)return;inp.type=inp.type==='password'?'text':'password';btn.textContent=inp.type==='password'?'👁':'🙈';}
 
@@ -866,12 +1187,14 @@ function toggleAgente(btn){
   app.agentActive=!app.agentActive;
   updateAgentToggleUI(app.agentActive);
   saveZapiState();
+  if(app.agentActive){startPolling();}else{stopPolling();}
   showToast(app.agentActive?'✅ Agente ativado — respondendo leads!':'⏸️ Agente pausado — não responderá novas mensagens.');
 }
 function toggleMainAgente(btn){
   app.agentActive=!app.agentActive;
   updateAgentToggleUI(app.agentActive);
   saveZapiState();
+  if(app.agentActive){startPolling();}else{stopPolling();}
   showToast(app.agentActive?'✅ Agente ativado!':'⏸️ Agente pausado!');
 }
 function updateAgentToggleUI(active){
@@ -1045,21 +1368,31 @@ function showView(id,btn){
 // ═══════════════════════════════════════════
 // INBOX / CONVERSAS
 // ═══════════════════════════════════════════
-function renderContactList(filter=''){
+function renderContactList(filter){
   const list=document.getElementById('contactList');if(!list)return;
-  const filtered=filter?contactsData.filter(c=>c.name.toLowerCase().includes(filter.toLowerCase())):contactsData;
+  const f=filter||'';
+  const filtered=f?contactsData.filter(c=>c.name.toLowerCase().includes(f.toLowerCase())||c.phone?.includes(f)):contactsData;
+  if(!filtered.length){
+    const cl=app.currentClient;
+    const zapi=JSON.parse(localStorage.getItem('pulsar_zapi_'+(cl?.id||0))||'{}');
+    const hasConfig=zapi.instance&&zapi.token&&zapi.clientToken;
+    list.innerHTML='<div style="padding:24px 16px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8;"><div style="font-size:32px;margin-bottom:10px;">📭</div>'
+      +(f?'Nenhum resultado para "'+f+'"':hasConfig?'<strong style="color:var(--muted2);">Nenhuma conversa ainda</strong><br><br>Clique em <strong style="color:var(--orange);">📲 Sincronizar WhatsApp</strong><br>para carregar conversas reais':'<strong style="color:var(--muted2);">Inbox vazio</strong><br><br>Configure as credenciais na aba <em style="color:var(--orange);">Zapi & Workflow</em> e sincronize')+'</div>';
+    return;
+  }
   list.innerHTML=filtered.map(c=>{
     const tc={hot:'cs-hot',warm:'cs-warm',cold:'cs-cold'};
     const tl={hot:'🔥 Quente',warm:'🌡️ Morno',cold:'❄️ Frio'};
-    const isActive=currentContact&&currentContact.id===c.id;
-    return`<div class="contact-item${c.unread?' unread':''}${isActive?' active':''}" onclick="openContact(${c.id})">
+    const isActive=currentContact&&String(currentContact.id)===String(c.id);
+    return`<div class="contact-item${c.unread?' unread':''}${isActive?' active':''}" onclick="openContact('${c.id}')">
       <div class="ci-ava">${c.avatar}</div>
       <div class="ci-body">
         <div class="ci-top"><div class="ci-name">${c.name}</div><div class="ci-time">${c.time}</div></div>
         <div class="ci-preview">${c.lastMsg}</div>
         <div style="display:flex;align-items:center;gap:6px;margin-top:4px;">
-          <span class="ci-score ${tc[c.temp]}">${tl[c.temp]} · ${c.score}%</span>
+          <span class="ci-score ${tc[c.temp]||'cs-cold'}">${tl[c.temp]||'❄️ Frio'} · ${c.score}%</span>
           ${c.unread?`<span class="ci-badge">${c.unread}</span>`:''}
+          ${c.fromZapi?'<span style="font-size:9px;color:var(--blue);">📱 WA</span>':''}
         </div>
       </div>
     </div>`;
@@ -1068,28 +1401,26 @@ function renderContactList(filter=''){
 function filterContacts(val){renderContactList(val);}
 
 function openContact(id){
-  const c=contactsData.find(x=>x.id===id);if(!c)return;
-  currentContact=c;
-  c.unread=0;
+  const c=contactsData.find(x=>String(x.id)===String(id));if(!c)return;
+  currentContact=c;c.unread=0;
   chatHistory=[...c.history];
   chatScore=c.score;chatStage=c.stage;chatMsgCount=c.history.filter(m=>m.role==='user').length;
-  // Show chat
   document.getElementById('chat-placeholder').style.display='none';
   const ac=document.getElementById('active-chat');ac.style.display='flex';
   document.getElementById('ch-ava').textContent=c.avatar;
   document.getElementById('ch-name').textContent=c.name;
-  document.getElementById('ch-sub').textContent=`${c.phone} · ${nichoData[c.nicho]?.name||'Negócio'}`;
-  // Lead side
+  document.getElementById('ch-sub').textContent=(c.phone?'+'+c.phone:'—')+(c.fromZapi?' · 📱 WhatsApp Real':' · 🔵 Simulado');
   const ls=document.getElementById('leadSide');ls.style.display='flex';ls.style.flexDirection='column';
   document.getElementById('ls-ava').textContent=c.avatar;
   document.getElementById('ls-name').textContent=c.name;
   updateLeadSideUI(chatScore,chatStage);
-  // Render history
   const win=document.getElementById('chatWin');win.innerHTML='';
+  if(!chatHistory.length){const s=document.createElement('div');s.className='sys-bub';s.textContent='Início da conversa';win.appendChild(s);}
   chatHistory.forEach(m=>renderBubble(m.role==='assistant'?'ai':'lead',m.content,false));
   win.scrollTop=win.scrollHeight;
   renderContactList(document.getElementById('search-contacts')?.value||'');
-  document.getElementById('inbox-count').textContent=contactsData.filter(x=>x.unread>0).length;
+  updateInboxBadges();
+  if(c.fromZapi)refreshContactMessages(c.phone);
 }
 function closeChat(){
   currentContact=null;
@@ -1098,138 +1429,27 @@ function closeChat(){
   document.getElementById('leadSide').style.display='none';
   renderContactList();
 }
-function renderBubble(role,text,scroll){
-  const clean=text.replace('[LEAD_QUENTE]','').trim();
-  const win=document.getElementById('chatWin');if(!win)return;
-  const row=document.createElement('div');
-  row.className='bubble-row '+(role==='lead'?'lr':'');
-  const now=new Date();const t=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
-  row.innerHTML=`<div class="av ${role==='ai'?'ai':'lead'}">${role==='ai'?'SDR':currentContact?.avatar||'👤'}</div>
-    <div class="bdy">
-      <div class="bsender">${role==='ai'?'Agente SDR — IA':'Lead'}</div>
-      <div class="bubble ${role==='ai'?'ai-bub':'lead-bub'}">${clean}</div>
-      <div class="btime">${t}</div>
-    </div>`;
-  win.appendChild(row);if(scroll)win.scrollTop=win.scrollHeight;
-}
-function showTypingInbox(){
-  const win=document.getElementById('chatWin');if(!win)return;
-  const r=document.createElement('div');r.className='typing-row';r.id='tr_inbox';
-  r.innerHTML=`<div class="av ai">SDR</div><div class="tbub"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
-  win.appendChild(r);win.scrollTop=win.scrollHeight;
-}
-function hideTypingInbox(){document.getElementById('tr_inbox')?.remove();}
-
-async function sendInboxMsg(){
-  const inp=document.getElementById('chatIn');
-  const btn=document.getElementById('sendBtn');
-  if(!inp||!currentContact||btn?.disabled)return;
-  const text=inp.value.trim();if(!text)return;
-  inp.value='';inp.style.height='auto';
-  if(btn)btn.disabled=true;
-  chatHistory.push({role:'user',content:text});
-  renderBubble('lead',text,true);
-  currentContact.lastMsg=text;currentContact.time='Agora';
-  showTypingInbox();
-  const reply=await callAI_inbox(text,currentContact.nicho);
-  hideTypingInbox();
-  const isHot=reply.includes('[LEAD_QUENTE]');
-  chatMsgCount++;
-  chatStage=isHot?4:Math.min(Math.floor(chatMsgCount/1.2),3);
-  chatScore=isHot?92:Math.min((chatScore||0)+(Math.random()*8+4),98);
-  chatHistory.push({role:'assistant',content:reply});
-  currentContact.history=[...chatHistory];
-  renderBubble('ai',reply,true);
-  updateLeadSideUI(chatScore,chatStage);
-  if(isHot){
-    setTimeout(()=>{showToast('🔥 Lead Quente! Notificando vendedor...');document.getElementById('ls-wa-btn').disabled=false;},400);
-    currentContact.temp='hot';currentContact.score=Math.round(chatScore);
-  }else{
-    currentContact.score=Math.round(chatScore);
-  }
-  renderContactList(document.getElementById('search-contacts')?.value||'');
-  if(btn)btn.disabled=false;inp.focus();
-}
-function hkInbox(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendInboxMsg();}}
-
-async function callAI_inbox(msg,nicho){
-  const key=app.apiKey;
-  const nd=nichoData[nicho]||nichoData.clinica;
-  const system=`Você é ${nd.persona} trabalhando para ${nd.negocio}. SDR especialista em ${nd.name}.\nSERVIÇOS: ${nd.servicos}\nOBJETIVO: Qualificar leads até o CTA: "${nd.cta}". TOM: ${nd.tom}. Mensagens curtas, máx 2-3 parágrafos. Emojis moderados.\nOBJEÇÕES: ${nd.objecoes}\nCONTEXTO: Você pode estar no meio de uma conversa — leia todo o histórico e NUNCA repita perguntas já feitas. Continue de onde parou.\nFUNIL: Consciência→Interesse→Consideração→Decisão→Lead Quente\nQuando lead demonstrar alta intenção, inclua: [LEAD_QUENTE]\nNunca invente preços. Responda SEMPRE em português.`;
-  if(!key)return getFallbackMsg(nicho,chatMsgCount);
-  try{
-    const messages=chatHistory.slice(-12);
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:app.model,max_tokens:600,system,messages})});
-    const data=await res.json();
-    if(data.error)return getFallbackMsg(nicho,chatMsgCount);
-    return data.content?.[0]?.text||'Desculpe, tente novamente.';
-  }catch(e){return getFallbackMsg(nicho,chatMsgCount);}
-}
-
-function getFallbackMsg(nicho,count){
-  const msgs={
-    clinica:['Olá! 😊 Sou a Sofia da Clínica Bella. O que te trouxe até nós hoje?','Entendo! Você já fez algum procedimento estético antes?','Ótimo! Que tal uma avaliação gratuita para conhecer o protocolo ideal para você?','Perfeito! Você prefere manhã ou tarde?','Maravilha! Vou verificar os horários disponíveis 😊'],
-    restaurante:['Olá! 😊 Sou o Lucas. Como posso ajudar?','Ótimo! Qual seria a ocasião?','Quantas pessoas seriam?','Que data você tem em mente?','Maravilha! Vou verificar a disponibilidade.'],
-  };
-  const list=msgs[nicho]||msgs.clinica;
-  return list[Math.min(count,list.length-1)];
-}
-
-function updateLeadSideUI(score,stage){
-  const pct=Math.round(score)+'%';
-  const stNames=['Consciência','Interesse','Consideração','Decisão','🔥 Quente'];
-  const tempLbls=['❄️ Frio','❄️ Frio','🌡️ Morno','🌡️ Morno','🔥 Quente'];
-  const intLbls=['❄️ Baixa','❄️ Baixa','🌡️ Média','🔥 Alta','🔥 Muito Alta'];
-  const el=id=>document.getElementById(id);
-  if(el('ls-score'))el('ls-score').textContent=pct;
-  if(el('ls-score-fill'))el('ls-score-fill').style.width=pct;
-  if(el('ls-sub'))el('ls-sub').textContent=stage>=0?(stNames[stage]||'—')+' — Em qualificação':'Aguardando qualificação';
-  if(el('ls-temp')&&stage>=0)el('ls-temp').textContent=tempLbls[stage];
-  if(el('ls-intent')&&stage>=0)el('ls-intent').textContent=intLbls[stage];
-  // Tags
-  const lt=el('ls-tags');if(lt){
-    let tags=[];
-    if(score>=70)tags.push('<span class="tag" style="color:var(--orange);border-color:rgba(255,101,53,.3);">🔥 Alta intenção</span>');
-    if(stage>=3)tags.push('<span class="tag" style="color:var(--green);border-color:rgba(0,230,118,.3);">📅 Disponível</span>');
-    if(chatMsgCount>=2)tags.push('<span class="tag">💬 Engajado</span>');
-    lt.innerHTML=tags.join('')||'<span class="tag">💬 Em contato</span>';
-  }
-  // Jornada
-  const jtrack=el('ls-jtrack');if(jtrack){
-    const icons=['🔍','💡','⚖️','🎯','🤝'];
-    jtrack.querySelectorAll('.jstep').forEach((s,i)=>{
-      const d=s.querySelector('.jdot');d.className='jdot';
-      if(i<stage){d.classList.add('done');d.textContent='✓';}
-      else if(i===stage){d.classList.add('now');d.textContent=icons[i];}
-      else{d.classList.add('todo');d.textContent=icons[i];}
-    });
-  }
-  if(stage>=4&&el('ls-wa-btn'))el('ls-wa-btn').disabled=false;
-}
-
-function newConvoModal(){
-  const name=prompt('Nome do lead simulado:','Lead Teste');
-  if(!name)return;
-  const newContact={id:Date.now(),name,phone:'5511'+Math.floor(Math.random()*900000000+100000000),avatar:'🧑',lastMsg:'Nova conversa',time:'Agora',unread:0,score:0,stage:-1,temp:'cold',nicho:app.currentClient?.nicho||'clinica',history:[]};
-  contactsData.unshift(newContact);
+async function loadConversations(){
   renderContactList();
-  setTimeout(()=>openContact(newContact.id),100);
+  await fetchZapiChats();
 }
-function loadConversations(){renderContactList();showToast('🔄 Conversas atualizadas!');}
 
 // ═══════════════════════════════════════════
 // TABLES
 // ═══════════════════════════════════════════
 function renderHotTable(){
   const tbody=document.getElementById('hotTbl');if(!tbody)return;
-  const hot=leadsData.filter(l=>l.temp==='hot');
-  tbody.innerHTML=hot.map(l=>`<tr><td><div class="tname">${l.name}</div><div class="tsub">${l.biz}</div></td><td><span class="temp t-hot">🔥 Quente</span></td><td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td><td><button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button></td></tr>`).join('');
+  const hot=contactsData.filter(l=>l.temp==='hot');
+  if(!hot.length){tbody.innerHTML='<tr><td colspan="4" style="padding:20px;text-align:center;color:var(--muted);font-size:12px;">Nenhum lead quente ainda — o agente está qualificando</td></tr>';return;}
+  tbody.innerHTML=hot.map(l=>`<tr><td><div class="tname">${l.name}</div><div class="tsub">${l.lastMsg||'—'}</div></td><td><span class="temp t-hot">🔥 Quente</span></td><td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td><td><button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button></td></tr>`).join('');
 }
 function renderAllTable(){
   const tbody=document.getElementById('allTbl');if(!tbody)return;
   const tc={hot:'t-hot',warm:'t-warm',cold:'t-cold'};
   const tl={hot:'🔥 Quente',warm:'🌡️ Morno',cold:'❄️ Frio'};
-  tbody.innerHTML=leadsData.map(l=>`<tr><td><div class="tname">${l.name}</div><div class="tsub">${l.biz}</div></td><td><span class="temp ${tc[l.temp]}">${tl[l.temp]}</span></td><td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td><td><span class="sbadge s2">${l.stage}</span></td><td style="font-size:10px;color:var(--muted);">${l.date}</td><td>${l.temp==='hot'?`<button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button>`:`<button class="btn btn-ghost btn-xs">Ver</button>`}</td></tr>`).join('');
+  if(!contactsData.length){tbody.innerHTML='<tr><td colspan="6" style="padding:20px;text-align:center;color:var(--muted);font-size:12px;">Nenhum lead ainda — sincronize o WhatsApp</td></tr>';return;}
+  const stNames=['Consciência','Interesse','Consideração','Decisão','🔥 Quente'];
+  tbody.innerHTML=contactsData.map(l=>`<tr><td><div class="tname">${l.name}</div><div class="tsub">${l.lastMsg||'—'}</div></td><td><span class="temp ${tc[l.temp]||'t-cold'}">${tl[l.temp]||'❄️ Frio'}</span></td><td><span class="pmini"><span class="pfill" style="width:${l.score}%"></span></span> <span style="font-size:10px;color:var(--orange);">${l.score}%</span></td><td><span class="sbadge s2">${stNames[l.stage+1]||'Consciência'}</span></td><td style="font-size:10px;color:var(--muted);">${l.time}</td><td>${l.temp==='hot'?`<button class="btn btn-green btn-xs" onclick="sendToWA('${l.name}')">📱 WA</button>`:`<button class="btn btn-ghost btn-xs" onclick="showView('inbox',null);openContact('${l.id}')">Ver</button>`}</td></tr>`).join('');
 }
 function exportHot(){showToast('📱 Leads quentes enviados ao WhatsApp!');}
 
@@ -1261,6 +1481,11 @@ Nunca invente precos. Nao repita saudacoes se conversa ja comecou. Pergunte UMA 
 Responda SEMPRE em portugues brasileiro.`;
   document.getElementById('prompt-output').style.display='block';
   document.getElementById('prompt-text').value=prompt;
+  // Salva training do cliente
+  if(app.currentClient){
+    const td={negocio,persona,servicos,objecoes,perguntas,cta,tom:document.getElementById('t-tom')?.value||''};
+    localStorage.setItem('pulsar_training_'+app.currentClient.id,JSON.stringify(td));
+  }
   showToast('✅ Configurações salvas! Copie o prompt para o n8n.');
 }
 function copyPrompt(){
@@ -1279,10 +1504,12 @@ function saveZapiConfig(){
     clientToken:document.getElementById('zapi-client-token')?.value||'',
     webhookUrl:document.getElementById('n8n-webhook-url')?.value||'',
     n8nBase:document.getElementById('n8n-base-url')?.value||'',
+    n8nAuthToken:document.getElementById('n8n-auth-token')?.value||'',
     active:app.agentActive,
   };
   localStorage.setItem('pulsar_zapi_'+c.id,JSON.stringify(config));
-  showToast('✅ Configurações Zapi salvas!');
+  showToast('✅ Configurações Zapi salvas! Verificando conexão...');
+  setTimeout(()=>checkZapiStatus(),500);
 }
 function openN8nWorkflow(){const url=document.getElementById('n8n-base-url')?.value||'https://app.n8n.cloud';window.open(url,'_blank');}
 function openZapi(){window.open('https://app.z-api.io','_blank');}
@@ -1311,6 +1538,166 @@ function toggleApiKeyVisibility(){const inp=document.getElementById('agencyApiKe
 // ═══════════════════════════════════════════
 // WA / MISC
 // ═══════════════════════════════════════════
+
+// ═══════════════════════════════════════════
+// INBOX CHAT FUNCTIONS
+// ═══════════════════════════════════════════
+function renderBubble(role,text,scroll){
+  const clean=(text||'').replace('[LEAD_QUENTE]','').trim();
+  const win=document.getElementById('chatWin');if(!win)return;
+  const row=document.createElement('div');
+  row.className='bubble-row '+(role==='lead'?'lr':'');
+  const now=new Date();const t=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+  row.innerHTML=`<div class="av ${role==='ai'?'ai':'lead'}">${role==='ai'?'SDR':currentContact?.avatar||'👤'}</div>
+    <div class="bdy">
+      <div class="bsender">${role==='ai'?'Agente SDR — IA':'Lead'}</div>
+      <div class="bubble ${role==='ai'?'ai-bub':'lead-bub'}">${clean}</div>
+      <div class="btime">${t}</div>
+    </div>`;
+  win.appendChild(row);if(scroll)win.scrollTop=win.scrollHeight;
+}
+function showTypingInbox(){
+  const win=document.getElementById('chatWin');if(!win)return;
+  const r=document.createElement('div');r.className='typing-row';r.id='tr_inbox';
+  r.innerHTML=`<div class="av ai">SDR</div><div class="tbub"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  win.appendChild(r);win.scrollTop=win.scrollHeight;
+}
+function hideTypingInbox(){document.getElementById('tr_inbox')?.remove();}
+
+async function sendInboxMsg(){
+  const inp=document.getElementById('chatIn');
+  const btn=document.getElementById('sendBtn');
+  if(!inp||!currentContact||btn?.disabled)return;
+  const text=inp.value.trim();if(!text)return;
+  inp.value='';inp.style.height='auto';
+  if(btn)btn.disabled=true;
+  chatHistory.push({role:'user',content:text});
+  renderBubble('lead',text,true);
+  currentContact.lastMsg=text;currentContact.time='Agora';
+  // Se é contato real do WhatsApp, mostra aviso — a resposta vem pelo agente n8n
+  if(currentContact.fromZapi){
+    showToast('📤 Mensagem enviada — aguarde a resposta do agente IA');
+    // Atualiza histórico em alguns segundos
+    setTimeout(()=>refreshContactMessages(currentContact.phone),5000);
+    setTimeout(()=>refreshContactMessages(currentContact.phone),12000);
+    if(btn)btn.disabled=false;inp.focus();
+    return;
+  }
+  showTypingInbox();
+  const reply=await callAI_inbox(text,currentContact.nicho);
+  hideTypingInbox();
+  const isHot=reply.includes('[LEAD_QUENTE]');
+  chatMsgCount++;
+  chatStage=isHot?4:Math.min(Math.floor(chatMsgCount/1.2),3);
+  chatScore=isHot?92:Math.min((chatScore||0)+(Math.random()*8+4),98);
+  chatHistory.push({role:'assistant',content:reply});
+  currentContact.history=[...chatHistory];
+  currentContact.score=Math.round(chatScore);
+  if(isHot)currentContact.temp='hot';
+  if(app.currentClient)saveClientContacts(app.currentClient.id,contactsData);
+  renderBubble('ai',reply,true);
+  updateLeadSideUI(chatScore,chatStage);
+  if(isHot){
+    setTimeout(()=>{showToast('🔥 Lead Quente! Notificando vendedor...');const b=document.getElementById('ls-wa-btn');if(b)b.disabled=false;},400);
+  }
+  renderContactList(document.getElementById('search-contacts')?.value||'');
+  renderHotTable();renderAllTable();
+  updateInboxBadges();
+  if(btn)btn.disabled=false;inp.focus();
+}
+function hkInbox(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendInboxMsg();}}
+
+async function callAI_inbox(msg,nicho){
+  const key=app.apiKey;
+  // Usa prompt gerado em Treinamento se disponível
+  let system='';
+  const promptEl=document.getElementById('prompt-text');
+  if(promptEl&&promptEl.value&&promptEl.value.length>30){
+    system=promptEl.value;
+  }else{
+    const nd=nichoData[nicho]||nichoData.clinica;
+    system=`Você é ${nd.persona} trabalhando para ${nd.negocio}. SDR especialista em ${nd.name}.
+SERVIÇOS: ${nd.servicos}
+OBJETIVO: Qualificar leads até o CTA: "${nd.cta}". TOM: ${nd.tom}. Mensagens curtas, máx 2-3 parágrafos. Emojis moderados.
+OBJEÇÕES: ${nd.objecoes}
+CONTEXTO: Você pode estar no meio de uma conversa — leia todo o histórico e NUNCA repita perguntas já feitas. Continue de onde parou.
+FUNIL: Consciência→Interesse→Consideração→Decisão→Lead Quente
+Quando lead demonstrar alta intenção, inclua: [LEAD_QUENTE]
+Nunca invente preços. Responda SEMPRE em português.`;
+  }
+  if(!key){return getFallbackMsg(nicho,chatMsgCount);}
+  try{
+    const messages=chatHistory.slice(-12).map(m=>({role:m.role,content:m.content}));
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:app.model,max_tokens:600,system,messages})
+    });
+    const data=await res.json();
+    if(data.error){console.error('Claude error:',data.error);return getFallbackMsg(nicho,chatMsgCount);}
+    return data.content?.[0]?.text||'Desculpe, tente novamente.';
+  }catch(e){console.error('Fetch error:',e);return getFallbackMsg(nicho,chatMsgCount);}
+}
+
+function getFallbackMsg(nicho,count){
+  const msgs={
+    clinica:['Olá! 😊 Sou a consultora da clínica. O que te trouxe até nós hoje?','Entendo! Você já fez algum procedimento estético antes?','Ótimo! Que tal uma avaliação gratuita para conhecer o protocolo ideal para você?','Perfeito! Você prefere manhã ou tarde?','Maravilha! Vou verificar os horários disponíveis 😊'],
+    restaurante:['Olá! 😊 Como posso ajudar?','Ótimo! Qual seria a ocasião?','Quantas pessoas seriam?','Que data você tem em mente?','Maravilha! Vou verificar a disponibilidade.'],
+    geral:['Olá! 😊 Como posso ajudar você hoje?','Ótimo! Pode me contar mais sobre o que você está buscando?','Entendo! Vamos encontrar a melhor solução para você.','Que tal agendarmos uma conversa para detalhar melhor?','Perfeito! Vou verificar as opções disponíveis.'],
+  };
+  const list=msgs[nicho]||msgs.geral;
+  return list[Math.min(count,list.length-1)];
+}
+
+function updateLeadSideUI(score,stage){
+  const pct=Math.round(score)+'%';
+  const stNames=['Consciência','Interesse','Consideração','Decisão','🔥 Quente'];
+  const tempLbls=['❄️ Frio','❄️ Frio','🌡️ Morno','🌡️ Morno','🔥 Quente'];
+  const intLbls=['❄️ Baixa','❄️ Baixa','🌡️ Média','🔥 Alta','🔥 Muito Alta'];
+  const el=id=>document.getElementById(id);
+  if(el('ls-score'))el('ls-score').textContent=pct;
+  if(el('ls-score-fill'))el('ls-score-fill').style.width=pct;
+  if(el('ls-sub'))el('ls-sub').textContent=stage>=0?(stNames[stage]||'—')+' — Em qualificação':'Aguardando qualificação';
+  if(el('ls-temp')&&stage>=0)el('ls-temp').textContent=tempLbls[stage];
+  if(el('ls-intent')&&stage>=0)el('ls-intent').textContent=intLbls[stage];
+  const lt=el('ls-tags');if(lt){
+    let tags=[];
+    if(score>=70)tags.push('<span class="tag" style="color:var(--orange);border-color:rgba(255,101,53,.3);">🔥 Alta intenção</span>');
+    if(stage>=3)tags.push('<span class="tag" style="color:var(--green);border-color:rgba(0,230,118,.3);">📅 Disponível</span>');
+    if(chatMsgCount>=2)tags.push('<span class="tag">💬 Engajado</span>');
+    lt.innerHTML=tags.join('')||'<span class="tag">💬 Em contato</span>';
+  }
+  const jtrack=el('ls-jtrack');if(jtrack){
+    const icons=['🔍','💡','⚖️','🎯','🤝'];
+    jtrack.querySelectorAll('.jstep').forEach((s,i)=>{
+      const d=s.querySelector('.jdot');if(!d)return;d.className='jdot';
+      if(i<stage){d.classList.add('done');d.textContent='✓';}
+      else if(i===stage){d.classList.add('now');d.textContent=icons[i];}
+      else{d.classList.add('todo');d.textContent=icons[i];}
+    });
+  }
+  if(stage>=4&&el('ls-wa-btn'))el('ls-wa-btn').disabled=false;
+}
+
+function newConvoModal(){
+  const name=prompt('Nome do lead (simulado):','Lead Teste');
+  if(!name)return;
+  const newContact={
+    id:String(Date.now()),name,
+    phone:'5511'+Math.floor(Math.random()*900000000+100000000),
+    avatar:getAvatar(name),lastMsg:'Nova conversa simulada',
+    time:'Agora',unread:0,score:0,stage:-1,temp:'cold',
+    nicho:app.currentClient?.nicho||'geral',history:[],
+    fromZapi:false
+  };
+  contactsData.unshift(newContact);
+  if(app.currentClient)saveClientContacts(app.currentClient.id,contactsData);
+  renderContactList();
+  updateInboxBadges();
+  setTimeout(()=>openContact(newContact.id),100);
+}
+
+
 function sendToWA(name){
   const wa=app.waNumber||localStorage.getItem('p_wa')||'5511999999999';
   const msg=encodeURIComponent(`🔥 Lead Quente: ${name}\nQualificado pelo Agente SDR Pulsar!\nScore: ${Math.round(chatScore||88)}%\nPronto para fechamento 💪`);
