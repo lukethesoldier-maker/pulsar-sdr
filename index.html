@@ -901,38 +901,53 @@ async function fetchZapiChats(){
   }
 
   const c=app.currentClient;if(!c)return;
-  const chats=Array.isArray(data)?data:(data.chats||data.value||[]);
 
-  if(!chats.length){showToast('📭 Nenhuma conversa encontrada no WhatsApp');return;}
+  // Parsing defensivo — workflow retorna {chats:[...]} OU array direto
+  let chats=[];
+  if(data&&!Array.isArray(data)&&typeof data==='object'){
+    chats=data.chats||data.value||data.data||[];
+  }else if(Array.isArray(data)){
+    if(data.length>0&&data[0]&&data[0].json&&data[0].json.chats) chats=data[0].json.chats;
+    else if(data.length>0&&(data[0].phone||data[0].id)) chats=data;
+    else chats=data;
+  }
+  if(!Array.isArray(chats))chats=[];
+  console.log('[Pulsar] chats recebidos:',chats.length,'raw:',JSON.stringify(data).slice(0,150));
 
+  if(!chats.length){showToast('📭 Nenhuma conversa encontrada. Verifique se o WhatsApp está conectado no Zapi.');return;}
+
+  // Carrega lista PRIMEIRO (rápido) — histórico carregado lazy ao abrir conversa
   let added=0;
   for(const chat of chats.slice(0,60)){
-    const phone=(chat.phone||chat.id||'').replace('@c.us','').replace(/\D/g,'');
-    if(!phone||phone.includes('g.us'))continue; // ignora grupos
+    const rawId=chat.phone||chat.id||'';
+    if(rawId.indexOf('@g.us')>=0||rawId.indexOf('-')>=0)continue; // grupos
+    const phone=rawId.replace('@c.us','').replace(/[^0-9]/g,'');
+    if(!phone||phone.length<8||phone.length>15)continue;
     const name=chat.name||chat.pushName||chat.senderName||formatPhone(phone);
     const existing=contactsData.find(x=>x.phone===phone);
+    // Z-API retorna lastMessageTime em milissegundos (não segundos)
+    const tsRaw=parseInt(chat.lastMessageTime||chat.timestamp||0,10);
+    const ts=tsRaw>9999999999?tsRaw/1000:tsRaw; // converte ms→s se necessário
+    const lastTxt=chat.text||chat.body||'...';
 
     if(!existing){
-      const msgs=await fetchZapiHistory(phone);
-      const lastTxt=chat.lastMessage?.text||chat.text||chat.body||msgs.at(-1)?.content||'—';
-      const ts=chat.lastMessage?.timestamp||chat.timestamp||Date.now()/1000;
       contactsData.unshift({
         id:'zapi_'+phone,name,phone,
         avatar:getAvatar(name),
         lastMsg:lastTxt,
         time:formatTime(ts),
-        unread:chat.unreadCount||0,
+        unread:parseInt(chat.messagesUnread||chat.unreadCount||'0',10),
         score:0,stage:-1,temp:'cold',
         nicho:c.nicho||'geral',
-        history:msgs,
+        history:[],
+        historyLoaded:false,
         fromZapi:true
       });
       added++;
     }else{
-      const lastTxt=chat.lastMessage?.text||chat.text||chat.body||existing.lastMsg;
-      existing.lastMsg=lastTxt;
+      existing.lastMsg=lastTxt||existing.lastMsg;
       existing.unread=chat.unreadCount||existing.unread;
-      existing.time=formatTime(chat.lastMessage?.timestamp||chat.timestamp||Date.now()/1000);
+      existing.time=formatTime(ts);
       existing.fromZapi=true;
     }
   }
@@ -941,34 +956,45 @@ async function fetchZapiChats(){
   renderContactList();
   renderHotTable();renderAllTable();
   updateInboxBadges();
-  showToast(added>0?`✅ ${added} novas conversas carregadas!`:'✅ Conversas atualizadas!');
+  showToast(added>0?`✅ ${added} contatos do WhatsApp carregados!`:'✅ Lista de contatos atualizada!');
 }
 
-// Busca histórico de mensagens de um telefone via n8n
+// Busca histórico de mensagens via n8n — workflow retorna {messages:[...]}
 async function fetchZapiHistory(phone){
   const data=await n8nGet('/webhook/pulsar-messages',{phone});
   if(!data)return[];
-  const msgs=Array.isArray(data)?data:(data.messages||data.value||[]);
+  // Parsing defensivo igual ao fetchZapiChats
+  let msgs=[];
+  if(data&&!Array.isArray(data)&&typeof data==='object'){
+    msgs=data.messages||data.value||data.data||[];
+  }else if(Array.isArray(data)){
+    if(data.length>0&&data[0]&&data[0].json&&data[0].json.messages) msgs=data[0].json.messages;
+    else if(data.length>0&&(data[0].role||data[0].content||data[0].fromMe!==undefined)) msgs=data;
+    else msgs=data;
+  }
+  if(!Array.isArray(msgs))msgs=[];
+  console.log('[Pulsar] mensagens:',msgs.length,'para',phone);
   return msgs
     .map(m=>({
       role:m.fromMe?'assistant':'user',
-      content:m.text?.message||m.text||m.message||m.body||'',
-      timestamp:m.timestamp,
+      content:(m.text&&m.text.message)||m.text||m.message||m.body||m.content||'',
+      timestamp:m.timestamp||0,
       isFromZapi:true
     }))
-    .filter(m=>m.content.trim().length>0)
-    .reverse(); // Z-API retorna mais recente primeiro
+    .filter(m=>m.content&&m.content.trim().length>0);
+  // SEM .reverse() — o workflow n8n já retorna em ordem cronológica
 }
 
 // Atualiza mensagens do contato aberto
 async function refreshContactMessages(phone){
   const msgs=await fetchZapiHistory(phone);
-  if(!msgs.length)return;
+  if(!msgs||!msgs.length)return;
   const c=app.currentClient;if(!c)return;
   const contact=contactsData.find(x=>x.phone===phone);
   if(!contact)return;
   const prevCount=contact.history.length;
   contact.history=msgs;
+  contact.historyLoaded=true;
   saveClientContacts(c.id,contactsData);
   if(currentContact&&currentContact.phone===phone&&msgs.length!==prevCount){
     chatHistory=[...msgs];
@@ -1015,7 +1041,7 @@ function startPolling(){
           if(existing){
             if((chat.unreadCount||0)>existing.unread){
               existing.unread=chat.unreadCount;changed=true;
-              existing.lastMsg=chat.lastMessage?.text||chat.text||existing.lastMsg;
+              existing.lastMsg=chat.text||chat.body||existing.lastMsg;
               existing.time=formatTime(chat.lastMessage?.timestamp||Date.now()/1000);
             }
           }else if((chat.unreadCount||0)>0){
@@ -1023,8 +1049,8 @@ function startPolling(){
             const msgs=await fetchZapiHistory(phone);
             contactsData.unshift({
               id:'zapi_'+phone,name,phone,avatar:getAvatar(name),
-              lastMsg:chat.lastMessage?.text||chat.text||'Nova mensagem',
-              time:'Agora',unread:chat.unreadCount,score:0,stage:-1,temp:'cold',
+              lastMsg:chat.text||chat.body||'Nova mensagem',
+              time:'Agora',unread:parseInt(chat.messagesUnread||chat.unreadCount||0,10),score:0,stage:-1,temp:'cold',
               nicho:app.currentClient?.nicho||'geral',history:msgs,fromZapi:true
             });
             changed=true;
@@ -1163,8 +1189,10 @@ function loadClientPanel(client){
   renderHotTable();
   renderAllTable();
 
-  // ── VERIFICA STATUS DO ZAPI E INICIA POLLING ──
-  if(zapi.instance&&zapi.token&&zapi.clientToken){
+  // ── VERIFICA STATUS E INICIA POLLING ──
+  const hasN8n=!!(zapi.n8nBase&&zapi.n8nAuthToken);
+  const hasZapi=!!(zapi.instance&&zapi.token&&zapi.clientToken);
+  if(hasN8n||hasZapi){
     checkZapiStatus();
     if(active)startPolling();
   }else{
@@ -1400,11 +1428,11 @@ function renderContactList(filter){
 }
 function filterContacts(val){renderContactList(val);}
 
-function openContact(id){
+async function openContact(id){
   const c=contactsData.find(x=>String(x.id)===String(id));if(!c)return;
   currentContact=c;c.unread=0;
-  chatHistory=[...c.history];
-  chatScore=c.score;chatStage=c.stage;chatMsgCount=c.history.filter(m=>m.role==='user').length;
+
+  // Abre o painel imediatamente com o que temos
   document.getElementById('chat-placeholder').style.display='none';
   const ac=document.getElementById('active-chat');ac.style.display='flex';
   document.getElementById('ch-ava').textContent=c.avatar;
@@ -1413,14 +1441,41 @@ function openContact(id){
   const ls=document.getElementById('leadSide');ls.style.display='flex';ls.style.flexDirection='column';
   document.getElementById('ls-ava').textContent=c.avatar;
   document.getElementById('ls-name').textContent=c.name;
-  updateLeadSideUI(chatScore,chatStage);
+
   const win=document.getElementById('chatWin');win.innerHTML='';
-  if(!chatHistory.length){const s=document.createElement('div');s.className='sys-bub';s.textContent='Início da conversa';win.appendChild(s);}
+
+  // Lazy load do histórico se ainda não carregou
+  if(c.fromZapi&&!c.historyLoaded&&c.phone){
+    const loadMsg=document.createElement('div');
+    loadMsg.className='sys-bub';loadMsg.id='history-loading';
+    loadMsg.textContent='⏳ Carregando histórico do WhatsApp...';
+    win.appendChild(loadMsg);
+    win.scrollTop=win.scrollHeight;
+
+    const msgs=await fetchZapiHistory(c.phone);
+    c.history=msgs;
+    c.historyLoaded=true;
+    const cl=app.currentClient;
+    if(cl)saveClientContacts(cl.id,contactsData);
+
+    // Remove loading indicator
+    document.getElementById('history-loading')?.remove();
+  }
+
+  chatHistory=[...c.history];
+  chatScore=c.score;chatStage=c.stage;chatMsgCount=c.history.filter(m=>m.role==='user').length;
+  updateLeadSideUI(chatScore,chatStage);
+
+  win.innerHTML='';
+  if(!chatHistory.length){
+    const s=document.createElement('div');s.className='sys-bub';
+    s.textContent=c.fromZapi?'Nenhuma mensagem carregada — verifique o workflow pulsar-messages':'Início da conversa';
+    win.appendChild(s);
+  }
   chatHistory.forEach(m=>renderBubble(m.role==='assistant'?'ai':'lead',m.content,false));
   win.scrollTop=win.scrollHeight;
   renderContactList(document.getElementById('search-contacts')?.value||'');
   updateInboxBadges();
-  if(c.fromZapi)refreshContactMessages(c.phone);
 }
 function closeChat(){
   currentContact=null;
